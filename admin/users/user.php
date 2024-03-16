@@ -21,7 +21,7 @@ class User
     function checkUser($Username, $Password)
     {
         $db = new connect();
-        $select = "select * from users where UserName='$Username' and Password='$Password'";
+        $select = "select * from users where userName='$Username' and password='$Password'";
         $result = $db->pdo_query_one($select);
 
         if ($result != null) {
@@ -34,7 +34,7 @@ class User
     public function userid($username, $password)
     {
         $db = new connect();
-        $select = "select UserID from users where UserName='$username' and Password='$password'";
+        $select = "select UserID from users where userName='$username' and password='$password'";
         $result = $db->pdo_query_one($select);
         return $result;
     }
@@ -50,7 +50,7 @@ class User
     public function getByID($id)
     {
         $db = new connect();
-        $query = "SELECT * FROM users where UserID = '$id'";
+        $query = "SELECT * FROM users where id = '$id'";
         $result = $db->pdo_query_one($query);
         return $result;
     }
@@ -59,7 +59,7 @@ class User
     public function addUser($Username, $FullName, $Email, $Phone, $Address, $Password, $role)
     {
         $db = new connect();
-        $query = "INSERT INTO users (UserID, UserName, fullName, email,phone, address, password, role) 
+        $query = "INSERT INTO users (id, userName, fullName, email,phone, address, password, role) 
                   values (null, '$Username', '$FullName', '$Email', '$Phone', '$Address','$Password', 'user')";
         $result = $db->pdo_execute($query);
         return $result;
@@ -67,18 +67,18 @@ class User
     public function addUser2($Username, $Password, $FullName, $Address, $Email, $Phone)
     {
         $db = new connect();
-        $query = "INSERT INTO users (UserID, UserName, password, fullName, address, email, phone,   role) 
+        $query = "INSERT INTO users (id, userName, password, fullName, address, email, phone,   role) 
                   values (null, '$Username', '$Password', '$FullName', '$Address', '$Email', '$Phone',  'user')";
         $result = $db->pdo_execute_id($query);
         return $result;
     }
 
     //hàm cập nhập dữ liệu
-    public function updateUser($Username, $Password, $Fullname, $Email, $Permissions, $Address, $Phone, $UserID)
+    public function updateUser($Username, $Password, $Fullname, $Email, $Address, $Phone, $UserID)
     {
         $db = new connect();
-        $query = "UPDATE users SET Username = '$Username', Password = '$Password', FullName = '$Fullname', 
-                Email = '$Email', Permissions = '$Permissions', Address = '$Address', Phone = '$Phone' WHERE UserID = '$UserID'";
+        $query = "UPDATE users SET username = '$Username', Password = '$Password', fullName = '$Fullname', 
+                email = '$Email', dddress = '$Address', phone = '$Phone' WHERE id = '$UserID'";
         $result = $db->pdo_execute($query);
         return $result;
     }
@@ -86,7 +86,7 @@ class User
     public function deleteUser($id)
     {
         $db = new connect();
-        $query = "DELETE FROM users WHERE UserID = '$id'";
+        $query = "DELETE FROM users WHERE id = '$id'";
         $result = $db->pdo_query_one($query);
         
         return $result;
@@ -97,7 +97,7 @@ class User
     }
     public function countUser(){
         $db = new connect();
-        $sql = "SELECT COUNT(userID) AS countUser FROM users";
+        $sql = "SELECT COUNT(id) AS countUser FROM users";
         $result = $db->pdo_execute($sql);
         return $result;
     } 

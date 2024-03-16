@@ -13,7 +13,6 @@
                         <th> Price </th>
                         <!-- <th>Description</th> -->
                         <th> Category </th>
-                        <th> Discount </th>
                         <th> Action </th>
                     </tr>
                 </thead>
@@ -27,7 +26,7 @@ foreach ($rows as $row) {
 ?>
 
 <tr>
-  <td><?php echo $row['productID']; ?></td>
+  <td><?php echo $row['id']; ?></td>
   <td><?php echo $row['name']; ?></td>
   
   <td>
@@ -36,13 +35,11 @@ foreach ($rows as $row) {
 
   <td><?php echo $row['price']; ?></td>
 
-  <td><?php echo $row['category_ID']; ?></td>
-  
-  <td><?php echo $row['discount']; ?></td>
+  <td><?php echo $row['category_id']; ?></td>
 
   <td style="text-align: center;">
     <a href="#"><button type="button" class="btn btn-danger">Delete</button></a> <br> <br>
-  <a href="?act=editpro&id=<? echo $row['productID']?>" ><button  type="button" class="btn btn-success">Edit</button ></a> </td>
+  <a href="?act=editpro&id=<? echo $row['id']?>" ><button  type="button" class="btn btn-success">Edit</button ></a> </td>
 </tr>
 
 <?php

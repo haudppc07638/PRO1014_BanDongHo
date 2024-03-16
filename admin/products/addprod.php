@@ -40,7 +40,7 @@
                 $dbCate = new Category();
                 $rows = $dbCate->getList();
                 foreach ($rows as $row) { ?>
-                    <option value="<? echo $row['categoryID'] ?>"><? echo $row['categoryName'] ?></option>
+                    <option value="<? echo $row['id'] ?>"><? echo $row['categoryName'] ?></option>
                 <?php } ?>
                 </select>
             </div>

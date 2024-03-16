@@ -10,10 +10,7 @@
                     <tr>
                         <th> ID </th>
                         <th> Name </th>
-
                         <th>Action</th>
-
-
                     </tr>
                 </thead>
                 <tbody>
@@ -25,17 +22,15 @@
                     foreach ($rows as $row) { ?>
                         <tr>
                             <td>
-                                <? echo $row['categoryID'] ?>
+                                <? echo $row['id'] ?>
                             </td>
                             <td>
                                 <? echo $row['categoryName'] ?>
                             </td>
 
                             <td styleact="text-align: center;">
-                                <a href="#"> <button type="button"
-                                        class="btn btn-danger">Delete</button></a> <br> <br>
-                                <a href="?act=editcate"><button type="button"
-                                        class="btn btn-success">Edit</button></a>
+                                <a href="#"> <button type="button" class="btn btn-danger">Delete</button></a> <br> <br>
+                                <a href="?act=editcate"><button type="button" class="btn btn-success">Edit</button></a>
                             </td>
                         </tr>
 

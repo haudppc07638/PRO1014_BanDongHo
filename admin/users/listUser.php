@@ -33,7 +33,7 @@
                         <tbody>
                             <tr>
                                 <td>
-                                    <? echo $row['userID'] ?>
+                                    <? echo $row['id'] ?>
                                 </td>
                                 <td>
                                     <? echo $row['userName'] ?>
