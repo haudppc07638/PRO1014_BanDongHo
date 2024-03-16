@@ -12,19 +12,19 @@ class Products {
 
     public function getList() {
         $db = new connect();
-        $sql = "SELECT * FROM products ORDER BY productID";
+        $sql = "SELECT * FROM products ORDER BY id";
         $result = $db->pdo_query($sql);
         return $result;
     }
     public function getList1() {
         $db = new connect();
-        $sql = "SELECT * FROM products ORDER BY productID DESC";
+        $sql = "SELECT * FROM products ORDER BY id DESC";
         $result = $db->pdo_query($sql);
         return $result;
     }
     public function getById($id) {
         $db = new connect();
-        $sql = "SELECT * FROM products WHERE productID = $id LIMIT 1";
+        $sql = "SELECT * FROM products WHERE id = $id LIMIT 1";
         $result = $db->pdo_query($sql);  
         return $result[0]; 
       }
@@ -39,20 +39,20 @@ class Products {
     }
     public function update($id, $name, $price, $image, $description, $category_ID, $discount) {
         $db = new connect();
-        $sql = "UPDATE products SET name='$name', price=$price, image='$image', description='$description', category_id=$category_ID, discount=$discount WHERE productID= $id";
+        $sql = "UPDATE products SET name='$name', price=$price, image='$image', description='$description', category_id=$category_ID, discount=$discount WHERE id= $id";
         $result = $db->pdo_query($sql);
         return $result;
     }
     
     public function delete($id){
         $db = new connect();
-        $sql = "DELETE FROM products WHERE productID = '$id'";
+        $sql = "DELETE FROM products WHERE id = '$id'";
         $result = $db->pdo_query_one($sql);
         return $result;
     }
     public function get_dssp($cateid){
         $db = new connect();
-        $query = "SELECT * FROM products WHERE category_ID = '$cateid'";
+        $query = "SELECT * FROM products WHERE category_id = '$cateid'";
         $result = $db->pdo_query($query);
         return $result;
     }
@@ -68,7 +68,7 @@ public function getCategories() {
   }
     public function Countpro(){
         $db = new connect();
-        $sql = "SELECT COUNT(productID) AS Countpro FROM products";
+        $sql = "SELECT COUNT(id) AS Countpro FROM products";
         $result = $db->pdo_execute($sql);
         return $result;
     }

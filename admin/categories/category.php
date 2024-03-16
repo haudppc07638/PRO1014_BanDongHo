@@ -20,7 +20,7 @@ class category
  // hàm lấy 1 dòng dữ liệu của bảng categoris dựa trên id
  public function getByID($id) {
      $db = new connect();
-     $query = "SELECT * FROM categories where categoryID = '$id'";
+     $query = "SELECT * FROM categories where id = '$id'";
      $result = $db->pdo_query_one($query);
      return $result;
  }
@@ -32,20 +32,20 @@ class category
 
  public function delete($id){
      $db = new connect();
-     $query = "DELETE FROM categories WHERE categoryID = '$id'";
+     $query = "DELETE FROM categories WHERE id = '$id'";
      $result = $db->pdo_query_one($query);
      return $result;
  }
 
  public function countCate(){
      $db = new connect();
-     $sql = "SELECT COUNT(categoryID) AS countCate FROM categories";
+     $sql = "SELECT COUNT(id) AS countCate FROM categories";
      $result = $db->pdo_execute($sql);
      return $result;
  }
  public function update($name, $id){
     $db = new connect();
-    $query = "UPDATE categories SET categoryName = '$name', updated = now() WHERE categoryID = '$id'";
+    $query = "UPDATE categories SET categoryName = '$name', updated = now() WHERE id = '$id'";
     $result = $db->pdo_execute($query);
     return $result;
 }
@@ -55,7 +55,7 @@ public function add($name) {
     if ($existingCategory) {
         return false;
     }
-    $query = "INSERT INTO categories (categoryID, categoryName) VALUES (null, '$name')";
+    $query = "INSERT INTO categories (id, categoryName) VALUES (null, '$name')";
     $result = $db->pdo_execute($query);
     return $result;
 }
@@ -68,7 +68,7 @@ public function getByName($name) {
 public function loadCate($id)
 {
     $db = new connect();
-    $sql = "SELECT * FROM categories WHERE categoryID = ?";
+    $sql = "SELECT * FROM categories WHERE id = ?";
     $cate = $db->pdo_query_one($id);
 
     if ($cate) {

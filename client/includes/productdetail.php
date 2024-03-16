@@ -169,9 +169,9 @@ $rowProd = $data->getByID($id);
                         </div>
                         <div class="fr__hover__info">
                             <ul class="product__action">
-                                <li><a href="wishlist.html"><i class="icon-heart icons"></i></a></li>
+                                <li><a href="#"><i class="icon-heart icons"></i></a></li>
 
-                                <li><a href="cart.html"><i class="icon-handbag icons"></i></a></li>
+                                <li><a href="#"><i class="icon-handbag icons"></i></a></li>
 
                                 <li><a href="#"><i class="icon-shuffle icons"></i></a></li>
                             </ul>
@@ -196,9 +196,9 @@ $rowProd = $data->getByID($id);
                         </div>
                         <div class="fr__hover__info">
                             <ul class="product__action">
-                                <li><a href="wishlist.html"><i class="icon-heart icons"></i></a></li>
+                                <li><a href="#"><i class="icon-heart icons"></i></a></li>
 
-                                <li><a href="cart.html"><i class="icon-handbag icons"></i></a></li>
+                                <li><a href="#"><i class="icon-handbag icons"></i></a></li>
 
                                 <li><a href="#"><i class="icon-shuffle icons"></i></a></li>
                             </ul>
@@ -223,9 +223,9 @@ $rowProd = $data->getByID($id);
                         </div>
                         <div class="fr__hover__info">
                             <ul class="product__action">
-                                <li><a href="wishlist.html"><i class="icon-heart icons"></i></a></li>
+                                <li><a href="#"><i class="icon-heart icons"></i></a></li>
 
-                                <li><a href="cart.html"><i class="icon-handbag icons"></i></a></li>
+                                <li><a href="#"><i class="icon-handbag icons"></i></a></li>
 
                                 <li><a href="#"><i class="icon-shuffle icons"></i></a></li>
                             </ul>
@@ -250,9 +250,9 @@ $rowProd = $data->getByID($id);
                         </div>
                         <div class="fr__hover__info">
                             <ul class="product__action">
-                                <li><a href="wishlist.html"><i class="icon-heart icons"></i></a></li>
+                                <li><a href="#"><i class="icon-heart icons"></i></a></li>
 
-                                <li><a href="cart.html"><i class="icon-handbag icons"></i></a></li>
+                                <li><a href="#"><i class="icon-handbag icons"></i></a></li>
 
                                 <li><a href="#"><i class="icon-shuffle icons"></i></a></li>
                             </ul>

@@ -6,31 +6,31 @@
             <form class="forms-sample" method="post">
                 <div class="form-group">
                     <label for="name">Tên Tài Khoản</label>
-                    <input type="text" class="form-control" placeholder="Name" name="Username" value="<?php echo $row_up['Username']?>">
+                    <input type="text" class="form-control" placeholder="Name" name="Username" value="<?php echo $row_up['username']?>">
                 </div>
                 <div class="form-group">
                     <label for="name">Password</label>
-                    <input type="text" class="form-control" placeholder="Name" name="Password" value="<?php echo $row_up['Password']?>">
+                    <input type="text" class="form-control" placeholder="Name" name="Password" value="<?php echo $row_up['password']?>">
                 </div>
                 <div class="form-group">
                     <label for="note">FullName</label>
-                    <input type="text" class="form-control" placeholder="Note" name="FullName" value="<?php echo $row_up['FullName']?>">
+                    <input type="text" class="form-control" placeholder="Note" name="FullName" value="<?php echo $row_up['fullName']?>">
                 </div>
                 <div class="form-group">
                     <label for="name">Email</label>
-                    <input type="text" class="form-control" placeholder="Name" name="Email" value="<?php echo $row_up['Email']?>">
+                    <input type="text" class="form-control" placeholder="Name" name="Email" value="<?php echo $row_up['email']?>">
                 </div>
                 <div class="form-group">
                     <label for="name">Permissions</label>
-                    <input type="text" class="form-control" placeholder="Name" name="Permissions" value="<?php echo $row_up['Permissions']?>">
+                    <input type="text" class="form-control" placeholder="Name" name="Permissions" value="<?php echo $row_up['role']?>">
                 </div>
                 <div class="form-group">
                     <label for="name">Address</label>
-                    <input type="text" class="form-control" placeholder="Name" name="Address" value="<?php echo $row_up['Address']?>">
+                    <input type="text" class="form-control" placeholder="Name" name="Address" value="<?php echo $row_up['address']?>">
                 </div>
                 <div class="form-group">
                     <label for="name">Phone</label>
-                    <input type="text" class="form-control" placeholder="Name" name="Phone" value="<?php echo $row_up['Phone']?>">
+                    <input type="text" class="form-control" placeholder="Name" name="Phone" value="<?php echo $row_up['phone']?>">
                 </div>
                 <button type="submit" class="btn btn-primary mr-2" name="editUser">Submit</button>
             </form>
