@@ -71,19 +71,15 @@
                 <div class="col-md-4">
                     <div class="order-details">
                         <h5 class="order-details__title">Đơn hàng</h5>
-                        <?foreach ($_SESSION['giohang'] as $sp) {
-                        extract($sp);
-                        $tt = $price * $soluong;
-                        ?>
                         <div class="order-details__item">
                             <!-- product -->
                             <div class="single-item">
                                 <div class="single-item__thumb" style="width: 120px;">
-                                    <img src="images/<?=$img?>" alt="ordered item">
+                                    <img src="images/dongho1.jpg" alt="ordered item">
                                 </div>
                                 <div class="single-item__content">
-                                    <a href=""><?=$name?></a>
-                                    <span class="price"><?=number_format($tt)?> VND</span>
+                                    <a href="">Dong ho nam</a>
+                                    <span class="price">190.000 VND</span>
                                 </div>
                                 <div class="single-item__remove">
                                     <a href="#"><i class="zmdi zmdi-delete"></i></a>
@@ -91,7 +87,6 @@
                             </div>
                             <!-- end product -->
                         </div>
-                        <?};?>
                         <div class="order-details__count">
                             <div class="order-details__count__single">
                                 <h5>VOUCHE: </h5>
