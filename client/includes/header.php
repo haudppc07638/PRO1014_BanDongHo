@@ -62,18 +62,33 @@
                             <div class="header__search search search__open">
                                 <a href="#"><i class="icon-magnifier icons"></i></a>
                         </div>
-                        <div class="dropdown">
-                            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" style="margin: 0px 10px;">Tài khoản</button>
+                       <?php
+                       if(!isset($_SESSION['login']['username'])){
+                        echo '<div class="dropdown">
+                        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" style="margin: 0px 10px;">Tài khoản</button>
+                        <ul class="dropdown-menu">
+                        <li>
+                            <a href="?act=profile">
+                                <i class="icon-user icons"></i>
+                            </a>
+                            </li>   
+                        <li><a href="?act=login">Đăng Nhập</a></li>
+                        </ul>
+                    </div>';
+                       }else{
+                            echo '<div class="dropdown">
+                            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" style="margin: 0px 10px;">Xin Chào,'.$_SESSION['login']['username'].' </button>
                             <ul class="dropdown-menu">
                             <li>
-                                <a href="?act=profile">
-                                    <i class="icon-user icons">Admin</i>
-                                </a>
-                                <a href="?act=logoutUser" height="auto">Đăng Xuất</a>
-                                </li>   
-                            <li><a href="?act=login">Đăng Nhập</a></li>
+                                <a href="" height="auto">Cập nhật thông tin</a>
+                            </li>  
+                            <li>
+                            <a href="?act=logout" height="auto">Đăng Xuất</a>
+                        </li> 
                             </ul>
-                        </div>
+                        </div>';
+                       }
+                       ?>
                             <div class="htc__shopping__cart">
                                 <a class="" href="?act=viewcart"><i class="icon-handbag icons"></i></a>
                             </div>
