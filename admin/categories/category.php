@@ -1,84 +1,108 @@
 <?php
 class category
 {
- // Khai báo thuộc tính
- var $id = null;
- var $name = null;
- var $create = null;
- var $status = null;
- var $update = null;
+    private $id = null;
+    private $categoryName = null;
+    private $image = null;
+    private $status = null;
+    private $created = null;
+    private $updated = null;
 
-
- // hàm lấy tất cả dữ liệu của bảng Categoris
- public function getList() {
-     $db = new connect();
-     $query = "SELECT * FROM categories"; // viết câu lệnh sql select *
-     $result = $db->pdo_query($query);
-     return $result;
- }
-
- // hàm lấy 1 dòng dữ liệu của bảng categoris dựa trên id
- public function getByID($id) {
-     $db = new connect();
-     $query = "SELECT * FROM categories where id = '$id'";
-     $result = $db->pdo_query_one($query);
-     return $result;
- }
-
- //hàm insert dữ liệu, create dữ liệu, thêm mới dữ liệu
-
-
- //hàm cập nhập dữ liệu
-
- public function delete($id){
-     $db = new connect();
-     $query = "DELETE FROM categories WHERE id = '$id'";
-     $result = $db->pdo_query_one($query);
-     return $result;
- }
-
- public function countCate(){
-     $db = new connect();
-     $sql = "SELECT COUNT(id) AS countCate FROM categories";
-     $result = $db->pdo_execute($sql);
-     return $result;
- }
- public function update($name, $id){
-    $db = new connect();
-    $query = "UPDATE categories SET categoryName = '$name', updated = now() WHERE id = '$id'";
-    $result = $db->pdo_execute($query);
-    return $result;
-}
-public function add($name) {
-    $db = new connect();
-    $existingCategory = $this->getByName($name);
-    if ($existingCategory) {
-        return false;
+    public function getList($db)
+    {
+        $query = "SELECT * FROM categories";
+        $result = $db->pdo_query($query);
+        return $result;
     }
-    $query = "INSERT INTO categories (id, categoryName) VALUES (null, '$name')";
-    $result = $db->pdo_execute($query);
-    return $result;
-}
-public function getByName($name) {
-    $db = new connect();
-    $query = "SELECT * FROM categories WHERE categoryName = '$name'";
-    $result = $db->pdo_query_one($query);
-    return $result;
-}
-public function loadCate($id)
-{
-    $db = new connect();
-    $sql = "SELECT * FROM categories WHERE id = ?";
-    $cate = $db->pdo_query_one($id);
+    public function getByID($id)
+    {
+        $db = new connect();
+        $query = "SELECT * FROM categories WHERE id = ?";
+        $result = $db->pdo_query_one($query, [$id]);
+        return $result;
+    }
+    public function delete($id, $db)
+    {
+        $query = "DELETE FROM categories WHERE id = ?";
+        $stmt = $db->pdo_get_connection()->prepare($query);
+        $stmt->bindParam(1, $id);
+        $result = $stmt->execute();
+        return $result;
+    }
 
-    if ($cate) {
-        return $cate['name']; // Access the 'name' directly instead of using extract
-    } else {
-        return "";
+
+    public function update($id, $name, $description, $newImageName, $db)
+    {
+        $query = "UPDATE categories SET categoryName = ?, description = ?";
+        if ($newImageName !== null) {
+            $query .= ", image = ?";
+        }
+        $query .= " WHERE id = ?";
+        $stmt = $db->pdo_get_connection()->prepare($query);
+        $stmt->bindParam(1, $name);
+        $stmt->bindParam(2, $description);
+        if ($newImageName !== null) {
+            $stmt->bindParam(3, $newImageName);
+            $stmt->bindParam(4, $id);
+        } else {
+            $stmt->bindParam(3, $id);
+        }
+        $success = $stmt->execute();
+        return $success;
+    }
+
+
+
+    public function add($name, $description, $image, $db)
+    {
+        $db = new connect();
+        $existingCategory = $this->getByName($name, $db);
+        if ($existingCategory) {
+            return false;
+        }
+        $query = "INSERT INTO categories (categoryName, description, image) VALUES (?, ?, ?)";
+        $stmt = $db->pdo_get_connection()->prepare($query);
+        $stmt->bindParam(1, $name);
+        $stmt->bindParam(2, $description);
+        $stmt->bindParam(3, $image);
+        $success = $stmt->execute();
+        return $success;
+    }
+
+    public function getByName($name, $db)
+    {
+        $db = new connect();
+        $query = "SELECT * FROM categories WHERE categoryName = ?";
+        $stmt = $db->pdo_get_connection()->prepare($query);
+        $stmt->bindParam(1, $name);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
+    public function loadCate($id)
+    {
+        $db = new connect();
+        $sql = "SELECT categoryName FROM categories WHERE id = ?";
+        $result = $db->pdo_query_value($sql, [$id]);
+        return $result;
+    }
+    public function categoryNameExists($name, $db)
+    {
+        $db = new connect();
+        $query = "SELECT COUNT(*) FROM categories WHERE categoryName = ?";
+        $stmt = $db->pdo_get_connection()->prepare($query);
+        $stmt->execute([$name]);
+        $count = $stmt->fetchColumn();
+        return $count > 0;
+    }
+    public function hasProducts($cateId, $db)
+    {
+        $db = new connect();
+        $query = "SELECT COUNT(*) FROM products WHERE category_id = ?";
+        $stmt = $db->pdo_get_connection()->prepare($query);
+        $stmt->execute([$cateId]);
+        $count = $stmt->fetchColumn();
+        return $count > 0; 
     }
 }
-
-
- }
-
-?>

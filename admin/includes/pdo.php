@@ -3,7 +3,7 @@ class connect
 {
     function pdo_get_connection()
     {
-        $dburl = "mysql:host=localhost;dbname=hkhstore;charset=utf8";
+        $dburl = "mysql:host=localhost;dbname=duan1;charset=utf8";
         $username = 'root';
         $password = 'mysql';
         $conn = new PDO($dburl, $username, $password);
@@ -45,7 +45,11 @@ class connect
         try {
             $conn = $this->pdo_get_connection();
             $stmt = $conn->prepare($sql);
-            $stmt->execute($sql_args);
+            
+            if (!$stmt->execute($sql_args)) {
+                throw new PDOException("Failed to execute query.");
+            }
+            
             $rows = $stmt->fetchAll();
             return $rows;
         } catch (PDOException $e) {
@@ -88,4 +92,3 @@ class connect
         }
     }
 }
-?>

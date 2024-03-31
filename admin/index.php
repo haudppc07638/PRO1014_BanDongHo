@@ -13,15 +13,15 @@
 
 <body>
   <div class="container-scroller">
-    <? include('includes/header.php'); ?>
-    <? include('includes/slidebar.php'); ?>
-    <?php include('includes/pdo.php') ?>
-    <?php include('users/user.php') ?>;
+    <?php include('includes/header.php'); ?>
+    <?php include('includes/slidebar.php'); ?>
+    <?php include('includes/pdo.php'); ?>
+    <?php include('users/user.php'); ?>
     <?php include('categories/category.php'); ?>
     <?php include('products/pro.php');?>
     <?php include('../model/binhluan.php');?>
     <div class="main-panel">
-      <?
+      <?php
       $action = "home";
       if (isset($_GET['act']))
         $action = $_GET['act'];
@@ -65,19 +65,6 @@
         case "addCoupon":
           include('coupons/addCoupon.php');
           break;
-        // case "listComment":
-        //   $comment = new comment();
-        //   $listbinhluan= $comment->loadall_binhluan(0);
-        //   include 'comment/listComment.php';
-        //   break;
-        // case "deleteComment":
-        //   include 'comment/deleteComment.php';
-        //   break;
-        // case "logout":
-        //     unset($_SESSION['admin']);
-        //     session_destroy();
-        //     header("location:../index.php");
-        //   break;
         default:
           include('includes/dashboard.php');
       }

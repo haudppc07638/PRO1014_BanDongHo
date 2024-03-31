@@ -72,6 +72,11 @@
             case "login":
                 include("client/login.php");
                 break;
+            case "logout":
+                unset($_SESSION['username']);
+                session_destroy();
+                header("location:index.php");
+                break;
             // case "profile":
             //     break;
             case "register":
