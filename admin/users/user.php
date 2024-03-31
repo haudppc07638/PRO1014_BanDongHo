@@ -12,6 +12,8 @@ class User
     var $Address = null;
     var $Phone = null;
 
+    var $status = null;
+
     function getUser()
     {
         $db = new connect();
@@ -23,13 +25,7 @@ class User
         $db = new connect();
         $select = "select * from users where userName='$Username' and password='$Password'";
         $result = $db->pdo_query_one($select);
-
-        if ($result != null) {
-            $this->role = $result['role'];
-            return true;
-        } else {
-            return false;
-        }
+        return $result;
     }
     public function userid($username, $password)
     {
@@ -41,7 +37,7 @@ class User
     public function getList()
     {
         $db = new connect();
-        $query = "SELECT * FROM users"; 
+        $query = "SELECT * FROM users";
         $result = $db->pdo_query($query);
         return $result;
     }
@@ -58,6 +54,9 @@ class User
     //hàm insert dữ liệu, create dữ liệu, thêm mới dữ liệu
     public function addUser($Username, $FullName, $Email, $Phone, $Address, $Password, $role)
     {
+        if (empty($Username) || empty($FullName) || empty($Email) || empty($Phone) || empty($Address) || empty($Password) || empty($role)) {
+            return false;
+        }
         $db = new connect();
         $query = "INSERT INTO users (id, userName, fullName, email,phone, address, password, role) 
                   values (null, '$Username', '$FullName', '$Email', '$Phone', '$Address','$Password', 'user')";
@@ -88,18 +87,22 @@ class User
         $db = new connect();
         $query = "DELETE FROM users WHERE id = '$id'";
         $result = $db->pdo_query_one($query);
-        
+
         return $result;
     }
-    function getRole()
-    {
-        return $this->role;
+    public function checkRole($id){
+        $db = new connect();
+        $sql = "SELECT role FROM users WHERE id = '$id'";
+        $result = $db->pdo_query_one($sql);
+        return $result;
     }
-    public function countUser(){
+    public function countUser()
+    {
         $db = new connect();
         $sql = "SELECT COUNT(id) AS countUser FROM users";
         $result = $db->pdo_execute($sql);
         return $result;
-    } 
+    }
+    
 }
 ?>

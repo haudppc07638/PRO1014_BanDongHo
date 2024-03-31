@@ -1,3 +1,11 @@
+<?php
+session_start();
+ob_start();
+if (!isset($_SESSION['login']['username'])) {
+  header("Location: ../index.php");
+  exit;
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,16 +26,16 @@
     <?php include('includes/pdo.php'); ?>
     <?php include('users/user.php'); ?>
     <?php include('categories/category.php'); ?>
-    <?php include('products/pro.php');?>
-    <?php include('../model/binhluan.php');?>
+    <?php include('products/pro.php'); ?>
+    <?php include('../model/binhluan.php'); ?>
     <div class="main-panel">
       <?php
       $action = "home";
       if (isset($_GET['act']))
         $action = $_GET['act'];
-        // if (!isset($_SESSION['admin'])) {
-        //   $action = "login";
-        // }
+      // if (!isset($_SESSION['admin'])) {
+      //   $action = "login";
+      // }
       switch ($action) {
         case "home":
           include('includes/dashboard.php');
@@ -59,12 +67,33 @@
         case "listUser":
           include('users/listUser.php');
           break;
+        case "active":
+          include("users/active.php");
+          break;
         case "deleteUser":
           include('users/deleteUser.php');
           break;
+        case "logout":
+            unset($_SESSION['username']);
+            session_destroy();
+            header("location:../index.php");
+            break;
         case "addCoupon":
           include('coupons/addCoupon.php');
           break;
+          // case "listComment":
+          //   $comment = new comment();
+          //   $listbinhluan= $comment->loadall_binhluan(0);
+          //   include 'comment/listComment.php';
+          //   break;
+          // case "deleteComment":
+          //   include 'comment/deleteComment.php';
+          //   break;
+          // case "logout":
+          //     unset($_SESSION['admin']);
+          //     session_destroy();
+          //     header("location:../index.php");
+          //   break;
         default:
           include('includes/dashboard.php');
       }
@@ -83,3 +112,6 @@
 </body>
 
 </html>
+<?php 
+ob_end_flush();
+?>
