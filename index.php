@@ -74,6 +74,9 @@ ob_start();
             case "donhang":
                 include('client/includes/donhang.php');
                 break;
+            case "login":
+                include("client/login.php");
+                break;
             case "logout":
                 unset($_SESSION['username']);
                 session_destroy();
