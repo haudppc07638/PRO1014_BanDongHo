@@ -23,11 +23,12 @@ if (!isset($_SESSION['login']['username'])) {
   <div class="container-scroller">
     <?php include('includes/header.php'); ?>
     <?php include('includes/slidebar.php'); ?>
-    <?php include('includes/pdo.php'); ?>
+    <?php include('includes/pdo.php') ?>
     <?php include('users/user.php'); ?>
     <?php include('categories/category.php'); ?>
-    <?php include('products/pro.php'); ?>
-    <?php include('../model/binhluan.php'); ?>
+    <?php include('products/pro.php');?>
+    <?php include('../model/binhluan.php');?>
+    <?php include('blog/blog.php');?>
     <div class="main-panel">
       <?php
       $action = "home";
@@ -81,19 +82,25 @@ if (!isset($_SESSION['login']['username'])) {
         case "addCoupon":
           include('coupons/addCoupon.php');
           break;
-          // case "listComment":
-          //   $comment = new comment();
-          //   $listbinhluan= $comment->loadall_binhluan(0);
-          //   include 'comment/listComment.php';
-          //   break;
-          // case "deleteComment":
-          //   include 'comment/deleteComment.php';
-          //   break;
-          // case "logout":
-          //     unset($_SESSION['admin']);
-          //     session_destroy();
-          //     header("location:../index.php");
-          //   break;
+        // case "listComment":
+        //   $comment = new comment();
+        //   $listbinhluan= $comment->loadall_binhluan(0);
+        //   include 'comment/listComment.php';
+        //   break;
+        // case "deleteComment":
+        //   include 'comment/deleteComment.php';
+        //   break;
+        // case "logout":
+        //     unset($_SESSION['admin']);
+        //     session_destroy();
+        //     header("location:../index.php");
+        //   break;
+        case "cateBlog":
+          include('blog/listCateBlog.php');
+          break;
+        case "editCateBlog":
+          include('blog/editCateBlog.php');
+          break;
         default:
           include('includes/dashboard.php');
       }

@@ -14446,5 +14446,10 @@ dl {
   -webkit-box-flex: 1;
   -ms-flex-positive: 1;
   flex-grow: 1; }
-
+.category-name {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-width: 150px; /* Độ rộng tối đa của tên danh mục */
+}
 /*# sourceMappingURL=style.css.map */
