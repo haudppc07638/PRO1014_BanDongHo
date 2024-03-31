@@ -20,7 +20,6 @@ ob_start();
     <!-- Bootstrap fremwork main css -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-
     <link rel="stylesheet" href="client/css/bootstrap.min.css">
     <!-- Owl Carousel min css -->
     <link rel="stylesheet" href="client/css/owl.carousel.min.css">
@@ -75,8 +74,10 @@ ob_start();
             case "donhang":
                 include('client/includes/donhang.php');
                 break;
-            case "login":
-                include("client/login.php");
+            case "logout":
+                unset($_SESSION['username']);
+                session_destroy();
+                header("location:index.php");
                 break;
             case "logout":
                 unset($_SESSION['username']);
@@ -112,9 +113,6 @@ ob_start();
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
-
 </html>
 <?php
 ob_end_flush();
-var_dump($_SESSION);
-?>

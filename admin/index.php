@@ -75,10 +75,10 @@ if (!isset($_SESSION['login']['username'])) {
           include('users/deleteUser.php');
           break;
         case "logout":
-            unset($_SESSION['username']);
-            session_destroy();
-            header("location:../index.php");
-            break;
+          unset($_SESSION['username']);
+          session_destroy();
+          header("location:../index.php");
+          break;
         case "addCoupon":
           include('coupons/addCoupon.php');
           break;
@@ -121,4 +121,3 @@ if (!isset($_SESSION['login']['username'])) {
 </html>
 <?php 
 ob_end_flush();
-?>
