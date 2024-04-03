@@ -78,12 +78,7 @@ ob_start();
                 include("client/login.php");
                 break;
             case "logout":
-                unset($_SESSION['username']);
-                session_destroy();
-                header("location:index.php");
-                break;
-            case "logout":
-                unset($_SESSION['username']);
+                unset($_SESSION['login']['username']);
                 session_destroy();
                 header("location:index.php");
                 break;
