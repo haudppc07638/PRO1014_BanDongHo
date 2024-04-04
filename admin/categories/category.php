@@ -52,8 +52,6 @@ class category
         return $success;
     }
 
-
-
     public function add($name, $description, $image, $db)
     {
         $db = new connect();

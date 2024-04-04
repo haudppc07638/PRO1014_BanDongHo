@@ -48,9 +48,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $success = $products->add($name, $price, $imagesStr, $description, $category_ID, $discount, $db);
 
         if ($success) {
-            echo "Product added successfully.";
+            echo "Thêm thành công .";
         } else {
-            echo "Failed to add the product.";
+            echo "Lỗi .";
         }
     } else {
         foreach ($errors as $error) {
@@ -95,7 +95,7 @@ function isImageValid($filename)
                 <div class="">
                     <label for="price">Giá </label>
                     <br>
-                    <input type="number" class="form-control" id="price" name="price" placeholder="Giá ">
+                    <input type="test" class="form-control" id="price" name="price" placeholder="Giá ">
                 </div>
                 <div class="">
                     <label for="image1">Hình 1</label>

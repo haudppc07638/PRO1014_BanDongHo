@@ -4,6 +4,7 @@ if($_SERVER['REQUEST_METHOD'] == 'GET'){
     $description = $_GET['description'];
     $image = $_GET['image'];
     $categoryId = $_GET['id'];
+    
 }
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $categoryId = $_POST['categoryId'];
@@ -53,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <label for="cateImage">Hình Ảnh :</label>
         <input type="file" class="form-control" id="cateImage" name="cateImage">
         <?php if (!empty($imagePath)) : ?>
-            <img src="/uploads/<?php echo $image ?>" alt="Hình ảnh cũ" style="max-width: 200px;">
+            <img src="/uploads/<?php echo htmlspecialchars($image); ?>" alt="Hình ảnh cũ" style="max-width: 200px;">
         <?php endif; ?>
     </div>
     <div id="text"></div>

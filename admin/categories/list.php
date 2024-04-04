@@ -10,7 +10,8 @@
                     <tr>
                         <th> ID </th>
                         <th> Tên </th>
-                        <th> Hình Ảnh </th>
+                        <th>Hình Ảnh </th>
+                        <th>Mô tả  </th>
                         <th>Hành động </th>
                     </tr>
                 </thead>
@@ -29,10 +30,13 @@
                             <td>
                                 <?php echo $row['categoryName'] ?>
                             </td>
+                            
                             <td>
-                                <img src="../uploads/<?php echo $row['image']; ?>" alt="image-product" width="500px">
+                                <img src="../images/<?php echo $row['image']; ?>" alt="image-product" width="500px">
                             </td>
-
+                            <td>
+                                <?php echo $row['description'] ?>
+                            </td>
                             <td styleact="text-align: center;">
                                 <a href="?act=deletecate&id=<?php echo $row['id']; ?>" onclick="return confirm('Are you sure you want to delete this category?');">
                                     <button type="button" class="btn btn-danger">Delete</button>

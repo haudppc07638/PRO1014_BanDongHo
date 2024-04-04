@@ -12,7 +12,8 @@
                         <th> Hình ảnh </th>
                         <th> Giá </th>
                          <th>Mô tả </th> 
-                        <th> Danh mục  </th>
+                        <th> Mã Danh mục  </th>
+                        <th> Giảm Giá  </th>
                         <th> Hành động </th>
                     </tr>
                 </thead>
@@ -52,7 +53,9 @@
                             <td>
                                 <?php echo $row['category_id']; ?>
                             </td>
-
+                            <td>
+                                <?php echo $row['discount']; ?>
+                            </td>
                            
                             <td style="text-align: center;">
                                 <a href="?act=deletepro&id=<?php echo $row['id']; ?>" onclick="return confirm('Are you sure you want to delete this product?');">

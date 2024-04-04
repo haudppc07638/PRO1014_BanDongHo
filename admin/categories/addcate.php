@@ -2,7 +2,7 @@
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $name = $_POST['cateName'];
     $description = $_POST['cateDescription'];
-    $uploadDir = $_SERVER['DOCUMENT_ROOT'] . '/uploads/';
+    $uploadDir = $_SERVER['DOCUMENT_ROOT'] . '/images/';
     $image = $_FILES['cateImage']['name'];
     $target = $uploadDir . basename($image);
 
@@ -10,6 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     include_once("../includes/pdo.php");
     $category = new category();
     $db = new connect();
+
     if (empty($name) || empty($description) || empty($image)) {
         echo "Vui lòng nhập đủ dữ liệu.";
     } elseif (!isImageValid($image)) {
@@ -26,6 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
     die();
 }
+
 function isImageValid($file)
 {
     $allowedExtensions = array('jpg', 'jpeg', 'png');
@@ -38,22 +40,22 @@ function isImageValid($file)
     <h2>Add New Category</h2>
     <form id="addCategoryForm" enctype="multipart/form-data">
         <div class="form-group">
-            <label for="cateName">Tên danh mục </label>
+            <label for="cateName">Category Name:</label>
             <input type="text" class="form-control" id="cateName" name="cateName">
         </div>
         <div class="form-group">
-            <label for="cateDescription">Mô tả </label>
+            <label for="cateDescription">Description:</label>
             <textarea class="form-control" id="cateDescription" name="cateDescription"></textarea>
         </div>
         <div class="form-group">
-            <label for="cateImage">Hình ảnh </label>
+            <label for="cateImage">Image:</label>
             <input type="file" class="form-control" id="cateImage" name="cateImage">
         </div>
         <div class="form-group">
             <img id="uploadedImage" src="" style="max-width: 300px; max-height: 300px;">
 
         </div>
-        <button type="submit" class="btn btn-primary">Xác nhận </button>
+        <button type="submit" class="btn btn-primary">Submit</button>
     </form>
     <div id="message"></div>
 </div>
