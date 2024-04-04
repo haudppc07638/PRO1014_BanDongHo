@@ -28,7 +28,8 @@ if (!isset($_SESSION['login']['username'])) {
     <?php include('categories/category.php'); ?>
     <?php include('products/pro.php');?>
     <?php include('../model/binhluan.php');?>
-    <?php include('blog/blog.php');?>
+    <?php include('blog/blogcate.php');?>
+    <?php include('blog/postBlog.php');?>
     <div class="main-panel">
       <?php
       $action = "home";
@@ -103,6 +104,15 @@ if (!isset($_SESSION['login']['username'])) {
           break;
         case "editCateBlog":
           include('blog/editCateBlog.php');
+          break;
+        case "listBlog":
+          include('blog/listBlog.php');
+          break;
+        case "editBlog":
+          include('blog/editBlog.php');
+          break;
+        case "addBlog":
+          include('blog/addBlog.php');
           break;
         default:
           include('includes/dashboard.php');
