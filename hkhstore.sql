@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Apr 03, 2024 at 12:31 PM
+-- Generation Time: Apr 06, 2024 at 11:49 AM
 -- Server version: 8.0.31
 -- PHP Version: 7.4.33
 
@@ -48,13 +48,37 @@ CREATE TABLE `bill` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `blog`
+--
+
+CREATE TABLE `blog` (
+  `id` int NOT NULL,
+  `title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `content` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `user_id` int DEFAULT NULL,
+  `blogcate_id` int DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `blog`
+--
+
+INSERT INTO `blog` (`id`, `title`, `content`, `user_id`, `blogcate_id`, `created_at`) VALUES
+(7, 'blog', '122222222221', 1, 58, '2024-04-04 12:59:17'),
+(8, 'testweqwqweq', 'qưeqwe', 1, 58, '2024-04-04 13:15:51'),
+(9, 'tieu de sua', 'noi dung tét', 1, 62, '2024-04-04 13:47:07');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `blogcategories`
 --
 
 CREATE TABLE `blogcategories` (
   `id` int NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
-  `parent_id` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `parent_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   `user_id` int DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -65,10 +89,8 @@ CREATE TABLE `blogcategories` (
 
 INSERT INTO `blogcategories` (`id`, `name`, `parent_id`, `user_id`, `created_at`) VALUES
 (58, 'Công Nghệ và Tính Năng', '', 1, '2024-03-31 15:06:35'),
-(59, 'Phong Cách và Thời Trang', '', 1, '2024-03-31 15:06:43'),
-(62, 'Giới thiệu và phân tích các công nghệ mới và tính năng tiên tiến trong ngành đồng hồ.', '58', 1, '2024-03-31 15:07:35'),
-(63, 'Hướng dẫn sử dụng các tính năng đặc biệt trên đồng hồ thông minh.', '59', 1, '2024-03-31 15:07:44'),
-(67, 'test', '', 1, '2024-04-02 12:42:48');
+(59, 'Phong Cách và Thời Trang moi', '59', 1, '2024-03-31 15:06:43'),
+(62, 'Giới thiệu và phân tích các công nghệ mới và tính năng tiên tiến trong ngành đồng hồ.', '58', 1, '2024-03-31 15:07:35');
 
 -- --------------------------------------------------------
 
@@ -98,18 +120,17 @@ CREATE TABLE `categories` (
   `categoryName` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `status` int DEFAULT NULL,
   `created` datetime DEFAULT NULL,
-  `updated` datetime DEFAULT NULL
+  `updated` datetime DEFAULT NULL,
+  `image` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `categories`
 --
 
-INSERT INTO `categories` (`id`, `categoryName`, `status`, `created`, `updated`) VALUES
-(1, 'Đồng hồ nam', 1, '2023-12-03 23:44:55', '2023-12-03 23:44:02'),
-(4, 'Đồng hồ nữ', NULL, NULL, NULL),
-(5, 'Đồng hồ thời trang', NULL, NULL, NULL),
-(6, 'Đồng hồ unisex', NULL, NULL, NULL);
+INSERT INTO `categories` (`id`, `categoryName`, `status`, `created`, `updated`, `image`, `description`) VALUES
+(21, 'hieu 111', NULL, NULL, NULL, '62848236-1bf2-4c3f-8e3a-ad2e548c2c75.jpg', '121111');
 
 -- --------------------------------------------------------
 
@@ -119,21 +140,12 @@ INSERT INTO `categories` (`id`, `categoryName`, `status`, `created`, `updated`) 
 
 CREATE TABLE `comment` (
   `id` int NOT NULL,
-  `content` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `content` text COLLATE utf8mb4_general_ci,
   `product_id` int DEFAULT NULL,
   `user_id` int DEFAULT NULL,
-  `created` datetime DEFAULT NULL,
-  `updated` datetime DEFAULT NULL,
-  `status` int DEFAULT '1'
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `comment`
---
-
-INSERT INTO `comment` (`id`, `content`, `product_id`, `user_id`, `created`, `updated`, `status`) VALUES
-(21, 'Sản phẩm tuyệt vời', 1, 1, '2023-12-03 21:52:31', '2023-12-03 21:52:31', 1),
-(24, 'sản phẩm xịn', 1, 1, '2023-12-03 23:09:27', '2023-12-03 23:09:27', 1);
 
 -- --------------------------------------------------------
 
@@ -189,13 +201,6 @@ CREATE TABLE `products` (
   `oldPrice` int DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `products`
---
-
-INSERT INTO `products` (`id`, `name`, `price`, `description`, `image`, `category_id`, `discount`, `created`, `updated`, `status`, `oldPrice`) VALUES
-(13, 'Harry', 149000, 'czxf', '1piece.jpg;dongho1.jpg;1piece.jpg', 21, '', '2024-04-10 15:07:03', NULL, 1, 200000);
-
 -- --------------------------------------------------------
 
 --
@@ -225,7 +230,8 @@ INSERT INTO `users` (`id`, `userName`, `password`, `address`, `email`, `fullName
 (2, 'admin', 'admin', '123312', '132312', '321313', 1, 'admin', '2023-12-03 22:15:39', '2023-12-03 22:15:39', '1231231232'),
 (5, 'User863', '123456', '123', '123@gmail.com', '12', 1, 'user', NULL, NULL, '123'),
 (6, 'User373', '123456', '123', '123@gmail.com', '12', 1, 'user', NULL, NULL, '123'),
-(7, '123', '123', '1231232', '123', '123', 1, 'user', NULL, NULL, '123132321232');
+(9, 'hieu', '123456', 'nguyen van linh', 'khcute2004@gmail.com', 'hieu tran', 1, 'user', NULL, NULL, '0356764863'),
+(10, 'test', '123', '123', 'khanhvo@gmail.com', 'vominhkhanh', 1, 'user', NULL, NULL, '123');
 
 --
 -- Indexes for dumped tables
@@ -237,6 +243,14 @@ INSERT INTO `users` (`id`, `userName`, `password`, `address`, `email`, `fullName
 ALTER TABLE `bill`
   ADD PRIMARY KEY (`id`),
   ADD KEY `id_user` (`user_id`);
+
+--
+-- Indexes for table `blog`
+--
+ALTER TABLE `blog`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `blogcate_id` (`blogcate_id`);
 
 --
 -- Indexes for table `blogcategories`
@@ -263,8 +277,8 @@ ALTER TABLE `categories`
 --
 ALTER TABLE `comment`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `FK_product` (`product_id`),
-  ADD KEY `FK_user` (`user_id`);
+  ADD KEY `product_id` (`product_id`),
+  ADD KEY `user_id` (`user_id`);
 
 --
 -- Indexes for table `coupons`
@@ -304,22 +318,28 @@ ALTER TABLE `bill`
   MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `blog`
+--
+ALTER TABLE `blog`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
 -- AUTO_INCREMENT for table `blogcategories`
 --
 ALTER TABLE `blogcategories`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
 
 --
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `comment`
 --
 ALTER TABLE `comment`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `coupons`
@@ -337,13 +357,13 @@ ALTER TABLE `orders`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- Constraints for dumped tables
@@ -354,6 +374,13 @@ ALTER TABLE `users`
 --
 ALTER TABLE `bill`
   ADD CONSTRAINT `bill_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+
+--
+-- Constraints for table `blog`
+--
+ALTER TABLE `blog`
+  ADD CONSTRAINT `blog_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
+  ADD CONSTRAINT `blog_ibfk_2` FOREIGN KEY (`blogcate_id`) REFERENCES `blogcategories` (`id`);
 
 --
 -- Constraints for table `blogcategories`
@@ -372,8 +399,8 @@ ALTER TABLE `cart`
 -- Constraints for table `comment`
 --
 ALTER TABLE `comment`
-  ADD CONSTRAINT `FK_product` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`),
-  ADD CONSTRAINT `FK_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+  ADD CONSTRAINT `comment_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`),
+  ADD CONSTRAINT `comment_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 --
 -- Constraints for table `orders`
