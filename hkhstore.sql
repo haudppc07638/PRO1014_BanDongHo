@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Apr 06, 2024 at 11:49 AM
+-- Generation Time: Apr 10, 2024 at 12:31 PM
 -- Server version: 8.0.31
 -- PHP Version: 7.4.33
 
@@ -201,6 +201,13 @@ CREATE TABLE `products` (
   `oldPrice` int DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `products`
+--
+
+INSERT INTO `products` (`id`, `name`, `price`, `description`, `image`, `category_id`, `discount`, `created`, `updated`, `status`, `oldPrice`) VALUES
+(13, 'Harry', 149000, 'czxf', '1piece.jpg;dongho1.jpg;1piece.jpg', 21, '', '2024-04-10 15:07:03', NULL, 1, 200000);
+
 -- --------------------------------------------------------
 
 --
@@ -357,7 +364,7 @@ ALTER TABLE `orders`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `users`
