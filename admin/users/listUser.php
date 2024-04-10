@@ -32,7 +32,7 @@ error_reporting(E_ALL);
                         <?php
                         $dblist = new User();
                         $rows = $dblist->getList();
-                        foreach ($rows as $row) : ?>
+                        foreach ($rows as $row) :?>
                             <tr>
                                 <td><?= $row['id'] ?></td>
                                 <td><?= $row['userName'] ?></td>
@@ -42,6 +42,7 @@ error_reporting(E_ALL);
                                 <td><?= $row['phone'] ?></td>
                                 <td><?= $row['role'] ?></td>
                                 <td>
+                                    <button type="submit" class="btn btn-primary"><a href="?act=editUser&id=<?= $row['id']?>">Sửa</a></button>
                                     <?php if ($row['status'] == 1) : ?>
                                         <form action="?act=active&id=<?= $row['id']; ?>&status=0" method="post" style="display:inline;">
                                             <input type="hidden" name="id" value="">

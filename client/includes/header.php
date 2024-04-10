@@ -1,3 +1,8 @@
+<?php
+ini_set('display_errors', '1');
+ini_set('display_startup_errors', '1');
+error_reporting(E_ALL);
+?>
 <header id="htc__header" class="htc__header__area header--one">
     <!-- Start Mainmenu Area -->
     <div id="sticky-header-with-topbar" class="mainmenu__wrap sticky__header">
@@ -114,8 +119,22 @@
                     <div class="search__inner">
                         <form action="?act=shop" method="GET">
                             <input placeholder="Search here... " type="text" name="keyword">
-                            <button type="submit" name="search"></button>
+                            <button type="submit" name="ok" value="search"></button>
                         </form>
+                        <?php
+                        if(isset($_REQUEST['submit'])){
+                            $db = new Products();
+                            $search = addslashes($_GET['search']);
+                            $kw = $_POST['keyword'];
+                            if(isset($search) && isset($kw)){
+                                echo "Vui lòng điền thông tin bạn muốn tìm kiếm";
+                            }else{
+                                $searchProduct = $db->searchProduct($id);
+                                var_dump($searchProduct);
+                            }
+                            var_dump($_REQUEST);
+                        }
+                        ?>
                         <div class="search__close__btn">
                             <span class="search__close__btn_icon"><i class="zmdi zmdi-close"></i></span>
                         </div>

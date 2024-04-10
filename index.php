@@ -39,8 +39,6 @@ ob_start();
     <script src="client/js/vendor/modernizr-3.5.0.min.js"></script>
 </head>
 <body>
-    <!-- Body main wrapper start -->
-    <div class="wrapper" style="font-family: 'sans-serif';"></div>
     <?php
     include('client/includes/header.php');
     include('admin/includes/pdo.php');
@@ -95,7 +93,6 @@ ob_start();
     }
     include('client/includes/footer.php');
     ?>
-    </div>
     <!-- Body main wrapper end -->
     <script src="client/js/vendor/jquery-3.2.1.min.js"></script>
     <!-- Bootstrap framework js -->

@@ -68,6 +68,9 @@ if (!isset($_SESSION['login']['username'])) {
         case "listUser":
           include('users/listUser.php');
           break;
+        case "editUser":
+          include("users/editUser.php");
+          break;
         case "active":
           include("users/active.php");
           break;

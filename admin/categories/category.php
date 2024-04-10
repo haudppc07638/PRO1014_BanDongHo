@@ -8,8 +8,9 @@ class category
     private $created = null;
     private $updated = null;
 
-    public function getList($db)
+    public function getList()
     {
+        $db = new connect();
         $query = "SELECT * FROM categories";
         $result = $db->pdo_query($query);
         return $result;

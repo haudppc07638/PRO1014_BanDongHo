@@ -33,7 +33,7 @@
                         <!-- End List And Grid View -->
                     </div>
 
-                    
+
                     <!-- Start Product View -->
                     <div class="row">
                         <div class="shop__grid__view__wrap">
@@ -41,169 +41,63 @@
                                 class="single-grid-view tab-pane fade in active clearfix">
                                 <!-- Start Single Product -->
                                 <?
-                                if (isset($_GET['id'])){
+                                if (isset($_GET['id'])) {
                                     $idCat = $_GET['id'];
                                     $dblis = new Products();
                                     $rows = $dblis->get_dssp($idCat);
-                                }else{
+                                } else {
                                     $dblis = new Products();
                                     $rows = $dblis->getList();
                                 }
                                 foreach ($rows as $row) { ?>
-                                <div class="col-md-4 col-lg-4 col-sm-6 col-xs-12">
-                                    <div class="category" style="border: 0.5px solid #eaeaea;">
-                                        <div class="ht__cat__thumb">
-                                            <a href="?act=detail&id=<? echo $row['productID'] ?>&idCat=<? echo $row['category_ID'] ?>">
-                                            <? echo '<img src="images/' . $row['image'] . '"alt="product images">'?>
-                                            </a>
-                                        </div>
-                                        <div class="fr__hover__info">
-                                            <ul class="product__action">
-                                                <li><a href="?act=addcart"><i class="icon-handbag icons"></i></a></li>
-                                            </ul>
-                                        </div>
-                                        <div class="fr__product__inner">
-                                            <h4><a href="?act=detail&id=<? echo $row['productID'] ?>"><? echo $row['name'] ?></a></h4>
-                                            <ul class="fr__pro__prize">
-                                                <li class="old__prize"><strike><?php echo number_format($row['price']) ?> VND</strike></li>
-                                                <li><?php echo number_format($row['price']) ?> VND</li>
-                                            </ul>
+                                    <div class="col-md-4 col-lg-3 col-sm-4 col-xs-12">
+                                        <div class="category" style="border: 0.5px solid #eaeaea;">
+                                            <div class="ht__cat__thumb">
+                                                <!-- <a href="?act=detail">
+                                    <img src="public/images/product/1.jpg" alt="product images">
+                                </a> -->
+                                                <a
+                                                    href="?act=detail&id=<? echo $row['id'] ?>&idCat=<? echo $row['category_id'] ?>">
+                                                    <?php
+                                                    $imageNames = explode(';', $row['image']);
+                                                    if (!empty($imageNames[0])) {
+                                                        echo '<img src="../images/' . $imageNames[0] . '" alt="image-product" width="100px">';
+                                                    }
+                                                    ?>
+                                                </a>
+                                            </div>
+                                            <div class="fr__hover__info">
+                                                <ul class="product__action">
+                                                    <!-- <li><a href="wishlist.html"><i class="icon-heart icons"></i></a></li> -->
+
+                                                    <li><a href="?act=addcart"><i class="icon-handbag icons"></i></a></li>
+                                                </ul>
+                                            </div>
+                                            <div class="fr__product__inner">
+                                                <h4><a
+                                                        href="?act=detail&id=<? echo $row['id'] ?>&idCat=<? echo $row['category_id'] ?>">
+                                                        <? echo $row['name'] ?>
+                                                    </a></h4>
+                                                <ul class="fr__pro__prize">
+                                                    <li class="old__prize"><del class="d-inline">
+                                                            <?php echo number_format($row['oldPrice']) ?> VND
+                                                        </del> </li>
+                                                    <li>
+                                                        <?php echo number_format($row['price']) ?> VND
+                                                    </li>
+                                                </ul>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <?}?>
+                                <? } ?>
                                 <!-- End Single Product -->
                             </div>
-
-                            <!-- <div role="tabpanel" id="list-view" class="single-grid-view tab-pane fade clearfix">
-                                <div class="col-xs-12">
-                                    <div class="ht__list__wrap">
-                                        
-                                        <div class="ht__list__product">
-                                            <div class="ht__list__thumb">
-                                                <a href="product-details.html"><img src="images/product-2/pro-1/1.jpg"
-                                                        alt="product images"></a>
-                                            </div>
-                                            <div class="htc__list__details">
-                                                <h2><a href="product-details.html">Product Title Here </a></h2>
-                                                <ul class="pro__prize">
-                                                    <li class="old__prize">$82.5</li>
-                                                    <li>$75.2</li>
-                                                </ul>
-                                                <ul class="rating">
-                                                    <li><i class="icon-star icons"></i></li>
-                                                    <li><i class="icon-star icons"></i></li>
-                                                    <li><i class="icon-star icons"></i></li>
-                                                    <li class="old"><i class="icon-star icons"></i></li>
-                                                    <li class="old"><i class="icon-star icons"></i></li>
-                                                </ul>
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipisLorem ipsum dolor sit
-                                                    amet, consec adipisicing elit, sed do eiusmod tempor incididunt ut
-                                                    labore et dolore magna aliqul Ut enim ad minim veniam, quis nostrud
-                                                    exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                                                    consequat.</p>
-                                                <div class="fr__list__btn">
-                                                    <a class="fr__btn" href="cart.html">Add To Cart</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="ht__list__product">
-                                            <div class="ht__list__thumb">
-                                                <a href="product-details.html"><img src="images/product-2/pro-1/2.jpg"
-                                                        alt="product images"></a>
-                                            </div>
-                                            <div class="htc__list__details">
-                                                <h2><a href="product-details.html">Product Title Here </a></h2>
-                                                <ul class="pro__prize">
-                                                    <li class="old__prize">$82.5</li>
-                                                    <li>$75.2</li>
-                                                </ul>
-                                                <ul class="rating">
-                                                    <li><i class="icon-star icons"></i></li>
-                                                    <li><i class="icon-star icons"></i></li>
-                                                    <li><i class="icon-star icons"></i></li>
-                                                    <li class="old"><i class="icon-star icons"></i></li>
-                                                    <li class="old"><i class="icon-star icons"></i></li>
-                                                </ul>
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipisLorem ipsum dolor sit
-                                                    amet, consec adipisicing elit, sed do eiusmod tempor incididunt ut
-                                                    labore et dolore magna aliqul Ut enim ad minim veniam, quis nostrud
-                                                    exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                                                    consequat.</p>
-                                                <div class="fr__list__btn">
-                                                    <a class="fr__btn" href="cart.html">Add To Cart</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                       
-                                        <div class="ht__list__product">
-                                            <div class="ht__list__thumb">
-                                                <a href="product-details.html"><img src="images/product-2/pro-1/3.jpg"
-                                                        alt="product images"></a>
-                                            </div>
-                                            <div class="htc__list__details">
-                                                <h2><a href="product-details.html">Product Title Here </a></h2>
-                                                <ul class="pro__prize">
-                                                    <li class="old__prize">$82.5</li>
-                                                    <li>$75.2</li>
-                                                </ul>
-                                                <ul class="rating">
-                                                    <li><i class="icon-star icons"></i></li>
-                                                    <li><i class="icon-star icons"></i></li>
-                                                    <li><i class="icon-star icons"></i></li>
-                                                    <li class="old"><i class="icon-star icons"></i></li>
-                                                    <li class="old"><i class="icon-star icons"></i></li>
-                                                </ul>
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipisLorem ipsum dolor sit
-                                                    amet, consec adipisicing elit, sed do eiusmod tempor incididunt ut
-                                                    labore et dolore magna aliqul Ut enim ad minim veniam, quis nostrud
-                                                    exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                                                    consequat.</p>
-                                                <div class="fr__list__btn">
-                                                    <a class="fr__btn" href="cart.html">Add To Cart</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                      
-                                        <div class="ht__list__product">
-                                            <div class="ht__list__thumb">
-                                                <a href="product-details.html"><img src="images/product-2/pro-1/4.jpg"
-                                                        alt="product images"></a>
-                                            </div>
-                                            <div class="htc__list__details">
-                                                <h2><a href="product-details.html">Product Title Here </a></h2>
-                                                <ul class="pro__prize">
-                                                    <li class="old__prize">$82.5</li>
-                                                    <li>$75.2</li>
-                                                </ul>
-                                                <ul class="rating">
-                                                    <li><i class="icon-star icons"></i></li>
-                                                    <li><i class="icon-star icons"></i></li>
-                                                    <li><i class="icon-star icons"></i></li>
-                                                    <li class="old"><i class="icon-star icons"></i></li>
-                                                    <li class="old"><i class="icon-star icons"></i></li>
-                                                </ul>
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipisLorem ipsum dolor sit
-                                                    amet, consec adipisicing elit, sed do eiusmod tempor incididunt ut
-                                                    labore et dolore magna aliqul Ut enim ad minim veniam, quis nostrud
-                                                    exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                                                    consequat.</p>
-                                                <div class="fr__list__btn">
-                                                    <a class="fr__btn" href="cart.html">Add To Cart</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                       
-                                    </div>
-                                </div>
-                            </div> -->
                         </div>
                     </div>
                     <!-- End Product View -->
                 </div>
                 <!-- Start Pagenation -->
-                <!-- <div class="row">
+                <div class="row">
                     <div class="col-xs-12">
                         <ul class="htc__pagenation">
                             <li><a href="#"><i class="zmdi zmdi-chevron-left"></i></a></li>
@@ -213,7 +107,7 @@
                             <li><a href="#"><i class="zmdi zmdi-chevron-right"></i></a></li>
                         </ul>
                     </div>
-                </div> -->
+                </div>
                 <!-- End Pagenation -->
             </div>
             <div class="col-lg-3 col-lg-pull-9 col-md-3 col-md-pull-9 col-sm-12 col-xs-12 smt-40 xmt-40">
@@ -244,13 +138,14 @@
                     <div class="htc__category">
                         <h4 class="title__line--4">Danh mục</h4>
                         <ul class="ht__cat__list">
-                            <?          
-                                $dblist = new Category();
-                                $rows = $dblist->getList();
-                                foreach ($rows as $row) { 
-                            ?>
-                            <li><a href="?act=shop&id=<? echo $row['categoryID'] ?>"><? echo $row['categoryName'] ?></a></li>
-                            <?}?>
+                            <?
+                            $dblist = new Category();
+                            $rows = $dblist->getList();
+                            foreach ($rows as $row) {
+                                ?>
+                                <li><a href="?act=shop&id=<? echo $row['id'] ?>"><? echo $row['categoryName'] ?></a>
+                                </li>
+                            <? } ?>
                         </ul>
                     </div>
                     <!-- End Category Area -->
@@ -263,21 +158,30 @@
                             $dblis = new Products();
                             $rows = $dblis->getList();
                             foreach ($rows as $row) { ?>
-                            <div class="htc__best__product">
-                                <div class="htc__best__pro__thumb">
-                                    <a href="?act=detail&id=<? echo $row['productID'] ?>&idCat=<? echo $row['category_ID'] ?>">
-                                        <? echo '<img src="images/' . $row['image'] . '"alt="product images" style="width: 100px;height: 120px; border: 1px solid #a6a6a6;">'?>
-                                    </a>
+                                <div class="htc__best__product">
+                                    <div class="htc__best__pro__thumb">
+                                        <a
+                                            href="?act=detail&id=<? echo $row['productID'] ?>&idCat=<? echo $row['category_ID'] ?>">
+                                            <?php
+                                            $imageNames = explode(';', $row['image']);
+                                            if (!empty($imageNames[0])) {
+                                                echo '<img src="../images/' . $imageNames[0] . '" alt="image-product" style="width: 80px;height: 95px; border: 1px solid #a6a6a6;">';
+                                            }
+                                            ?>
+
+                                        </a>
+                                    </div>
+                                    <div class="htc__best__product__details">
+                                        <h2><a
+                                                href="?act=detail&id=<? echo $row['productID'] ?>&idCat=<? echo $row['category_ID'] ?>"><? echo $row['name'] ?></a>
+                                        </h2>
+                                        <ul class="pro__prize">
+                                            <!-- <li class="old__prize"></li> -->
+                                            <li><?php echo number_format($row['price']) ?> VND</li>
+                                        </ul>
+                                    </div>
                                 </div>
-                                <div class="htc__best__product__details">
-                                    <h2><a href="?act=detail&id=<? echo $row['productID'] ?>&idCat=<? echo $row['category_ID'] ?>"><? echo $row['name'] ?></a></h2>
-                                    <ul class="pro__prize">
-                                        <!-- <li class="old__prize"></li> -->
-                                        <li><?php echo number_format($row['price']) ?> VND</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <?}?>
+                            <? } ?>
                             <!-- End Single Product -->
                         </div>
                     </div>

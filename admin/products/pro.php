@@ -81,6 +81,15 @@ class Products
         $count = $stmt->fetchColumn();
         return $count > 0; // Trả về true nếu tên sản phẩm tồn tại, ngược lại false
     }
+    public function searchProduct($search){
+        if(isset($search)){
+
+        }
+        $db = new connect();
+        $query = "SELECT * FROM products WHERE name LIKE '%$search%'";
+        $result = $db->pdo_query($query);
+        return $result;
+    }
 
 
 

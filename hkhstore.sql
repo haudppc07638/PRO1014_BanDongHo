@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Apr 03, 2024 at 12:31 PM
+-- Generation Time: Apr 10, 2024 at 12:31 PM
 -- Server version: 8.0.31
 -- PHP Version: 7.4.33
 
@@ -183,20 +183,18 @@ CREATE TABLE `products` (
   `image` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
   `category_id` int DEFAULT NULL,
   `discount` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `created` datetime DEFAULT NULL,
+  `created` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `updated` datetime DEFAULT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT '1'
+  `status` tinyint(1) NOT NULL DEFAULT '1',
+  `oldPrice` int DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `products`
 --
 
-INSERT INTO `products` (`id`, `name`, `price`, `description`, `image`, `category_id`, `discount`, `created`, `updated`, `status`) VALUES
-(1, 'Đồng hồ nam sang trọng', 132213, 'Mẫu Casio MTP-V001L-1BUDF phiên bản dây da đen có vân lịch lãm, thiết kế đơn giản 3 kim trên mặt số size 38mm, nền cọc số học trò kiểu dáng mỏng trẻ trung.', 'phshop.jpg', 1, '132312', '2023-12-03 17:34:44', '2023-12-03 17:34:44', 1),
-(3, 'Citizen BM6835-23E – Nam – Eco-Drive (Năng Lượng Ánh Sáng) – Dây Da – Mặt Số 42mm', 6800000, 'Mẫu Citizen BM6835-23E dây da đen phiên bản da trơn phong cách thời trang cho phái mạnh, cọc số nhỏ phối tone màu đỏ nổi bật trên nền mặt số đen size 42mm.', 'dongho1.jpg', 1, '123', NULL, NULL, 1),
-(4, 'Citizen AN8195-58E – Nam – Quartz (Pin) – Mặt Số 42mm, Kính Cứng, Chống Nước 10ATM', 4500000, 'Mẫu Citizen AN8195-58E thiết kế 3 núm vặn điều chỉnh các tính năng Chronograph (đo thời gian) hiện thị trên nền mặt số đen size 42mm.', 'dongho2.jpg', 5, '123', NULL, NULL, 1),
-(5, 'SR SG1056.4601TE', 5600000, 'Mẫu SR SG1056.4601TE kiểu dáng đơn giản 3 kim cùng với cọc vạch số được tạo hình mỏng trẻ trung, nổi bật với phần vỏ máy pin được thiết kế siêu mỏng chỉ dày 6mm', 'dongho3.jpg', 5, '123', NULL, NULL, 1);
+INSERT INTO `products` (`id`, `name`, `price`, `description`, `image`, `category_id`, `discount`, `created`, `updated`, `status`, `oldPrice`) VALUES
+(13, 'Harry', 149000, 'czxf', '1piece.jpg;dongho1.jpg;1piece.jpg', 21, '', '2024-04-10 15:07:03', NULL, 1, 200000);
 
 -- --------------------------------------------------------
 
@@ -339,7 +337,7 @@ ALTER TABLE `orders`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `users`

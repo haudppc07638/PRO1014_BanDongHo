@@ -3,7 +3,6 @@
 class User
 {
     var $id = null;
-    var $UserID = null;
     var $Username = null;
     var $Password = null;
     var $FullName = null;
@@ -73,11 +72,14 @@ class User
     }
 
     //hàm cập nhập dữ liệu
-    public function updateUser($Username, $Password, $Fullname, $Email, $Address, $Phone, $UserID)
+    public function updateUser($Username, $Password, $Fullname, $Email, $Address, $Phone, $id)
     {
+        if (empty($Username) || empty($FullName) || empty($Email) || empty($Phone) || empty($Address) || empty($Password) || empty($role)) {
+            return false;
+        }
         $db = new connect();
-        $query = "UPDATE users SET username = '$Username', Password = '$Password', fullName = '$Fullname', 
-                email = '$Email', dddress = '$Address', phone = '$Phone' WHERE id = '$UserID'";
+        $query = "UPDATE users SET userName = '$Username', password = '$Password', fullName = '$Fullname', 
+                email = '$Email', address = '$Address', phone = '$Phone' WHERE id = '$id'";
         $result = $db->pdo_execute($query);
         return $result;
     }
