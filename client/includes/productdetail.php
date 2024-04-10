@@ -44,7 +44,7 @@ $rowProd = $data->getByID($id);
                                         $activeClass = ($index === 0) ? 'in active' : '';
                                         ?>
                                         <div role="tabpanel" class="tab-pane fade <?= $activeClass ?>" id="<?= $tabId ?>">
-                                            <img src="../images/<?= $imageName ?>" alt="image-product" width="100px">
+                                            <img src="images/<?= $imageName ?>" alt="image-product" width="100px">
                                         </div>
                                         <?php
                                     endif;
@@ -64,7 +64,7 @@ $rowProd = $data->getByID($id);
                                     ?>
                                     <li role="presentation" class="pot-small-img <?= $activeClass ?>">
                                         <a href="#<?= $tabId ?>" role="tab" data-toggle="tab">
-                                            <img src="../images/<?= $imageName ?>" alt="image-product" width="100px">
+                                            <img src="images/<?= $imageName ?>" alt="image-product" width="100px">
                                         </a>
                                     </li>
                                     <?php

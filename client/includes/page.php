@@ -86,7 +86,7 @@
                                         <?php
                                         $imageNames = explode(';', $row['image']);
                                         if (!empty($imageNames[0])) {
-                                            echo '<img src="../images/' . $imageNames[0] . '" alt="image-product" width="100px">';
+                                            echo '<img src="images/' . $imageNames[0] . '" alt="image-product" width="100px">';
                                         }
                                         ?>
                                     </a>
@@ -154,7 +154,7 @@
                                                         <?php
                                                         $imageNames = explode(';', $row['image']);
                                                         if (!empty($imageNames[0])) {
-                                                            echo '<img src="../images/' . $imageNames[0] . '" alt="image-product" width="100px">';
+                                                            echo '<img src="images/' . $imageNames[0] . '" alt="image-product" width="100px">';
                                                         }
                                                         ?>
                                                     </a>
@@ -227,7 +227,7 @@
                                                     <?php
                                                     $imageNames = explode(';', $row['image']);
                                                     if (!empty($imageNames[0])) {
-                                                        echo '<img src="../images/' . $imageNames[0] . '" alt="image-product" width="100px">';
+                                                        echo '<img src="images/' . $imageNames[0] . '" alt="image-product" width="100px">';
                                                     }
                                                     ?>
                                                 </a>
