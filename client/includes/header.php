@@ -1,3 +1,10 @@
+<?php
+$count = 0;
+if(isset($_SESSION['myCart']) && !empty($_SESSION['myCart'])) {
+    $count = count($_SESSION['myCart']);
+}
+?>
+<div class="wrapper">
 <header id="htc__header" class="htc__header__area header--one">
     <!-- Start Mainmenu Area -->
     <div id="sticky-header-with-topbar" class="mainmenu__wrap sticky__header">
@@ -125,6 +132,35 @@
                             <div class="htc__shopping__cart">
                                 <a class="" href="?act=viewcart"><i class="icon-handbag icons"></i></a>
                             </div>
+                            <?php
+                            if (!isset($_SESSION['login']['username'])) : ?>
+                                <div class="dropdown">
+                                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" style="margin: 0px 10px;">Tài khoản</button>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="?act=login">Đăng Nhập</a></li>
+                                    </ul>
+                                </div>
+                            <?php else : ?>
+                                <div class="dropdown">
+                                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" style="margin: 0px 10px;">Xin Chào, <?= $_SESSION['login']['username'] ?? "" ?> </button>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <a href="" height="auto">Cập nhật thông tin</a>
+                                        </li>
+                                        <li>
+                                            <a href="?act=logout" height="auto">Đăng Xuất</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            <?php
+                            endif;
+                            ?>
+                            <?php if (strpos($_SERVER['REQUEST_URI'], '?act=cart') === false) : ?>
+                                <div class="htc__shopping__cart">
+                                    <a class="cart__menu" href="#"><i class="icon-handbag icons"></i></a>
+                                    <a href="#"><span class="cart__menu htc__qua"><?= $count; ?></span></a>
+                                </div>
+                            <?php endif; ?>
                         </div>
                     </div>
                 </div>
@@ -156,4 +192,58 @@
             </div>
         </div>
     </div>
+    <?php if (strpos($_SERVER['REQUEST_URI'], '?act=cart') === false) : ?>
+        <div class="shopping__cart">
+            <div class="shopping__cart__inner">
+                <div class="offsetmenu__close__btn">
+                    <a href="#"><i class="zmdi zmdi-close"></i></a>
+                </div>
+                <div class="shp__cart__wrap">
+                    <?php
+                    // unset($_SESSION['myCart']);
+                    $totalBill = 0;
+                    $i = 0;
+                    $tongtienthanhtoan = 0;
+                    foreach ($_SESSION['myCart'] as $cart) :
+                        $totalPrice = $cart[2] * $cart[4];
+                        $totalBill += $totalPrice;
+                    ?>
+                        <div class="shp__single__product">
+                            <div class="shp__pro__thumb">
+                                <a href="#">
+                                    <?php
+                                    $imageNames = explode(';', $cart[3]);
+                                    if (!empty($imageNames[0])) : ?>
+                                        <a href="#"><img src="images/<?= $imageNames[0] ?>" alt="product img" height="99" /></a>
+                                    <?php endif; ?>
+                                </a>
+                            </div>
+                            <div class="shp__pro__details">
+                                <h2><a href="product-details.html"><?= $cart[1] ?></a></h2>
+                                <span class="quantity">Số lượng: <?= $cart[4] ?></span>
+                                <span class="shp__price"><?= number_format($cart[2]) ?> VND</span>
+                            </div>
+                            <div class="remove__btn">
+                                <a href="index.php?act=deleCart&cartId=<?= $i ?>" onclick="return confirm('Bạn có chắc chắn muốn xóa sản phẩm này khỏi giỏ hàng không?')">
+                                    <i class="zmdi zmdi-close"></i>
+                                </a>
+                            </div>
+                        </div>
+                    <?php
+                        $tongtienthanhtoan = $totalBill;
+                        $i += 1;
+                    endforeach;
+                    ?>
+                </div>
+                <ul class="shoping__total">
+                    <li class="subtotal">Tổng tiền:</li>
+                    <li class="total__price"><?= number_format($totalBill) ?> VNĐ</li>
+                </ul>
+                <ul class="shopping__btn">
+                    <li><a href="?act=cart">View Cart</a></li>
+                    <li class="shp__checkout"><a href="?act=checkout">Checkout</a></li>
+                </ul>
+            </div>
+        </div>
+    <?php endif; ?>
 </div>

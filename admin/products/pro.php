@@ -32,6 +32,15 @@ class Products
         $result = $db->pdo_query($sql);
         return $result[0];
     }
+    public function getCategoryName($cateID)
+    {
+        $db = new connect();
+        $sql = "SELECT categoryName, id
+            FROM categories 
+            WHERE id = $cateID";
+        $result = $db->pdo_query($sql);
+        return $result[0];
+    }
 
 
 

@@ -1,6 +1,9 @@
 <?php
 session_start();
 ob_start();
+if(!isset($_SESSION['myCart'])) {
+    $_SESSION['myCart'] = [];
+}
 ?>
 <!doctype html>
 <html class="no-js" lang="en">
@@ -74,10 +77,32 @@ ob_start();
             case "detail":
                 include('client/includes/productdetail.php');
                 break;
-            case "formcomment":
-                include('client/includes/formcomment.php');
-                break;
-            case "donhang":
+            case "checkout":
+                if(isset($_POST['dathang'])) {
+                    $id = $_POST['id'];
+                    $username = isset($_POST['userName']) ? trim($_POST['userName']) : '';
+                    $phone = isset($_POST['phone']) ? trim($_POST['phone']) : '';
+                    $address = isset($_POST['address']) ? trim($_POST['address']) : '';
+                    $totalBill = $_POST['totalBill'];
+                    $paymentType = $_POST['paymentType'];
+                    $dongy = isset($_POST['dongy']) ? $_POST['dongy'] : '';
+                    $errors = $clientController->validation_dathang($username, $address, $dongy, $phone);
+
+                    if($errors == 1) {
+                        $result = $bill->add($username, $phone, $address, $totalBill, $paymentType, $fk_userId);
+                        if($result) {
+                            if(isset($_SESSION['myCart']) && count($_SESSION['myCart']) > 0) {
+                                foreach($_SESSION['myCart'] as $item) {
+                                    $billDetail = $bill->add_billDetail($result, $item[0], $item[4], $item[2], $note);
+                                }
+                                unset($_SESSION['myCart']);
+                                header('Location: index.php?act=lichsu');
+                            }
+                        } else {
+                            echo "tb";
+                        }
+                    }
+                }
                 include('client/includes/donhang.php');
                 break;
             case "updateUser":
@@ -88,6 +113,7 @@ ob_start();
                 break;
             case "logout":
                 unset($_SESSION['login']['username']);
+                unset($_SESSION['myCart']);
                 session_destroy();
                 header("location:index.php");
                 break;
@@ -98,6 +124,54 @@ ob_start();
                 break;
             case "forgot":
                 include('PHPMailer-master/forgot.php');
+            case "cart":
+                if(isset($_POST['addcart'])) {
+                    $productId = $_POST['productId'];
+                    $name = $_POST['name'];
+                    $price = $_POST['price'];
+                    $image = $_POST['image'];
+                    if(isset($_POST['quantity']) && $_POST['quantity'] > 0) {
+                        $quantity = $_POST['quantity'];
+                    } else {
+                        $quantity = 1;
+                    }
+                    $totalPrice = $price * $quantity;
+                    $fg = 0;
+                    $i = 0;
+                    foreach($_SESSION['myCart'] as $item) {
+                        if($item[0] == $productId) {
+                            $quantityNew = $item[4] + $quantity;
+                            $_SESSION['myCart'][$i][4] = $quantityNew;
+                            $fg = 1;
+                            break;
+                        }
+                        $i++;
+                    }
+                    if($fg == 0) {
+                        $productCart = [$productId, $name, $price, $image, $quantity, $totalPrice];
+                        $_SESSION['myCart'][] = $productCart;
+                    }
+
+                    header("Location:index.php?act=cart");
+                }
+                include "client/includes/cart.php";
+                break;
+            case 'deleCart':
+                if(isset($_GET['cartId'])) {
+                    array_splice($_SESSION['myCart'], $_GET['cartId'], 1);
+                } else {
+                    $_SESSION['myCart'] = [];
+                }
+                if(isset($_SERVER['HTTP_REFERER'])) {
+                    $previousPage = $_SERVER['HTTP_REFERER'];
+                    $query = parse_url($previousPage, PHP_URL_QUERY);
+                    parse_str($query, $params);
+                    if(isset($params['act'])) {
+                        $act = $params['act'];
+                        header("Location: index.php?act=$act");
+                        exit;
+                    }
+                }
                 break;
             default:
                 include('client/includes/page.php');

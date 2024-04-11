@@ -37,6 +37,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         } else {
             $user = new User();
             $user->addUser($userName, $fullName, $email, $phone, $address, $password, 'user');
+            $listUser = $user->userid($userName, $password);
+            extract($listUser);
+            $_SESSION['userId'] = $listUser['id'];
             echo '<script> alert("Tạo tài khoản thành công"); window.location.href = "?act=login"; </script>';
             exit;
         }
