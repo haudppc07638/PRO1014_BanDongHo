@@ -68,37 +68,6 @@ if(isset($_SESSION['myCart']) && !empty($_SESSION['myCart'])) {
                         <div class="header__right">
                             <div class="header__search search search__open">
                                 <a href="#"><i class="icon-magnifier icons"></i></a>
-                        </div>
-                       <?php
-                       if(!isset($_SESSION['login']['username'])): ?>
-                        <div class="dropdown">
-                            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" style="margin: 0px 10px;">Tài khoản</button>
-                            <ul class="dropdown-menu">
-                            <li>
-                                <a href="?act=profile">
-                                    <i class="icon-user icons"></i>
-                                </a>
-                                </li>   
-                            <li><a href="?act=login">Đăng Nhập</a></li>
-                            <li>
-                                        <a href="?act=forgot" height="auto">Quên mật khẩu</a>
-                                    </li>
-                            </ul>
-                        </div>
-                        <?php else: ?>
-                            <div class="dropdown">
-                                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" style="margin: 0px 10px;">Xin Chào, <?= $_SESSION['login']['username']??"" ?> </button>
-                                <ul class="dropdown-menu">
-                                    <li>
-                                        <a href="" height="auto">Cập nhật thông tin</a>
-                                    </li>  
-                                    <li>
-                                        <a href="?act=logout" height="auto">Đăng Xuất</a>
-                                    </li> 
-                                    <li>
-                                        <a href="?act=forgot" height="auto">Quên mật khẩu</a>
-                                    </li>
-                                </ul>
                             </div>
                             <?php
                             if (!isset($_SESSION['login']['username'])) : ?>
@@ -138,6 +107,7 @@ if(isset($_SESSION['myCart']) && !empty($_SESSION['myCart'])) {
                                     <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" style="margin: 0px 10px;">Tài khoản</button>
                                     <ul class="dropdown-menu">
                                         <li><a href="?act=login">Đăng Nhập</a></li>
+                                        <li><a href="?act=forgot" height="auto">Quên mật khẩu</a></li>
                                     </ul>
                                 </div>
                             <?php else : ?>
@@ -146,6 +116,9 @@ if(isset($_SESSION['myCart']) && !empty($_SESSION['myCart'])) {
                                     <ul class="dropdown-menu">
                                         <li>
                                             <a href="" height="auto">Cập nhật thông tin</a>
+                                        </li>
+                                        <li>
+                                            <a href="?act=forgot" height="auto">Quên mật khẩu</a>
                                         </li>
                                         <li>
                                             <a href="?act=logout" height="auto">Đăng Xuất</a>
