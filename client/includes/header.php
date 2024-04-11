@@ -165,6 +165,7 @@ if(isset($_SESSION['myCart']) && !empty($_SESSION['myCart'])) {
                                     <a href="#"><span class="cart__menu htc__qua"><?= $count; ?></span></a>
                                 </div>
                             <?php endif; ?>
+                        <?php endif; ?>
                         </div>
                     </div>
                 </div>
@@ -208,18 +209,19 @@ if(isset($_SESSION['myCart']) && !empty($_SESSION['myCart'])) {
                     $totalBill = 0;
                     $i = 0;
                     $tongtienthanhtoan = 0;
-                    foreach ($_SESSION['myCart'] as $cart) :
+                    foreach ($_SESSION['myCart'] as $cart) {
                         $totalPrice = $cart[2] * $cart[4];
                         $totalBill += $totalPrice;
-                    ?>
+                        ?>
                         <div class="shp__single__product">
                             <div class="shp__pro__thumb">
                                 <a href="#">
                                     <?php
                                     $imageNames = explode(';', $cart[3]);
-                                    if (!empty($imageNames[0])) : ?>
+                                    if (!empty($imageNames[0])) {
+                                        ?>
                                         <a href="#"><img src="images/<?= $imageNames[0] ?>" alt="product img" height="99" /></a>
-                                    <?php endif; ?>
+                                    <?php } ?>
                                 </a>
                             </div>
                             <div class="shp__pro__details">
@@ -236,7 +238,7 @@ if(isset($_SESSION['myCart']) && !empty($_SESSION['myCart'])) {
                     <?php
                         $tongtienthanhtoan = $totalBill;
                         $i += 1;
-                    endforeach;
+                    }
                     ?>
                 </div>
                 <ul class="shoping__total">
