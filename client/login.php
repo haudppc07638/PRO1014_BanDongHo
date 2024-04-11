@@ -2,7 +2,7 @@
 if (isset($_POST['login'])) {
     $userName = $_POST['username'];
     $password = $_POST['password'];
-
+    $id = $_GET['id'];
     if (empty($userName)) {
         $errorUsername = "Vui lòng điền tên đăng nhập";
     }
@@ -11,16 +11,18 @@ if (isset($_POST['login'])) {
     }
     if (!isset($errorUsername) && !isset($errorPassword)) {
         $user = new User();
-        $userInfo = $user->checkUser($userName, $password);
+        $userInfo = $user->userid($userName, $password);
         
         if (!$userInfo) {
             $errorInfo = "Tài khoản hoặc mật khẩu không chính xác";
         } else {
             $_SESSION['login']['username'] = $userName;
+            $_SESSION['login']['id'] = $userInfo['id'];
             $role = $user->checkRole($userInfo['id']);
             
             if ($role['role'] == 'user') {
                 header("Location: ./index.php");
+                var_dump($_SESSION);
                 exit;
             }
             if ($role['role'] == 'admin') {

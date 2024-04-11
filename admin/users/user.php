@@ -26,10 +26,10 @@ class User
         $result = $db->pdo_query_one($select);
         return $result;
     }
-    public function userid($username, $password)
+    public function userid($Username, $Password)
     {
         $db = new connect();
-        $select = "select UserID from users where userName='$username' and password='$password'";
+        $select = "select id from users where userName='$Username' and password='$Password'";
         $result = $db->pdo_query_one($select);
         return $result;
     }
@@ -74,11 +74,16 @@ class User
     //hàm cập nhập dữ liệu
     public function updateUser($Username, $Password, $Fullname, $Email, $Address, $Phone, $id)
     {
-        if (empty($Username) || empty($FullName) || empty($Email) || empty($Phone) || empty($Address) || empty($Password) || empty($role)) {
-            return false;
-        }
         $db = new connect();
         $query = "UPDATE users SET userName = '$Username', password = '$Password', fullName = '$Fullname', 
+                email = '$Email', address = '$Address', phone = '$Phone' WHERE id = '$id'";
+        $result = $db->pdo_execute($query);
+        return $result;
+    }
+    public function updateUser2($Password, $Fullname, $Email, $Address, $Phone, $id)
+    {
+        $db = new connect();
+        $query = "UPDATE users SET password = '$Password', fullName = '$Fullname', 
                 email = '$Email', address = '$Address', phone = '$Phone' WHERE id = '$id'";
         $result = $db->pdo_execute($query);
         return $result;

@@ -1,8 +1,3 @@
-<?php
-ini_set('display_errors', '1');
-ini_set('display_startup_errors', '1');
-error_reporting(E_ALL);
-?>
 <header id="htc__header" class="htc__header__area header--one">
     <!-- Start Mainmenu Area -->
     <div id="sticky-header-with-topbar" class="mainmenu__wrap sticky__header">
@@ -66,35 +61,36 @@ error_reporting(E_ALL);
                         <div class="header__right">
                             <div class="header__search search search__open">
                                 <a href="#"><i class="icon-magnifier icons"></i></a>
-                        </div>
-                       <?php
-                       if(!isset($_SESSION['login']['username'])): ?>
-                        <div class="dropdown">
-                            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" style="margin: 0px 10px;">Tài khoản</button>
-                            <ul class="dropdown-menu">
-                            <li>
-                                <a href="?act=profile">
-                                    <i class="icon-user icons"></i>
-                                </a>
-                                </li>   
-                            <li><a href="?act=login">Đăng Nhập</a></li>
-                            </ul>
-                        </div>
-                        <?php else: ?>
-                            <div class="dropdown">
-                                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" style="margin: 0px 10px;">Xin Chào, <?= $_SESSION['login']['username']??"" ?> </button>
-                                <ul class="dropdown-menu">
-                                    <li>
-                                        <a href="" height="auto">Cập nhật thông tin</a>
-                                    </li>  
-                                    <li>
-                                        <a href="?act=logout" height="auto">Đăng Xuất</a>
-                                    </li> 
-                                </ul>
                             </div>
-                       <?php
-                        endif; 
-                       ?>
+                            <?php
+                            if (!isset($_SESSION['login']['username'])) : ?>
+                                <div class="dropdown">
+                                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" style="margin: 0px 10px;">Tài khoản</button>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <a href="?act=profile">
+                                                <i class="icon-user icons"></i>
+                                            </a>
+                                        </li>
+                                        <li><a href="?act=login">Đăng Nhập</a></li>
+                                    </ul>
+                                </div>
+                            <?php else : ?>
+                                <div class="dropdown">
+                                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" style="margin: 0px 10px;">Xin Chào, <?= $_SESSION['login']['username'] ?? "" ?> </button>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <a href="?act=updateUser&id=<?= $_SESSION['login']['id'] ?? "" ?>" height="auto">Cập nhật thông tin</a>
+                                        </li>
+                                      
+                                        <li>
+                                            <a href="?act=logout" height="auto">Đăng Xuất</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            <?php
+                            endif;
+                            ?>
                             <div class="htc__shopping__cart">
                                 <a class="" href="?act=viewcart"><i class="icon-handbag icons"></i></a>
                             </div>
@@ -117,24 +113,10 @@ error_reporting(E_ALL);
             <div class="row">
                 <div class="col-md-12">
                     <div class="search__inner">
-                        <form action="?act=shop" method="GET">
+                        <form method="POST">
                             <input placeholder="Search here... " type="text" name="keyword">
                             <button type="submit" name="ok" value="search"></button>
                         </form>
-                        <?php
-                        if(isset($_REQUEST['submit'])){
-                            $db = new Products();
-                            $search = addslashes($_GET['search']);
-                            $kw = $_POST['keyword'];
-                            if(isset($search) && isset($kw)){
-                                echo "Vui lòng điền thông tin bạn muốn tìm kiếm";
-                            }else{
-                                $searchProduct = $db->searchProduct($id);
-                                var_dump($searchProduct);
-                            }
-                            var_dump($_REQUEST);
-                        }
-                        ?>
                         <div class="search__close__btn">
                             <span class="search__close__btn_icon"><i class="zmdi zmdi-close"></i></span>
                         </div>

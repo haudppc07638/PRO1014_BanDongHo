@@ -57,14 +57,15 @@ class Products
         return $result;
     }
 
-    public function delete($id) {
+    public function delete($id)
+    {
         $db = new connect();
         $sql = "DELETE FROM products WHERE id = ?";
         $stmt = $db->pdo_get_connection()->prepare($sql);
         $result = $stmt->execute([$id]);
         return $result;
     }
-    
+
     public function get_dssp($cateid)
     {
         $db = new connect();
@@ -81,16 +82,12 @@ class Products
         $count = $stmt->fetchColumn();
         return $count > 0; // Trả về true nếu tên sản phẩm tồn tại, ngược lại false
     }
-    public function searchProduct($search){
-        if(isset($search)){
 
-        }
+    public function searchProduct($search)
+    {
         $db = new connect();
         $query = "SELECT * FROM products WHERE name LIKE '%$search%'";
         $result = $db->pdo_query($query);
         return $result;
     }
-
-
-
 }

@@ -72,6 +72,9 @@ ob_start();
             case "donhang":
                 include('client/includes/donhang.php');
                 break;
+            case "updateUser":
+                include('client/includes/updateUser.php');
+                break;
             case "login":
                 include("client/login.php");
                 break;
