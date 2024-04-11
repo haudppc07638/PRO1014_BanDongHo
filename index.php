@@ -38,6 +38,7 @@ ob_start();
     <!-- <link rel="stylesheet" href="client/css/comments.css"> -->
     <script src="client/js/vendor/modernizr-3.5.0.min.js"></script>
 </head>
+
 <body>
     <?php
     include('client/includes/header.php');
@@ -46,6 +47,7 @@ ob_start();
     include('admin/categories/category.php');
     include('client/includes/giohang.php');
     include('admin/users/user.php');
+    include('client/includes/comment.php');;
     include('model/donhang.php');
     if (isset($_GET['act'])) {
         $tam = $_GET['act'];
@@ -66,8 +68,14 @@ ob_start();
             case "viewcart":
                 include('client/includes/cart.php');
                 break;
+            case "fogotpass":
+                include('client/includes/fogotpass.php');
+                break;
             case "detail":
                 include('client/includes/productdetail.php');
+                break;
+            case "formcomment":
+                include('client/includes/formcomment.php');
                 break;
             case "donhang":
                 include('client/includes/donhang.php');
@@ -83,10 +91,13 @@ ob_start();
                 session_destroy();
                 header("location:index.php");
                 break;
-            // case "profile":
-            //     break;
+                // case "profile":
+                //     break;
             case "register":
                 include('client/register.php');
+                break;
+            case "forgot":
+                include('PHPMailer-master/forgot.php');
                 break;
             default:
                 include('client/includes/page.php');
@@ -111,6 +122,7 @@ ob_start();
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
+
 </html>
 <?php
 ob_end_flush();

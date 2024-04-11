@@ -1,5 +1,5 @@
 <?php
-class comment
+class commentt 
 {
  // Khai báo thuộc tính
  var $id = null;
@@ -53,3 +53,4 @@ public function delete_binhluan($id)
     }
 }
 ?>
+

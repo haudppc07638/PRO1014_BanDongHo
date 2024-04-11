@@ -1,7 +1,39 @@
 <?php
 $id = $_GET['id'];
+
+$db = new connect();
+$pdo = $db->pdo_get_connection();
 $data = new Products();
-$rowProd = $data->getByID($id);
+$rowProd = $data->getByID($id, $db);
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    if (isset($_POST['submit_comment'])) {
+        $content = $_POST['content'];
+        $product_ID = $_POST['product_id'];
+        $user_ID = 1;
+
+        // Xác thực dữ liệu nhập vào (Ví dụ: đảm bảo không rỗng)
+        if (!empty($content) && !empty($product_ID) && !empty($user_ID)) {
+            // Thêm bình luận vào cơ sở dữ liệu
+            $stmt = $pdo->prepare("INSERT INTO comment (content, product_id, user_id, created_at) VALUES (?, ?, ?, NOW())");
+            $stmt->execute([$content, $product_ID, $user_ID]);
+
+            // Hiển thị thông báo hoặc làm mới trang để hiển thị bình luận mới
+            echo "<script>alert('Bình luận đã được thêm.'); window.location.href=window.location.href;</script>";
+        } else {
+            // Hiển thị lỗi nếu dữ liệu nhập vào không hợp lệ
+            echo "<p>Vui lòng nhập đầy đủ thông tin bình luận.</p>";
+        }
+    }
+    die();
+}
+if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+    $product_ID = $_GET['id'];
+    $stmt = $pdo->prepare("SELECT * FROM comment WHERE product_id = ?");
+    $stmt->execute([$product_ID]);
+    $comments = $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+// Lấy bình luận từ cơ sở dữ liệu
+
 ?>
 <!-- Start Bradcaump area -->
 <div class="ht__bradcaump__area"
@@ -144,137 +176,78 @@ $rowProd = $data->getByID($id);
     </div>
     <!-- End Product Details Top -->
 </section>
-
-<!-- <section class="htc__produc__decription bg__white">
-    <div class="container">
-        <div class="row" id=comment>
-            <iframe src="public/comment/commentform.php?idpro=<?= $id ?>" frameborder="0" width="100%" height="600px"></iframe>
-        </div>
-    </div>
-</section> -->
-
-<!-- End Product Description -->
-<!-- Start Product Area -->
-<section class="htc__product__area--2 pb--100 product-details-res">
+<section class="htc__produc__decription bg__white">
     <div class="container">
         <div class="row">
             <div class="col-xs-12">
-                <div class="section__title--2 text-center">
-                    <h2 class="title__line">Sản Phẩm Liên Quan</h2>
-                    <!-- <p>But I must explain to you how all this mistaken idea</p> -->
-                </div>
+                <!-- Start List And Grid View -->
+                <ul class="pro__details__tab" role="tablist">
+                    <li role="presentation" class="description active"><a href="#description" role="tab"
+                            data-toggle="tab">description</a></li>
+                    <li role="presentation" class="review"><a href="#review" role="tab" data-toggle="tab">review</a>
+                    </li>
+                    <li role="presentation" class="comment"><a href="#comment" role="tab" data-toggle="tab">Comment</a>
+                    </li>
+                </ul>
+                <!-- End List And Grid View -->
             </div>
         </div>
         <div class="row">
-            <div class="product__wrap clearfix">
-                <!-- Start Single Product -->
-                <div class="col-md-3 col-lg-3 col-sm-6 col-xs-12">
-                    <div class="category">
-                        <div class="ht__cat__thumb">
-                            <a href="product-details.html">
-                                <img src="images/dongho1.jpg" alt="product images">
-                            </a>
-                        </div>
-                        <div class="fr__hover__info">
-                            <ul class="product__action">
-                                <li><a href="#"><i class="icon-heart icons"></i></a></li>
-
-                                <li><a href="#"><i class="icon-handbag icons"></i></a></li>
-
-                                <li><a href="#"><i class="icon-shuffle icons"></i></a></li>
-                            </ul>
-                        </div>
-                        <div class="fr__product__inner">
-                            <h4><a href="product-details.html">Product Title Here </a></h4>
-                            <ul class="fr__pro__prize">
-                                <li class="old__prize">$30.3</li>
-                                <li>$25.9</li>
-                            </ul>
-                        </div>
+            <div class="col-xs-12">
+                <div class="ht__pro__details__content">
+                    <!-- Start Single Content -->
+                    <div role="tabpanel" id="description" class="pro__single__content tab-pane fade in active">
                     </div>
-                </div>
-                <!-- End Single Product -->
-                <!-- Start Single Product -->
-                <div class="col-md-3 col-lg-3 col-sm-6 col-xs-12">
-                    <div class="category">
-                        <div class="ht__cat__thumb">
-                            <a href="product-details.html">
-                                <img src="images/dongho2.jpg" alt="product images">
-                            </a>
-                        </div>
-                        <div class="fr__hover__info">
-                            <ul class="product__action">
-                                <li><a href="#"><i class="icon-heart icons"></i></a></li>
+                    <!-- End Single Content -->
+                    <!-- Start Single Content -->
+                    <!-- Bắt đầu Phần Nội dung Chi Tiết Sản Phẩm -->
+<div role="tabpanel" id="review" class="pro__single__content tab-pane fade">
+    <!-- Hiển thị tiêu đề phần đánh giá nếu có bình luận -->
+    <?php if (!empty($comments)): ?>
+        <h4 class="ht__pro__title">Đánh Giá Sản Phẩm</h4>
+    <?php endif; ?>
+    
+    <?php
+    // Kiểm tra nếu có bình luận
+    if (!empty($comments)) {
+        // Duyệt qua mỗi bình luận và hiển thị nội dung và ngày tạo
+        foreach ($comments as $comment) {
+            echo "<div class='comment-block'>";
+            echo "<p>" . htmlspecialchars($comment['content']) . "</p>"; // Hiển thị nội dung bình luận
+            echo "<p>Ngày: " . htmlspecialchars($comment['created_at']) . "</p>"; // Hiển thị ngày tạo bình luận
+            echo "</div>";
+        }
+    } else {
+        echo "<p>Chưa có đánh giá nào cho sản phẩm này.</p>";
+    }
+    ?>
+</div>
+<!-- Kết thúc Phần Nội dung Chi Tiết Sản Phẩm -->
 
-                                <li><a href="#"><i class="icon-handbag icons"></i></a></li>
-
-                                <li><a href="#"><i class="icon-shuffle icons"></i></a></li>
-                            </ul>
-                        </div>
-                        <div class="fr__product__inner">
-                            <h4><a href="product-details.html">Product Title Here </a></h4>
-                            <ul class="fr__pro__prize">
-                                <li class="old__prize">$30.3</li>
-                                <li>$25.9</li>
-                            </ul>
-                        </div>
+                    <!-- End Single Content -->
+                    <!-- Start Single Content -->
+                    <!-- Start Single Content -->
+                    <!-- Start Single Content -->
+                    <div role="tabpanel" id="comment" class="pro__single__content tab-pane fade">
+                        <h4 class="ht__pro__title">Thêm Bình Luận</h4>
+                        <form action="" method="post"> <!-- Gửi form đến chính trang này -->
+                            <div class="form-group">
+                                <label for="comment_content">Nội dung bình luận:</label>
+                                <textarea class="form-control" id="comment_content" name="content" rows="4"
+                                    placeholder="Nhập nội dung bình luận"></textarea>
+                            </div>
+                            <!-- Các trường ẩn -->
+                            <input type="hidden" name="product_id" value="<?php echo $id ?>">
+                            <input type="hidden" name="user_ID" value="<?php echo $user_id ?>">
+                            <!-- Thay $user_id bằng ID của người dùng đã đăng nhập -->
+                            <button type="submit" name="submit_comment" class="btn btn-primary">Gửi Bình Luận</button>
+                        </form>
+                        <!-- Hiển thị bình luận -->
                     </div>
-                </div>
-                <!-- End Single Product -->
-                <!-- Start Single Product -->
-                <div class="col-md-3 col-lg-3 col-sm-6 col-xs-12">
-                    <div class="category">
-                        <div class="ht__cat__thumb">
-                            <a href="product-details.html">
-                                <img src="images/dongho3.jpg" alt="product images">
-                            </a>
-                        </div>
-                        <div class="fr__hover__info">
-                            <ul class="product__action">
-                                <li><a href="#"><i class="icon-heart icons"></i></a></li>
-
-                                <li><a href="#"><i class="icon-handbag icons"></i></a></li>
-
-                                <li><a href="#"><i class="icon-shuffle icons"></i></a></li>
-                            </ul>
-                        </div>
-                        <div class="fr__product__inner">
-                            <h4><a href="product-details.html">Product Title Here </a></h4>
-                            <ul class="fr__pro__prize">
-                                <li class="old__prize">$30.3</li>
-                                <li>$25.9</li>
-                            </ul>
-                        </div>
+                    <div role="tabpanel" id="review" class="pro__single__content tab-pane fade">
                     </div>
-                </div>
-                <!-- End Single Product -->
-                <!-- Start Single Product -->
-                <div class="col-md-3 col-lg-3 col-sm-6 col-xs-12">
-                    <div class="category">
-                        <div class="ht__cat__thumb">
-                            <a href="product-details.html">
-                                <img src="images/dongho6.jpg" alt="product images">
-                            </a>
-                        </div>
-                        <div class="fr__hover__info">
-                            <ul class="product__action">
-                                <li><a href="#"><i class="icon-heart icons"></i></a></li>
 
-                                <li><a href="#"><i class="icon-handbag icons"></i></a></li>
-
-                                <li><a href="#"><i class="icon-shuffle icons"></i></a></li>
-                            </ul>
-                        </div>
-                        <div class="fr__product__inner">
-                            <h4><a href="product-details.html">Product Title Here </a></h4>
-                            <ul class="fr__pro__prize">
-                                <li class="old__prize">$30.3</li>
-                                <li>$25.9</li>
-                            </ul>
-                        </div>
-                    </div>
                 </div>
-                <!-- End Single Product -->
             </div>
         </div>
     </div>

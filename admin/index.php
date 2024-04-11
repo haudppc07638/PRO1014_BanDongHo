@@ -27,7 +27,6 @@ if (!isset($_SESSION['login']['username'])) {
     <?php include('users/user.php'); ?>
     <?php include('categories/category.php'); ?>
     <?php include('products/pro.php');?>
-    <?php include('../model/binhluan.php');?>
     <?php include('blog/blogcate.php');?>
     <?php include('blog/postBlog.php');?>
     <div class="main-panel">
