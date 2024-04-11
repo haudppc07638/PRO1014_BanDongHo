@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_POST['submit_comment'])) {
         $content = $_POST['content'];
         $product_ID = $_POST['product_id'];
-        $user_ID = 1;
+        $user_ID = $_POST['user_id'];
 
         // Xác thực dữ liệu nhập vào (Ví dụ: đảm bảo không rỗng)
         if (!empty($content) && !empty($product_ID) && !empty($user_ID)) {
