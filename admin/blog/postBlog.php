@@ -87,4 +87,11 @@ class postBlog
         $result = $db->pdo_query_one($query);
         return $result;
     }
+    public function countPosts()
+    {
+        $db = new connect();
+        $query = "SELECT COUNT(*) FROM blog";
+        $count = $db->pdo_query_value($query);
+        return $count;
+    }
 }

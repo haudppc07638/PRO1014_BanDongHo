@@ -9,3 +9,4 @@ if (isset($_GET['act']) && $_GET['act'] == 'deletepro') {
         echo "Lỗi .";
     }
 }
+?>

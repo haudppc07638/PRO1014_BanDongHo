@@ -11,9 +11,8 @@
                         <th> Tên </th>
                         <th> Hình ảnh </th>
                         <th> Giá </th>
-                         <th>Mô tả </th> 
-                        <th> Mã Danh mục  </th>
-                        <th> Giảm Giá  </th>
+                        <th>Mô tả </th>
+                        <th> Tên danh mục </th>
                         <th> Hành động </th>
                     </tr>
                 </thead>
@@ -24,7 +23,7 @@
                     $rows = $dblist->getList();
 
                     foreach ($rows as $row) {
-                    ?>
+                        ?>
 
                         <tr>
                             <td>
@@ -45,20 +44,24 @@
                                 ?>
                             </td>
                             <td>
-                                <?php echo $row['price']; ?>
+                                <?php echo number_format($row['price']) . ' vnd'; ?>
                             </td>
+
                             <td>
                                 <?php echo $row['description']; ?>
                             </td>
                             <td>
-                                <?php echo $row['category_id']; ?>
+                                <?php
+                                $category_ID = $row['category_id'];
+                                $categoryName = $dblist->getCategoryNameById($category_ID);
+                                echo $categoryName;
+                                ?>
                             </td>
-                            <td>
-                                <?php echo $row['discount']; ?>
-                            </td>
-                           
+
+
                             <td style="text-align: center;">
-                                <a href="?act=deletepro&id=<?php echo $row['id']; ?>" onclick="return confirm('Are you sure you want to delete this product?');">
+                                <a href="?act=deletepro&id=<?php echo $row['id']; ?>"
+                                    onclick="return confirm('Are you sure you want to delete this product?');">
                                     <button type="button" class="btn btn-danger">Delete</button>
                                 </a>
                                 <br><br>
@@ -66,10 +69,10 @@
                                     <button type="button" class="btn btn-success">Edit</button>
                                 </a>
                             </td>
-                            
+
                         </tr>
 
-                    <?php
+                        <?php
                     }
                     ?>
 

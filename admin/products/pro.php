@@ -9,7 +9,7 @@ class Products
     var $price = null;
     var $description = null;
     var $category_ID = null;
-    var $discount = null;
+ 
 
     public function getList()
     {
@@ -44,34 +44,47 @@ class Products
 
 
 
-    public function add($name, $price, $imageStr, $description, $category_ID, $discount, $db)
+    public function add($name, $price, $imageStr, $description, $category_ID, $db)
     {
-        $query = "INSERT INTO products (name, price, image, description, category_id, discount) VALUES (?, ?, ?, ?, ?, ?)";
+        $query = "INSERT INTO products (name, price, image, description, category_id) VALUES (?, ?, ?, ?, ?)";
         $stmt = $db->pdo_get_connection()->prepare($query);
         $stmt->bindParam(1, $name);
         $stmt->bindParam(2, $price);
         $stmt->bindParam(3, $imageStr);
         $stmt->bindParam(4, $description);
         $stmt->bindParam(5, $category_ID);
-        $stmt->bindParam(6, $discount);
         $success = $stmt->execute();
         return $success;
     }
 
-    public function update($id, $name, $price, $image, $description, $category_ID, $discount)
+    public function update($id, $name, $price, $image, $description, $category_ID)
     {
         $db = new connect();
-        $sql = "UPDATE products SET name='$name', price=$price, image='$image', description='$description', category_id=$category_ID, discount=$discount WHERE id= $id";
-        $result = $db->pdo_query($sql);
-        return $result;
+        $oldProduct = $this->getById($id);
+        $newImage = $oldProduct['image']; 
+        if (!empty($image)) {
+            $newImage = $image;
+        }
+        $sql = "UPDATE products SET name=?, price=?, image=?, description=?, category_id=? WHERE id=?";
+        $stmt = $db->pdo_get_connection()->prepare($sql);
+        $stmt->execute([$name, $price, $newImage, $description, $category_ID, $id]);
+        return $stmt->rowCount() > 0;
     }
 
     public function delete($id)
     {
         $db = new connect();
-        $sql = "DELETE FROM products WHERE id = ?";
-        $stmt = $db->pdo_get_connection()->prepare($sql);
-        $result = $stmt->execute([$id]);
+    
+        // Xóa bình luận liên quan đến sản phẩm
+        $sqlDeleteComment = "DELETE FROM comment WHERE product_id = ?";
+        $stmtComment = $db->pdo_get_connection()->prepare($sqlDeleteComment);
+        $stmtComment->execute([$id]);
+    
+        // Xóa sản phẩm
+        $sqlDeleteProduct = "DELETE FROM products WHERE id = ?";
+        $stmtProduct = $db->pdo_get_connection()->prepare($sqlDeleteProduct);
+        $result = $stmtProduct->execute([$id]);
+    
         return $result;
     }
 
@@ -99,5 +112,41 @@ class Products
         $result = $db->pdo_query($query);
         return $result;
     }
-    
+    public function countProducts()
+    {
+        $db = new connect();
+        $query = "SELECT COUNT(*) FROM products";
+        $stmt = $db->pdo_get_connection()->prepare($query);
+        $stmt->execute();
+        $count = $stmt->fetchColumn();
+        return $count;
+    }
+    public function countProductsByCategory($categoryId)
+    {
+        $db = new connect();
+        $query = "SELECT COUNT(*) AS productCount FROM products WHERE category_id = ?";
+        $stmt = $db->pdo_get_connection()->prepare($query);
+        $stmt->execute([$categoryId]);
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result['productCount'];
+    }
+
+    public function getProductNameById($id)
+    {
+        $db = new connect(); // Tạo kết nối đến cơ sở dữ liệu
+        $query = "SELECT name FROM products WHERE id = ?"; // Truy vấn để lấy tên sản phẩm dựa trên id
+        $stmt = $db->pdo_get_connection()->prepare($query); // Chuẩn bị câu truy vấn
+        $stmt->execute([$id]); // Thực thi truy vấn với tham số id
+        $result = $stmt->fetch(PDO::FETCH_ASSOC); // Lấy kết quả trả về từ truy vấn
+        return $result['name']; // Trả về tên sản phẩm
+    }
+    public function getCategoryNameById($category_ID)
+{
+    $db = new connect(); // Tạo kết nối đến cơ sở dữ liệu
+    $query = "SELECT categoryName FROM categories WHERE id = ?"; // Truy vấn để lấy tên danh mục dựa trên id
+    $stmt = $db->pdo_get_connection()->prepare($query); // Chuẩn bị câu truy vấn
+    $stmt->execute([$category_ID]); // Thực thi truy vấn với tham số category_ID
+    $result = $stmt->fetch(PDO::FETCH_ASSOC); // Lấy kết quả trả về từ truy vấn
+    return $result['categoryName']; // Trả về tên danh mục
+}
 }

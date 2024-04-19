@@ -79,6 +79,14 @@ class blogcategories
             return "";
         }
     }
+    public function countblog()
+    {
+        $db = new connect();
+        $query = "SELECT COUNT(*) FROM blogcategories";
+        $count = $db->pdo_query_value($query);
+        return $count;
+    }
+    
 }
 
 ?>

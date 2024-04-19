@@ -132,6 +132,13 @@ class User
         $result = $db->pdo_execute($sql);
         return $result;
     }
+    public function countUsers()
+    {
+        $db = new connect();
+        $query = "SELECT COUNT(*) FROM users";
+        $count = $db->pdo_query_value($query);
+        return $count;
+    }
     
 }
 ?>

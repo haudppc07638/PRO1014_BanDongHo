@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $price = trim($_POST['price']);
     $description = trim($_POST['description']);
     $category_ID = trim($_POST['category_ID']);
-    $discount = trim($_POST['discount']);
+
 
     $errors = [];
     $imageFiles = ['image', 'image2', 'image3'];
@@ -45,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $imagesStr = implode(";", $uploadedImages);
         echo $imagesStr;
 
-        $success = $products->add($name, $price, $imagesStr, $description, $category_ID, $discount, $db);
+        $success = $products->add($name, $price, $imagesStr, $description, $category_ID, $db);
 
         if ($success) {
             echo "Thêm thành công .";
@@ -97,28 +97,30 @@ function isImageValid($filename)
                     <br>
                     <input type="test" class="form-control" id="price" name="price" placeholder="Giá ">
                 </div>
-                <div class="">
-                    <label for="image1">Hình 1</label>
-                    <input type="file" class="form-control" id="image" name="image">
-                    <div class="form-group">
-                        <img id="uploadedImage1" src="" style="max-width: 300px; max-height: 300px;">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="image1">Hình 1</label>
+                            <input type="file" class="form-control" id="image" name="image">
+                            <img id="uploadedImage1" src="" style="max-width: 300px; max-height: 300px;">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="image2">Hình 2</label>
+                            <input type="file" class="form-control" id="image2" name="image2">
+                            <img id="uploadedImage2" src="" style="max-width: 300px; max-height: 300px;">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="image3">Hình 3</label>
+                            <input type="file" class="form-control" id="image3" name="image3">
+                            <img id="uploadedImage3" src="" style="max-width: 300px; max-height: 300px;">
+                        </div>
+                    </div>
+                </div>
 
-                    </div>
-                </div>
-                <div class="">
-                    <label for="image2">HÌnh 2</label>
-                    <input type="file" class="form-control" id="image2" name="image2">
-                    <div class="form-group">
-                        <img id="uploadedImage2" src="" style="max-width: 300px; max-height: 300px;">
-                    </div>
-                </div>
-                <div class="">
-                    <label for="image3">Hình 3</label>
-                    <input type="file" class="form-control" id="image3" name="image3">
-                    <div class="form-group">
-                        <img id="uploadedImage3" src="" style="max-width: 300px; max-height: 300px;">
-                    </div>
-                </div>
 
                 <div class="">
                     <label for="description">Mô tả :</label>
@@ -135,17 +137,13 @@ function isImageValid($filename)
                         $db = new connect();
                         $dbCate = new category();
 
-                        $rows = $dbCate->getList($db);
+                        $rows = $dbCate->getList();
                         foreach ($rows as $row) { ?>
                             <option value="<?php echo $row['id']; ?>">
                                 <?php echo $row['categoryName']; ?>
                             </option>
                         <?php } ?>
                     </select>
-                </div>
-                <div class="">
-                    <label for="discount">Giảm giá :</label>
-                    <input type="number" class="form-control" id="discount" name="discount">
                 </div>
                 <div id="message"></div>
                 <button type="submit" class="btn btn-primary" name="addProduct">Thêm sản phẩm </button>

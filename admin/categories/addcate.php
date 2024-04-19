@@ -1,7 +1,6 @@
 <?php
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $name = $_POST['cateName'];
-    $description = $_POST['cateDescription'];
     $uploadDir = $_SERVER['DOCUMENT_ROOT'] . '/images/';
     $image = $_FILES['cateImage']['name'];
     $target = $uploadDir . basename($image);
@@ -11,15 +10,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $category = new category();
     $db = new connect();
 
-    if (empty($name) || empty($description) || empty($image)) {
+    if (empty($name)  || empty($image)) {
         echo "Vui lòng nhập đủ dữ liệu.";
-    } elseif (!isImageValid($image)) {
+    } else
+    if (!isImageValid($image)) {
         echo "Định dạng hình ảnh không hợp lệ. Chỉ cho phép tải lên hình ảnh PNG và JPEG.";
-    } elseif ($category->categoryNameExists($name, $db)) {
+    } else
+          if ($category->categoryNameExists($name, $db)) {
         echo "Tên danh mục đã tồn tại, vui lòng chọn tên khác.";
     } else {
         if (move_uploaded_file($_FILES['cateImage']['tmp_name'], $target)) {
-            $result = $category->add($name, $description, basename($image), $db);
+            $result = $category->add($name, basename($image), $db);
             if ($result) {
                 echo "Thêm danh mục thành công.";
             }
@@ -42,10 +43,6 @@ function isImageValid($file)
         <div class="form-group">
             <label for="cateName">Category Name:</label>
             <input type="text" class="form-control" id="cateName" name="cateName">
-        </div>
-        <div class="form-group">
-            <label for="cateDescription">Description:</label>
-            <textarea class="form-control" id="cateDescription" name="cateDescription"></textarea>
         </div>
         <div class="form-group">
             <label for="cateImage">Image:</label>

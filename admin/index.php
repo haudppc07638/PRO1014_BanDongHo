@@ -85,6 +85,9 @@ if (!isset($_SESSION['login']['username'])) {
         case "addCoupon":
           include('coupons/addCoupon.php');
           break;
+          case "listComment":
+            include 'comment/listComment.php';
+            break;
         // case "listComment":
         //   $comment = new comment();
         //   $listbinhluan= $comment->loadall_binhluan(0);
