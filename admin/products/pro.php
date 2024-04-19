@@ -99,4 +99,5 @@ class Products
         $result = $db->pdo_query($query);
         return $result;
     }
+    
 }

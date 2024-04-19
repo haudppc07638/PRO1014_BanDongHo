@@ -126,10 +126,31 @@ if (isset($_SESSION['myCart']) && !empty($_SESSION['myCart'])) {
                 <div class="row">
                     <div class="col-md-12">
                         <div class="search__inner">
-                            <form method="POST">
-                                <input placeholder="Search here... " type="text" name="keyword">
-                                <button type="submit" name="ok" value="search"></button>
+                            <form method="GET">
+                                <input placeholder="Search here... " type="text" name="keyword" id="keyword">
+                                <button type="submit" name="ok" value="search" id="search"></button>
                             </form>
+                            <div id="waiting"></div>
+                            <div class="sp"></div>
+                            <?php
+                            if (isset($_REQUEST['ok'])) {
+                                $search = $_GET['keyword'];
+                                if (empty($search)) {
+                                    echo "Vui lòng nhập thông tin sản phẩm";
+                                } else {
+                                    $db = new Products();
+                                    $searchProducts = $db->searchProduct($search);
+                                    if ($searchProducts) {
+                                        $itemSearch = $searchProducts[0];
+                                        $productName = $itemSearch['name'];
+                                        header("Location: ?act=shop&name=" . urlencode($productName));
+                                    } else {
+                                        echo "Không tìm thấy sản phẩm phù hợp";
+                                    }
+                                }
+                            }
+                            ?>
+
                             <div class="search__close__btn">
                                 <span class="search__close__btn_icon"><i class="zmdi zmdi-close"></i></span>
                             </div>

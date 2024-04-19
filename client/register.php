@@ -7,11 +7,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $phone = trim($_POST['phone']);
     $password = trim($_POST['password']);
     $confirm = trim($_POST['confirm']);
+    $user = new User();
+    $checkName = $user->checkUserName($userName);
+    $checkEmail = $user->checkUserEmail($email);
     $errorMessages = [];
 
     if (isset($_POST['register'])) {
-        if (empty($userName) ) {
+        if (empty($userName)){
             $errorMessages['username'] = "Bạn chưa điền tên tài khoản";
+        }
+        if(!$checkName){
+            $errorMessages['username'] = "Tài khoản đã tồn tại!";
         }
         if (empty($fullName)) {
             $errorMessages['fullname'] = "Bạn chưa điền đầy đủ họ tên";
@@ -21,6 +27,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
         if (empty($email)) {
             $errorMessages['email'] = "Bạn chưa điền email";
+        }
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $errorMessages['email'] = "Bạn hãy nhập đúng định dạng @gmail.com!";
+          }
+        if(!$checkEmail){
+            $errorMessages['email'] = "Email đã tồn tại!";
         }
         if (empty($phone) || !is_numeric($phone)) {
             $errorMessages['phone'] = "Bạn chưa điền số điện thoại hoặc không phải số";
@@ -35,7 +47,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (!empty($errorMessages)) {
         
         } else {
-            $user = new User();
             $user->addUser($userName, $fullName, $email, $phone, $address, $password, 'user');
             $listUser = $user->userid($userName, $password);
             extract($listUser);
@@ -57,9 +68,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             <form method="post" enctype="multipart/form-data">
                                 <div class="form-outline mb-4">
                                     <input type="text" id="form3Example1cg" class="form-control form-control-lg" placeholder="Tên Tài Khoản *" name="username" />
-                                    <?php if (isset($errorMessages['username'])) {
+                                    <?php if (isset($errorMessages['username'])){
                                         echo '<p style="color:red">' . $errorMessages['username'] . '</p>';
-                                    } ?>
+                                        
+                                    }?>
 
                                 </div>
                                 <!-- ... other form fields ... -->

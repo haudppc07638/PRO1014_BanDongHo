@@ -26,10 +26,32 @@ class User
         $result = $db->pdo_query_one($select);
         return $result;
     }
-    public function userid($username, $password)
+    function checkUserName($Username)
     {
         $db = new connect();
-        $select = "select id from users where userName='$username' and password='$password'";
+        $select = "SELECT COUNT(userName) as count from users where userName='$Username'";
+        $result = $db->pdo_query_one($select);
+        if($result['count'] > 0){
+            return false;
+        }else{
+            return $result;
+        }
+    }
+    function checkUserEmail($Email)
+    {
+        $db = new connect();
+        $select = "SELECT COUNT(email) as count from users where email='$Email'";
+        $result = $db->pdo_query_one($select);
+        if($result['count'] > 0){
+            return false;
+        }else{
+            return $result;
+        }
+    }
+    public function userid($Username, $Password)
+    {
+        $db = new connect();
+        $select = "select id from users where userName='$Username' and password='$Password'";
         $result = $db->pdo_query_one($select);
         return $result;
     }
@@ -53,7 +75,7 @@ class User
     //hàm insert dữ liệu, create dữ liệu, thêm mới dữ liệu
     public function addUser($Username, $FullName, $Email, $Phone, $Address, $Password, $role)
     {
-        if (empty($Username) || empty($FullName) || empty($Email) || empty($Phone) || empty($Address) || empty($Password) || empty($role)) {
+        if (empty($Username) || empty($FullName) || empty($Email) || empty($Phone) || empty($Address) || empty($Password) || empty($role) || isset($Username) || isset($Email)) {
             return false;
         }
         $db = new connect();
