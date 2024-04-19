@@ -50,45 +50,57 @@
                                     $rows = $dblis->getList();
                                 }
                                 foreach ($rows as $row) { ?>
-                                    <div class="col-md-4 col-lg-3 col-sm-4 col-xs-12">
-                                        <div class="category" style="border: 0.5px solid #eaeaea;">
-                                            <div class="ht__cat__thumb">
-                                                <!-- <a href="?act=detail">
-                                    <img src="public/images/product/1.jpg" alt="product images">
-                                </a> -->
-                                                <a
-                                                    href="?act=detail&id=<? echo $row['id'] ?>&idCat=<? echo $row['category_id'] ?>">
-                                                    <?php
-                                                    $imageNames = explode(';', $row['image']);
-                                                    if (!empty($imageNames[0])) {
-                                                        echo '<img src="images/' . $imageNames[0] . '" alt="image-product" width="100px">';
-                                                    }
-                                                    ?>
-                                                </a>
-                                            </div>
-                                            <div class="fr__hover__info">
-                                                <ul class="product__action">
-                                                    <!-- <li><a href="wishlist.html"><i class="icon-heart icons"></i></a></li> -->
+                                    <form action="?act=cart" method="post">
+                                        <div class="col-md-4 col-lg-4 col-sm-6 col-xs-12">
+                                            <div class="category" style="border: 0.5px solid #eaeaea;">
+                                                <div class="ht__cat__thumb">
+                                                    <a
+                                                        href="?act=detail&id=<?= $row['id'] ?>&idCat=<?= $row['category_id'] ?>">
+                                                        <?php
+                                                        $imageNames = explode(';', $row['image']);
+                                                        if (!empty($imageNames[0])) {
+                                                            echo '<img src="images/' . $imageNames[0] . '" alt="image-product">';
+                                                        }
+                                                        ?>
+                                                    </a>
+                                                </div>
+                                                <div class="fr__hover__info">
+                                                    <ul class="product__action">
+                                                        <li><button type="submit" name="addcart"><a><i
+                                                                        class="icon-handbag icons"></i></a></button></li>
+                                                        <input type="hidden" name='productId' value='<?= $row['id'] ?>'>
+                                                        <input type="hidden" name='name' value='<?= $row['name'] ?>'>
+                                                        <input type="hidden" name='price' value='<?= $row['price'] ?>'>
+                                                        <input type="hidden" name='image' value='<?= $row['image'] ?>'>
 
-                                                    <li><a href="?act=addcart"><i class="icon-handbag icons"></i></a></li>
-                                                </ul>
-                                            </div>
-                                            <div class="fr__product__inner">
-                                                <h4><a
-                                                        href="?act=detail&id=<? echo $row['id'] ?>&idCat=<? echo $row['category_id'] ?>">
-                                                        <? echo $row['name'] ?>
-                                                    </a></h4>
-                                                <ul class="fr__pro__prize">
-                                                    <li class="old__prize"><del class="d-inline">
-                                                            <?php echo number_format($row['oldPrice']) ?> VND
-                                                        </del> </li>
-                                                    <li>
-                                                        <?php echo number_format($row['price']) ?> VND
+                                                    </ul>
+                                                </div>
+                                                <div class="fr__product__inner">
+                                                    <h4 class="m-0">
+                                                        <a href="?act=detail&id=<?= $row['id'] ?>&idCat=<?= $row['category_id'] ?>"
+                                                            class="text-decoration-none">
+                                                            <?= $row['name'] ?>
+                                                        </a>
+                                                    </h4>
+                                                    <div class="price-container">
+                                                        <ul class="fr__pro__prize">
+                                                            <li class="old__prize"><del class="d-inline">
+                                                                    <?= number_format($row['oldPrice']) ?> VND
+                                                                </del> </li>
+                                                            <li class="text-danger">
+                                                                <strong><?= number_format($row['price']) ?> VND</strong>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <ul class="shopping__btn p-3">
+                                                    <li class="shp__checkout"><a
+                                                            href="?act=checkout&id=<?= $row['id'] ?>">Mua Ngay</a>
                                                     </li>
                                                 </ul>
                                             </div>
                                         </div>
-                                    </div>
+                                    </form>
                                 <? } ?>
                                 <!-- End Single Product -->
                             </div>
@@ -138,6 +150,7 @@
                     <div class="htc__category">
                         <h4 class="title__line--4">Danh mục</h4>
                         <ul class="ht__cat__list">
+                            <li><a href="?act=shop">Tất cả sản phẩm</a></li>
                             <?
                             $dblist = new Category();
                             $rows = $dblist->getList();

@@ -119,7 +119,7 @@
                                 <span class="price"></span>
                             </div> -->
                             <div class="order-details__count__single">
-                                <h5>Tổng tiền hàng</h5>
+                                <h5>Tổng tiền:</h5>
                                 <p><span class="price"><?= number_format($tongtienthanhtoan) ?> VND</span></p>
                             </div>
                             <div class="order-details__count__single">

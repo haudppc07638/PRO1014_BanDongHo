@@ -1,4 +1,4 @@
-<nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+<!-- <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
   <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
     <a class="navbar-brand brand-logo" href="index.html"><img src="../images/logo-rb.png" alt="logo" style="height: 70px;width: calc(200px - 120px)"/></a>
     <a class="navbar-brand brand-logo-mini" href="index.html"><img src="../images/logo-rb.png" alt="logo" style="width: calc(none)"/></a>
@@ -149,5 +149,5 @@
       <span class="mdi mdi-menu"></span>
     </button>
   </div>
-</nav>
+</nav> -->
 <div class="container-fluid page-body-wrapper">

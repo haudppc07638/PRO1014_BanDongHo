@@ -124,6 +124,7 @@ if(!isset($_SESSION['myCart'])) {
                 break;
             case "forgot":
                 include('PHPMailer-master/forgot.php');
+                break;
             case "cart":
                 if(isset($_POST['addcart'])) {
                     $productId = $_POST['productId'];

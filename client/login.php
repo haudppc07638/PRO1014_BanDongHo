@@ -2,7 +2,6 @@
 if (isset($_POST['login'])) {
     $userName = $_POST['username'];
     $password = $_POST['password'];
-    $id = $_GET['id'];
     if (empty($userName)) {
         $errorUsername = "Vui lòng điền tên đăng nhập";
     }
@@ -10,7 +9,7 @@ if (isset($_POST['login'])) {
         $errorPassword = "Vui lòng điền mật khẩu";
     }
     if (!isset($errorUsername) && !isset($errorPassword)) {
-        $user = new User();
+        $user = new User();                                                         
         $userInfo = $user->userid($userName, $password);
         
         if (!$userInfo) {

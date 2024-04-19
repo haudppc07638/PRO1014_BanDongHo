@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_POST['submit_comment'])) {
         $content = $_POST['content'];
         $product_ID = $_POST['product_id'];
-        $user_ID = $_POST['user_id'];
+        $user_ID = 1;
 
         // Xác thực dữ liệu nhập vào (Ví dụ: đảm bảo không rỗng)
         if (!empty($content) && !empty($product_ID) && !empty($user_ID)) {
@@ -75,7 +75,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                                         $activeClass = ($index === 0) ? 'in active' : '';
                                 ?>
                                         <div role="tabpanel" class="tab-pane fade <?= $activeClass ?>" id="<?= $tabId ?>">
-                                            <img src="images/<?= $imageName ?>" alt="image-product" height="367px" >
+                                            <img src="images/<?= $imageName ?>" alt="image-product" height="367px">
                                         </div>
                                 <?php
                                     endif;
@@ -95,7 +95,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                                     ?>
                                     <li role="presentation" class="pot-small-img <?= $activeClass ?>">
                                         <a href="#<?= $tabId ?>" role="tab" data-toggle="tab">
-                                            <img src="images/<?= $imageName ?>" alt="image-product" style="min-width: 45px; height: 66px" >
+                                            <img src="images/<?= $imageName ?>" alt="image-product" style="min-width: 45px; height: 66px">
                                         </a>
                                     </li>
                             <?php
@@ -162,7 +162,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
                                     <li><a href="#" target="_blank"><i class="icon-social-pinterest icons"></i></a></li>
                                 </ul>
-                            </div> -->  
+                            </div> -->
                             <form action="?act=cart" method="post">
                                 <div class="mb-3">
                                     <div class="row">
@@ -171,7 +171,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                                             <input type="number" name="quantity" id="quantity" min="1" value="1" max="99" class="form-control">
                                         </div>
                                     </div>
-                                    
+
                                 </div>
                                 <input type="hidden" name="productId" value="<?php echo $rowProd['id'] ?>">
                                 <input type="hidden" name="name" value="<?php echo $rowProd['name'] ?>">
@@ -194,8 +194,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             <div class="col-xs-12">
                 <!-- Start List And Grid View -->
                 <ul class="pro__details__tab" role="tablist">
-                    <li role="presentation" class="description active"><a href="#description" role="tab"
-                            data-toggle="tab">description</a></li>
+                    <li role="presentation" class="description active"><a href="#description" role="tab" data-toggle="tab">description</a></li>
                     <li role="presentation" class="review"><a href="#review" role="tab" data-toggle="tab">review</a>
                     </li>
                     <li role="presentation" class="comment"><a href="#comment" role="tab" data-toggle="tab">Comment</a>
@@ -210,14 +209,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     <div class="container">
         <div class="row">
             <div class="col-xs-12">
-                <div class="text-center">
-                    <h2 class="h1">SẢN PHẨM LIÊN QUAN</h2>
-                    <!-- <p>But I must explain to you how all this mistaken idea</p> -->
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-xs-12">
                 <div class="ht__pro__details__content">
                     <!-- Start Single Content -->
                     <div role="tabpanel" id="description" class="pro__single__content tab-pane fade in active">
@@ -225,28 +216,28 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                     <!-- End Single Content -->
                     <!-- Start Single Content -->
                     <!-- Bắt đầu Phần Nội dung Chi Tiết Sản Phẩm -->
-<div role="tabpanel" id="review" class="pro__single__content tab-pane fade">
-    <!-- Hiển thị tiêu đề phần đánh giá nếu có bình luận -->
-    <?php if (!empty($comments)): ?>
-        <h4 class="ht__pro__title">Đánh Giá Sản Phẩm</h4>
-    <?php endif; ?>
-    
-    <?php
-    // Kiểm tra nếu có bình luận
-    if (!empty($comments)) {
-        // Duyệt qua mỗi bình luận và hiển thị nội dung và ngày tạo
-        foreach ($comments as $comment) {
-            echo "<div class='comment-block'>";
-            echo "<p>" . htmlspecialchars($comment['content']) . "</p>"; // Hiển thị nội dung bình luận
-            echo "<p>Ngày: " . htmlspecialchars($comment['created_at']) . "</p>"; // Hiển thị ngày tạo bình luận
-            echo "</div>";
-        }
-    } else {
-        echo "<p>Chưa có đánh giá nào cho sản phẩm này.</p>";
-    }
-    ?>
-</div>
-<!-- Kết thúc Phần Nội dung Chi Tiết Sản Phẩm -->
+                    <div role="tabpanel" id="review" class="pro__single__content tab-pane fade">
+                        <!-- Hiển thị tiêu đề phần đánh giá nếu có bình luận -->
+                        <?php if (!empty($comments)) : ?>
+                            <h4 class="ht__pro__title">Đánh Giá Sản Phẩm</h4>
+                        <?php endif; ?>
+
+                        <?php
+                        // Kiểm tra nếu có bình luận
+                        if (!empty($comments)) {
+                            // Duyệt qua mỗi bình luận và hiển thị nội dung và ngày tạo
+                            foreach ($comments as $comment) {
+                                echo "<div class='comment-block'>";
+                                echo "<p>" . htmlspecialchars($comment['content']) . "</p>"; // Hiển thị nội dung bình luận
+                                echo "<p>Ngày: " . htmlspecialchars($comment['created_at']) . "</p>"; // Hiển thị ngày tạo bình luận
+                                echo "</div>";
+                            }
+                        } else {
+                            echo "<p>Chưa có đánh giá nào cho sản phẩm này.</p>";
+                        }
+                        ?>
+                    </div>
+                    <!-- Kết thúc Phần Nội dung Chi Tiết Sản Phẩm -->
 
                     <!-- End Single Content -->
                     <!-- Start Single Content -->
@@ -257,8 +248,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                         <form action="" method="post"> <!-- Gửi form đến chính trang này -->
                             <div class="form-group">
                                 <label for="comment_content">Nội dung bình luận:</label>
-                                <textarea class="form-control" id="comment_content" name="content" rows="4"
-                                    placeholder="Nhập nội dung bình luận"></textarea>
+                                <textarea class="form-control" id="comment_content" name="content" rows="4" placeholder="Nhập nội dung bình luận"></textarea>
                             </div>
                             <!-- Các trường ẩn -->
                             <input type="hidden" name="product_id" value="<?php echo $id ?>">

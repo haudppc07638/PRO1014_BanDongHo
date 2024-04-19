@@ -22,25 +22,25 @@
     </li>
     <li class="nav-item">
       <a class="nav-link" href="?act=list">
-        <span class="menu-title">Categories</span>
+        <span class="menu-title">Danh Mục</span>
         <i class="mdi mdi-contacts menu-icon"></i>
       </a>
     </li>
     <li class="nav-item">
       <a class="nav-link" href="?act=listpro">
-        <span class="menu-title">Products</span>
+        <span class="menu-title">Sản phẩm</span>
         <i class="mdi mdi-contacts menu-icon"></i>
       </a>
     </li>
     <li class="nav-item">
       <a class="nav-link" href="?act=listUser">
-        <span class="menu-title">Users</span>
+        <span class="menu-title">Người đùng</span>
         <i class="mdi mdi-contacts menu-icon"></i>
       </a>
     </li>
     <li class="nav-item">
       <a class="nav-link" href="?act=listComment">
-        <span class="menu-title">Comments</span>
+        <span class="menu-title">Bình luận</span>
         <i class="mdi mdi-contacts menu-icon"></i>
       </a>
     </li>

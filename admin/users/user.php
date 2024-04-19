@@ -26,10 +26,10 @@ class User
         $result = $db->pdo_query_one($select);
         return $result;
     }
-    public function userid($Username, $Password)
+    public function userid($username, $password)
     {
         $db = new connect();
-        $select = "select id from users where userName='$Username' and password='$Password'";
+        $select = "select id from users where userName='$username' and password='$password'";
         $result = $db->pdo_query_one($select);
         return $result;
     }
