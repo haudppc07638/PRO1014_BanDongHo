@@ -10,16 +10,16 @@ $listbinhluan = $comment->loadall_binhluan($idpro);
 <div class="col-lg-12 grid-margin stretch-card">
     <div class="card">
         <div class="card-body">
-            <h4 class="card-title">List comment</h4>
+            <h4 class="card-title">Danh sách bình luận</h4>
             <table class="table table-bordered">
                 <thead>
                     <tr>
                         <th> ID </th>
-                        <th> Content </th>
-                        <th> ID product </th>
-                        <th> ID user </th>
-                        <th> Day created </th>
-                        <th> Action </th>
+                        <th> Nội dung </th>
+                        <th> Tên sản phẩm </th>
+                        <th> Tên người bình luận </th>
+                        <th> Ngày bình luận </th>
+                        <th> Tác vụ </th>
                     </tr>
                 </thead>
                 <tbody>
@@ -32,8 +32,7 @@ $listbinhluan = $comment->loadall_binhluan($idpro);
                             <td><?php echo $binhluan['created_at']; ?></td>
                             <td style='text-align: center;'>
                                 <a href='?act=deleteComment&id=<?php echo $binhluan["id"]; ?>'>
-                                    <button type='button' class='btn btn-danger btn-fw'
-                                        style='margin: 5px; min-width: 50px'>Remove</button>
+                                    <button type='button' class='btn btn-danger p-2'><i class="mdi mdi-delete"></i></button>
                                 </a>
                             </td>
                         </tr>

@@ -1,7 +1,7 @@
 <div class="col-lg-12 grid-margin stretch-card">
     <div class="card">
         <div class="card-body">
-            <h4 class="card-title">List products</h4>
+            <h4 class="card-title">Danh sách sản phẩm</h4>
             <a href="?act=addprod"><button type="button" class="btn btn-outline-primary btn-fw">Addproducts</button></a>
             </p>
             <table class="table table-bordered">
@@ -13,7 +13,7 @@
                         <th> Giá </th>
                         <th>Mô tả </th>
                         <th> Tên danh mục </th>
-                        <th> Hành động </th>
+                        <th> Tác vụ </th>
                     </tr>
                 </thead>
                 <tbody>
@@ -47,7 +47,7 @@
                                 <?php echo number_format($row['price']) . ' vnd'; ?>
                             </td>
 
-                            <td>
+                            <td class="category-name">
                                 <?php echo $row['description']; ?>
                             </td>
                             <td>
@@ -62,11 +62,10 @@
                             <td style="text-align: center;">
                                 <a href="?act=deletepro&id=<?php echo $row['id']; ?>"
                                     onclick="return confirm('Are you sure you want to delete this product?');">
-                                    <button type="button" class="btn btn-danger">Delete</button>
+                                    <button type="button" class="btn btn-danger p-2"><i class="mdi mdi-delete"></i></button>
                                 </a>
-                                <br><br>
                                 <a href="?act=editpro&id=<?php echo $row['id'] ?>">
-                                    <button type="button" class="btn btn-success">Edit</button>
+                                    <button type="button" class="btn btn-success p-2"><i class="mdi mdi-pencil-box-outline"></i></button>
                                 </a>
                             </td>
 

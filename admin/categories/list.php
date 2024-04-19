@@ -1,7 +1,7 @@
 <div class="col-lg-12 grid-margin stretch-card">
     <div class="card">
         <div class="card-body">
-            <h4 class="card-title">Danh sách danh mục </h4>
+            <h4 class="card-title">Danh sách danh mục</h4>
             <a href="?act=addcate"><button type="button" class="btn btn-outline-primary btn-fw">Thêm 
                  danh mục </button></a>
             </p>
@@ -35,13 +35,11 @@
                             </td>
                             <td styleact="text-align: center;">
                                 <a href="?act=deletecate&id=<?php echo $row['id']; ?>" onclick="return confirm('Are you sure you want to delete this category?');">
-                                    <button type="button" class="btn btn-danger">Delete</button>
+                                    <button type="button" class="btn btn-danger p-2"><i class="mdi mdi-delete"></i></button>
                                 </a>
-                                <a href="?act=editcate&name=<?php echo  $row['categoryName'] ?>&description=<?php echo $row['description']?>&image=<?php echo $row['image'] ?>&id=<?php echo $row['id']; ?>"><button type="button" class="btn btn-success">Edit</button></a>
+                                <a href="?act=editcate&name=<?php echo  $row['categoryName'] ?>&description=<?php echo $row['description']?>&image=<?php echo $row['image'] ?>&id=<?php echo $row['id']; ?>"><button type="button" class="btn btn-success p-2"><i class="mdi mdi-pencil-box-outline"></i></button></a>
                             </td>
                         </tr>
-
-
                     <?php } ?>
                 </tbody>
             </table>

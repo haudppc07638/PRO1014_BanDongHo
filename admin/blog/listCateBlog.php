@@ -76,7 +76,7 @@ $notification = "";
                                         <a href="?act=editCateBlog&id=<?= $category['id'] ?>" class="btn btn-success p-2"><i
                                                 class="mdi mdi-pencil-box-outline"></i></a>
                                         <input type="hidden" name="deleteCategoryId" value="<?= $category['id'] ?>">
-                                        <button type="submit" name="delete" class="btn btn-danger p-2" onclick="return confirm('Bạn có chắc chắn muốn xóa danh mục bài viết này không?')"> <i
+                                        <button type="submit" name="delete" class="btn btn-danger p-2" onclick="return confirm('Bạn có chắc chắn muốn xóa danh mục bài viết này không?')"><i
                                                 class="mdi mdi-delete"></i> </button>
                                     </form>
                                 </td>
