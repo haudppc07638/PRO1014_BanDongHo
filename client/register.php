@@ -7,6 +7,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $phone = trim($_POST['phone']);
     $password = trim($_POST['password']);
     $confirm = trim($_POST['confirm']);
+    
     $user = new User();
     $checkName = $user->checkUserName($userName);
     $checkEmail = $user->checkUserEmail($email);
@@ -15,41 +16,42 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['register'])) {
         if (empty($userName)){
             $errorMessages['username'] = "Bạn chưa điền tên tài khoản";
-        }
-        if(!$checkName){
+        } elseif(!$checkName){
             $errorMessages['username'] = "Tài khoản đã tồn tại!";
         }
+        
         if (empty($fullName)) {
             $errorMessages['fullname'] = "Bạn chưa điền đầy đủ họ tên";
         }
+        
         if (empty($address)) {
             $errorMessages['address'] = "Bạn chưa điền địa chỉ";
         }
+        
         if (empty($email)) {
             $errorMessages['email'] = "Bạn chưa điền email";
-        }
-        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        } if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             $errorMessages['email'] = "Bạn hãy nhập đúng định dạng @gmail.com!";
-          }
-        if(!$checkEmail){
+        } if(!$checkEmail){
             $errorMessages['email'] = "Email đã tồn tại!";
         }
+        
         if (empty($phone) || !is_numeric($phone)) {
             $errorMessages['phone'] = "Bạn chưa điền số điện thoại hoặc không phải số";
         }
+        
         if (empty($password)) {
             $errorMessages['password'] = "Bạn chưa điền mật khẩu";
         }
+        
         if (empty($confirm) || $password !== $confirm) {
             $errorMessages['confirm'] = "Nhập sai mật khẩu";
         }
 
         if (!empty($errorMessages)) {
-        
         } else {
             $user->addUser($userName, $fullName, $email, $phone, $address, $password, 'user');
             $listUser = $user->userid($userName, $password);
-            extract($listUser);
             $_SESSION['userId'] = $listUser['id'];
             echo '<script> alert("Tạo tài khoản thành công"); window.location.href = "?act=login"; </script>';
             exit;

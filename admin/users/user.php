@@ -75,7 +75,7 @@ class User
     //hàm insert dữ liệu, create dữ liệu, thêm mới dữ liệu
     public function addUser($Username, $FullName, $Email, $Phone, $Address, $Password, $role)
     {
-        if (empty($Username) || empty($FullName) || empty($Email) || empty($Phone) || empty($Address) || empty($Password) || empty($role) || isset($Username) || isset($Email)) {
+        if (empty($Username) || empty($FullName) || empty($Email) || empty($Phone) || empty($Address) || empty($Password)) {
             return false;
         }
         $db = new connect();
