@@ -1,10 +1,16 @@
 <?php
 $db = new blogcategories();
+$data = new postBlog();
+$notification = "";
 ?>
-<div class="row">
-    <div>
-        <span id="notification" class="text-success"></span>
+<div class="row mt-3">
+    <div class="col">
+        <div class="text-center">
+            <p id="notification" class="text-success"></p>
+        </div>
     </div>
+</div>
+<div class="row">
     <div class="col-lg-4 mb-5">
         <div class="card">
             <div class="card-body">
@@ -67,9 +73,11 @@ $db = new blogcategories();
                                 </td>
                                 <td>
                                     <form method="post">
-                                        <a href="?act=editCateBlog&id=<?= $category['id'] ?>" class="btn btn-success p-2"><i class="mdi mdi-pencil-box-outline"></i></a>
+                                        <a href="?act=editCateBlog&id=<?= $category['id'] ?>" class="btn btn-success p-2"><i
+                                                class="mdi mdi-pencil-box-outline"></i></a>
                                         <input type="hidden" name="deleteCategoryId" value="<?= $category['id'] ?>">
-                                        <button type="submit" name="delete" class="btn btn-danger p-2"> <i class="mdi mdi-delete"></i> </button>
+                                        <button type="submit" name="delete" class="btn btn-danger p-2" onclick="return confirm('Bạn có chắc chắn muốn xóa danh mục bài viết này không?')"> <i
+                                                class="mdi mdi-delete"></i> </button>
                                     </form>
                                 </td>
                             </tr>
@@ -82,7 +90,6 @@ $db = new blogcategories();
 </div>
 
 <?php
-$notification = "";
 if (isset($_POST['addBlogCate'])) {
     $errors = array();
     if (empty($_POST['cateName'])) {
@@ -108,7 +115,7 @@ if (isset($_POST['addBlogCate'])) {
                 echo '<script>window.location.href = "http://127.0.0.1:5000/admin/?act=cateBlog";</script>';
             } else {
                 $errors[] = "Đã xảy ra lỗi khi thêm danh mục!";
-            }  
+            }
         }
     } else {
         foreach ($errors as $error) {
@@ -116,21 +123,17 @@ if (isset($_POST['addBlogCate'])) {
         }
     }
 }
-if(isset($_POST['delete']) && isset($_POST['deleteCategoryId'])) {
+if (isset($_POST['delete']) && isset($_POST['deleteCategoryId'])) {
     $categoryIdToDelete = $_POST['deleteCategoryId'];
-    $categoryToDelete = $db->getById($categoryIdToDelete);
-    if(is_null($categoryToDelete['parent_id'])) {
-        $notification = "Không thể xóa danh mục vì danh mục cha là null!";
+    $postsInCategory = $data->getPostsByCategoryId($categoryIdToDelete);
+
+    if (!empty($postsInCategory)) {
+        $notification = "Không thể xóa danh mục vì đã có bài viết thuộc danh mục này!";
     } else {
         $deleteResult = $db->delete($categoryIdToDelete);
-        
-        if (!$deleteResult) {
-            echo '<script>window.location.href = "http://127.0.0.1:5000/admin/?act=cateBlog";</script>';
-        }
-         else {
-            $notification = "Đã xảy ra lỗi khi xóa danh mục!";
-        }
+        echo '<script>window.location.href = "http://127.0.0.1:5000/admin/?act=cateBlog";</script>';
     }
 }
+
 echo '<script>document.getElementById("notification").innerHTML = "' . $notification . '";</script>';
 ?>

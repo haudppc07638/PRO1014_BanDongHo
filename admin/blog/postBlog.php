@@ -48,7 +48,7 @@ class postBlog
         $result = $db->pdo_execute($query);
         return $result;
     }
-    public function add($title, $content, $blogcate_id , $user_id)
+    public function add($title, $content, $blogcate_id, $user_id)
     {
         $db = new connect();
         $existingCategory = $this->getByName($title);
@@ -63,6 +63,27 @@ class postBlog
     {
         $db = new connect();
         $query = "SELECT * FROM blog WHERE title = '$title'";
+        $result = $db->pdo_query_one($query);
+        return $result;
+    }
+    public function getPostsByCategoryId($cateId)
+    {
+        $db = new connect();
+        $query = "SELECT * FROM blog WHERE blogcate_id = '$cateId'";
+        $result = $db->pdo_query_one($query);
+        return $result;
+    }
+    public function getNameUser($user_id)
+    {
+        $db = new connect();
+        $query = "SELECT userName FROM users JOIN blog ON users.id = user_id WHERE user_id = '$user_id';";
+        $result = $db->pdo_query_one($query);
+        return $result;
+    }
+    public function getCategoryName($blogcate_id)
+    {
+        $db = new connect();
+        $query = "SELECT blogcategories.name FROM blogcategories JOIN blog ON blogcategories.id = blogcate_id WHERE blogcate_id = '$blogcate_id';";
         $result = $db->pdo_query_one($query);
         return $result;
     }

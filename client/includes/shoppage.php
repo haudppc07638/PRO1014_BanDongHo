@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-lg-9 col-lg-push-3 col-md-9 col-md-push-3 col-sm-12 col-xs-12">
                 <div class="htc__product__rightidebar">
-                    <div class="htc__grid__top">
+                    <!-- <div class="htc__grid__top">
                         <div class="htc__select__option">
                             <select class="ht__select">
                                 <option>Default softing</option>
@@ -23,15 +23,13 @@
                         <div class="ht__pro__qun">
                             <span>Showing 1-12 of 1033 products</span>
                         </div>
-                        <!-- Start List And Grid View -->
                         <ul class="view__mode" role="tablist">
                             <li role="presentation" class="grid-view active"><a href="#grid-view" role="tab"
                                     data-toggle="tab"><i class="zmdi zmdi-grid"></i></a></li>
                             <li role="presentation" class="list-view"><a href="#list-view" role="tab"
                                     data-toggle="tab"><i class="zmdi zmdi-view-list"></i></a></li>
                         </ul>
-                        <!-- End List And Grid View -->
-                    </div>
+                    </div> -->
 
 
                     <!-- Start Product View -->
