@@ -120,7 +120,7 @@
                                         </div>
                                     </div>
                                     <ul class="shopping__btn p-3">
-                                        <li class="shp__checkout"><a href="?act=checkout&id=<?= $row['id'] ?>">Mua Ngay</a>
+                                        <li class="shp__checkout"><a href="?act=detail&id=<?= $row['id'] ?>&idCat=<?= $row['category_id'] ?>">Xem chi tiết</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -212,7 +212,7 @@
                                     </div>
                                 </div>
                                 <ul class="shopping__btn p-3">
-                                    <li class="shp__checkout"><a href="?act=checkout&id=<?= $row['id'] ?>">Mua Ngay</a>
+                                    <li class="shp__checkout"><a href="?act=detail&id=<?= $row['id'] ?>&idCat=<?= $row['category_id'] ?>">Xem chi tiết</a>
                                     </li>
                                 </ul>
                             </div>
@@ -293,7 +293,7 @@
                                     </div>
                                 </div>
                                 <ul class="shopping__btn p-3">
-                                    <li class="shp__checkout"><a href="?act=checkout&id=<?= $row['id'] ?>">Mua Ngay</a>
+                                    <li class="shp__checkout"><a href="?act=detail&id=<?= $row['id'] ?>&idCat=<?= $row['category_id'] ?>">Xem chi tiết</a>
                                     </li>
                                 </ul>
                             </div>

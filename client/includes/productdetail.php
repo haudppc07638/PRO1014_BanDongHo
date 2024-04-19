@@ -36,7 +36,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
 ?>
 <!-- Start Bradcaump area -->
-<div class="ht__bradcaump__area" style="background: rgba(0, 0, 0, 0) url(images/banner1.jpg) no-repeat scroll center center / cover ;">
+<div class="ht__bradcaump__area"
+    style="background: rgba(0, 0, 0, 0) url(images/banner1.jpg) no-repeat scroll center center / cover ;">
     <div class="ht__bradcaump__wrap">
         <div class="container">
             <div class="row">
@@ -47,7 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                             <span class="brd-separetor"><i class="zmdi zmdi-chevron-right"></i></span>
                             <a class="breadcrumb-item" href="?act=shop">Cửa hàng</a>
                             <span class="brd-separetor"><i class="zmdi zmdi-chevron-right"></i></span>
-                            <span class="breadcrumb-item active">Chi tiết</span>
+                            <span class="breadcrumb-item active text-info"><?= $rowProd['name'] ?></span>
                         </nav>
                     </div>
                 </div>
@@ -69,15 +70,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                             <div class="portfolio-full-image tab-content">
                                 <?php
                                 $imageNames = explode(';', $rowProd['image']);
-                                foreach ($imageNames as $index => $imageName) :
-                                    if (!empty($imageName)) :
+                                foreach ($imageNames as $index => $imageName):
+                                    if (!empty($imageName)):
                                         $tabId = "img-tab-" . ($index + 1);
                                         $activeClass = ($index === 0) ? 'in active' : '';
-                                ?>
+                                        ?>
                                         <div role="tabpanel" class="tab-pane fade <?= $activeClass ?>" id="<?= $tabId ?>">
                                             <img src="images/<?= $imageName ?>" alt="image-product" height="367px">
                                         </div>
-                                <?php
+                                        <?php
                                     endif;
                                 endforeach;
                                 ?>
@@ -87,18 +88,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                         <!-- End Product Big Images -->
                         <!-- Start Small images -->
                         <ul class="product__small__images" role="tablist">
-                            <?php foreach ($imageNames as $index => $imageName) : ?>
-                                <?php if (!empty($imageName)) : ?>
+                            <?php foreach ($imageNames as $index => $imageName): ?>
+                                <?php if (!empty($imageName)): ?>
                                     <?php
                                     $tabId = "img-tab-" . ($index + 1);
                                     $activeClass = ($index === 0) ? 'active' : '';
                                     ?>
                                     <li role="presentation" class="pot-small-img <?= $activeClass ?>">
                                         <a href="#<?= $tabId ?>" role="tab" data-toggle="tab">
-                                            <img src="images/<?= $imageName ?>" alt="image-product" style="min-width: 45px; height: 66px">
+                                            <img src="images/<?= $imageName ?>" alt="image-product"
+                                                style="min-width: 45px; height: 66px">
                                         </a>
                                     </li>
-                            <?php
+                                    <?php
                                 endif;
                             endforeach;
                             ?>
@@ -144,7 +146,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                                 $cateID = $rowProd['category_id'];
                                 $rowCate = $data->getCategoryName($cateID);
                                 ?>
-                                <p class="pro__info"><strong>Categories: </strong><a href="?act=shop&id=<? echo $rowProd['category_id'] ?>"><?= $rowCate['categoryName'] ?></a></p>
+                                <p class="pro__info"><strong>Categories: </strong><a
+                                        href="?act=shop&id=<? echo $rowProd['category_id'] ?>"><?= $rowCate['categoryName'] ?></a>
+                                </p>
                             </div>
                             <!-- <div class="sin__desc product__share__link">
                                 <p><span>Share this:</span></p>
@@ -168,7 +172,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                                     <div class="row">
                                         <div class="col-lg-2">
                                             <label for="quantity" class="form-label">Số lượng</label>
-                                            <input type="number" name="quantity" id="quantity" min="1" value="1" max="99" class="form-control">
+                                            <input type="number" name="quantity" id="quantity" min="1" value="1"
+                                                max="99" class="form-control">
                                         </div>
                                     </div>
 
@@ -177,7 +182,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                                 <input type="hidden" name="name" value="<?php echo $rowProd['name'] ?>">
                                 <input type="hidden" name="price" value="<?php echo $rowProd['price'] ?>">
                                 <input type="hidden" name="image" value="<?php echo $rowProd['image'] ?>">
-                                <button type="submit" name="addcart" class="btn btn-danger d-block mx-auto">Thêm Vào Giỏ Hàng</button>
+                                <button type="submit" name="addcart" class="btn btn-danger d-block mx-auto">Thêm Vào Giỏ
+                                    Hàng</button>
                             </form>
 
                         </div>
@@ -194,7 +200,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             <div class="col-xs-12">
                 <!-- Start List And Grid View -->
                 <ul class="pro__details__tab" role="tablist">
-                    <li role="presentation" class="description active"><a href="#description" role="tab" data-toggle="tab">description</a></li>
+                    <li role="presentation" class="description active"><a href="#description" role="tab"
+                            data-toggle="tab">description</a></li>
                     <li role="presentation" class="review"><a href="#review" role="tab" data-toggle="tab">review</a>
                     </li>
                     <li role="presentation" class="comment"><a href="#comment" role="tab" data-toggle="tab">Comment</a>
@@ -205,20 +212,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         </div>
     </div>
 </section>
-<section class="htc__product__area--2 pb--100 product-details-res">
+<section class="htc__product__area--2 product-details-res">
     <div class="container">
         <div class="row">
             <div class="col-xs-12">
                 <div class="ht__pro__details__content">
                     <!-- Start Single Content -->
                     <div role="tabpanel" id="description" class="pro__single__content tab-pane fade in active">
+                        <div class="pro__tab__content__inner">
+                            <h4 class="ht__pro__title m-0">Description</h4>
+                            <p><?= $rowProd['description'] ?></p>
+                        </div>
                     </div>
                     <!-- End Single Content -->
                     <!-- Start Single Content -->
                     <!-- Bắt đầu Phần Nội dung Chi Tiết Sản Phẩm -->
                     <div role="tabpanel" id="review" class="pro__single__content tab-pane fade">
                         <!-- Hiển thị tiêu đề phần đánh giá nếu có bình luận -->
-                        <?php if (!empty($comments)) : ?>
+                        <?php if (!empty($comments)): ?>
                             <h4 class="ht__pro__title">Đánh Giá Sản Phẩm</h4>
                         <?php endif; ?>
 
@@ -229,7 +240,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                             foreach ($comments as $comment) {
                                 echo "<div class='comment-block'>";
                                 echo "<p>" . htmlspecialchars($comment['content']) . "</p>"; // Hiển thị nội dung bình luận
-                                echo "<p>Ngày: " . htmlspecialchars($comment['created_at']) . "</p>"; // Hiển thị ngày tạo bình luận
+                                echo "<p>Ngày: " . htmlspecialchars(date('d/m/Y', strtotime($comment['created_at']))) . "</p>"; // Hiển thị ngày tạo bình luận
                                 echo "</div>";
                             }
                         } else {
@@ -248,7 +259,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                         <form action="" method="post"> <!-- Gửi form đến chính trang này -->
                             <div class="form-group">
                                 <label for="comment_content">Nội dung bình luận:</label>
-                                <textarea class="form-control" id="comment_content" name="content" rows="4" placeholder="Nhập nội dung bình luận"></textarea>
+                                <textarea class="form-control" id="comment_content" name="content" rows="4"
+                                    placeholder="Nhập nội dung bình luận"></textarea>
                             </div>
                             <!-- Các trường ẩn -->
                             <input type="hidden" name="product_id" value="<?php echo $id ?>">
@@ -260,7 +272,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                     </div>
                     <div role="tabpanel" id="review" class="pro__single__content tab-pane fade">
                     </div>
-
                 </div>
             </div>
         </div>
