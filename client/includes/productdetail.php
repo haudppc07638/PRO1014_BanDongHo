@@ -10,17 +10,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $content = $_POST['content'];
         $product_ID = $_POST['product_id'];
         $user_ID = 1;
-
-        // Xác thực dữ liệu nhập vào (Ví dụ: đảm bảo không rỗng)
         if (!empty($content) && !empty($product_ID) && !empty($user_ID)) {
-            // Thêm bình luận vào cơ sở dữ liệu
             $stmt = $pdo->prepare("INSERT INTO comment (content, product_id, user_id, created_at) VALUES (?, ?, ?, NOW())");
             $stmt->execute([$content, $product_ID, $user_ID]);
-
-            // Hiển thị thông báo hoặc làm mới trang để hiển thị bình luận mới
             echo "<script>alert('Bình luận đã được thêm.'); window.location.href=window.location.href;</script>";
         } else {
-            // Hiển thị lỗi nếu dữ liệu nhập vào không hợp lệ
             echo "<p>Vui lòng nhập đầy đủ thông tin bình luận.</p>";
         }
     }
@@ -32,7 +26,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     $stmt->execute([$product_ID]);
     $comments = $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
-// Lấy bình luận từ cơ sở dữ liệu
 
 ?>
 <!-- Start Bradcaump area -->
@@ -146,7 +139,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                                 $cateID = $rowProd['category_id'];
                                 $rowCate = $data->getCategoryName($cateID);
                                 ?>
-                                <p class="pro__info"><strong>Categories: </strong><a
+                                <p class="pro__info"><strong>Danh mục: </strong><a
                                         href="?act=shop&id=<? echo $rowProd['category_id'] ?>"><?= $rowCate['categoryName'] ?></a>
                                 </p>
                             </div>
@@ -168,24 +161,27 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                                 </ul>
                             </div> -->
                             <div class="sin__desc mb-3">
-                            <form action="?act=cart" method="post">
-                                <div class="mb-3">
-                                    <div class="row">
-                                        <div class="col-lg-2">
-                                            <label for="quantity" class="form-label"><p class="pro_info"><strong>Số lượng</strong></p></label>
-                                            <input type="number" name="quantity" id="quantity" min="1" value="1"
-                                                max="99" class="form-control">
+                                <form action="?act=cart" method="post">
+                                    <div class="mb-3">
+                                        <div class="row">
+                                            <div class="col-lg-2">
+                                                <label for="quantity" class="form-label">
+                                                    <p class="pro_info"><strong>Số lượng</strong></p>
+                                                </label>
+                                                <input type="number" name="quantity" id="quantity" min="1" value="1"
+                                                    max="99" class="form-control">
+                                            </div>
                                         </div>
-                                    </div>
 
-                                </div>
-                                <input type="hidden" name="productId" value="<?php echo $rowProd['id'] ?>">
-                                <input type="hidden" name="name" value="<?php echo $rowProd['name'] ?>">
-                                <input type="hidden" name="price" value="<?php echo $rowProd['price'] ?>">
-                                <input type="hidden" name="image" value="<?php echo $rowProd['image'] ?>">
-                                <button type="submit" name="addcart" class="btn btn-danger d-block mx-auto">Thêm Vào Giỏ
-                                    Hàng</button>
-                            </form>
+                                    </div>
+                                    <input type="hidden" name="productId" value="<?php echo $rowProd['id'] ?>">
+                                    <input type="hidden" name="name" value="<?php echo $rowProd['name'] ?>">
+                                    <input type="hidden" name="price" value="<?php echo $rowProd['price'] ?>">
+                                    <input type="hidden" name="image" value="<?php echo $rowProd['image'] ?>">
+                                    <button type="submit" name="addcart" class="btn btn-danger d-block mx-auto">Thêm Vào
+                                        Giỏ
+                                        Hàng</button>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -202,10 +198,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                 <!-- Start List And Grid View -->
                 <ul class="pro__details__tab" role="tablist">
                     <li role="presentation" class="description active"><a href="#description" role="tab"
-                            data-toggle="tab">description</a></li>
-                    <li role="presentation" class="review"><a href="#review" role="tab" data-toggle="tab">review</a>
+                            data-toggle="tab">Mô tả chi tiết</a></li>
+                    <li role="presentation" class="review"><a href="#review" role="tab" data-toggle="tab">Đánh giá</a>
                     </li>
-                    <li role="presentation" class="comment"><a href="#comment" role="tab" data-toggle="tab">Comment</a>
+                    <li role="presentation" class="comment"><a href="#comment" role="tab" data-toggle="tab">Bình
+                            luận</a>
                     </li>
                 </ul>
                 <!-- End List And Grid View -->
@@ -221,7 +218,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                     <!-- Start Single Content -->
                     <div role="tabpanel" id="description" class="pro__single__content tab-pane fade in active">
                         <div class="pro__tab__content__inner">
-                            <h4 class="ht__pro__title m-0">Description</h4>
+                            <h4 class="ht__pro__title m-0">Mô tả: </h4>
                             <p><?= $rowProd['description'] ?></p>
                         </div>
                     </div>
@@ -231,7 +228,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                     <div role="tabpanel" id="review" class="pro__single__content tab-pane fade">
                         <!-- Hiển thị tiêu đề phần đánh giá nếu có bình luận -->
                         <?php if (!empty($comments)): ?>
-                            <h4 class="ht__pro__title">Đánh Giá Sản Phẩm</h4>
+                            <div class="pro__tab__content__inner">
+                                <h4 class="ht__pro__title m-0">Đánh Giá Sản Phẩm</h4>
+                            </div>
                         <?php endif; ?>
 
                         <?php
@@ -256,7 +255,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                     <!-- Start Single Content -->
                     <!-- Start Single Content -->
                     <div role="tabpanel" id="comment" class="pro__single__content tab-pane fade">
-                        <h4 class="ht__pro__title">Thêm Bình Luận</h4>
+                        <div class="pro__tab__content__inner">
+                            <h4 class="ht__pro__title m-0">Thêm Bình Luận</h4>
+                        </div>
                         <form action="" method="post"> <!-- Gửi form đến chính trang này -->
                             <div class="form-group">
                                 <label for="comment_content">Nội dung bình luận:</label>
