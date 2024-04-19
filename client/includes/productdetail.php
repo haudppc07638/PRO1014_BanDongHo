@@ -134,10 +134,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                                 <?php echo number_format($rowProd['price']) ?> VND
                             </li>
                         </ul>
-                        <p class="pro__info">
-                            <strong>Mô tả:</strong> <?php echo $rowProd['description'] ?>
-                        </p>
                         <div class="ht__pro__desc">
+                            <div class="sin__desc mb-3">
+                                <p class="pro__info"><strong>Mô tả:</strong> <?php echo $rowProd['description'] ?></p>
+                            </div>
                             <div class="sin__desc mb-3">
                                 <p class="pro__info"><strong>Tình trạng:</strong> Còn hàng</p>
                             </div>
@@ -167,11 +167,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                                     <li><a href="#" target="_blank"><i class="icon-social-pinterest icons"></i></a></li>
                                 </ul>
                             </div> -->
+                            <div class="sin__desc mb-3">
                             <form action="?act=cart" method="post">
                                 <div class="mb-3">
                                     <div class="row">
                                         <div class="col-lg-2">
-                                            <label for="quantity" class="form-label">Số lượng</label>
+                                            <label for="quantity" class="form-label"><p class="pro_info"><strong>Số lượng</strong></p></label>
                                             <input type="number" name="quantity" id="quantity" min="1" value="1"
                                                 max="99" class="form-control">
                                         </div>
@@ -185,7 +186,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                                 <button type="submit" name="addcart" class="btn btn-danger d-block mx-auto">Thêm Vào Giỏ
                                     Hàng</button>
                             </form>
-
+                            </div>
                         </div>
                     </div>
                 </div>
