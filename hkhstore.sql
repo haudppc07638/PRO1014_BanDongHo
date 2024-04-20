@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Apr 10, 2024 at 12:31 PM
--- Server version: 8.0.31
--- PHP Version: 7.4.33
+-- Máy chủ: localhost
+-- Thời gian đã tạo: Th4 20, 2024 lúc 09:00 PM
+-- Phiên bản máy phục vụ: 8.0.36
+-- Phiên bản PHP: 7.4.33
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `hkhstore`
+-- Cơ sở dữ liệu: `hkhstore`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `bill`
+-- Cấu trúc bảng cho bảng `bill`
 --
 
 CREATE TABLE `bill` (
@@ -48,7 +48,7 @@ CREATE TABLE `bill` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `blog`
+-- Cấu trúc bảng cho bảng `blog`
 --
 
 CREATE TABLE `blog` (
@@ -61,18 +61,17 @@ CREATE TABLE `blog` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `blog`
+-- Đang đổ dữ liệu cho bảng `blog`
 --
 
 INSERT INTO `blog` (`id`, `title`, `content`, `user_id`, `blogcate_id`, `created_at`) VALUES
-(7, 'blog', '122222222221', 1, 58, '2024-04-04 12:59:17'),
-(8, 'testweqwqweq', 'qưeqwe', 1, 58, '2024-04-04 13:15:51'),
-(9, 'tieu de sua', 'noi dung tét', 1, 62, '2024-04-04 13:47:07');
+(11, 'Apple ra mắt Apple Watch Series 8 và Apple Watch SE mới', 'CUPERTINO, CALIFORNIA Hôm nay Apple đã giới thiệu Apple Watch Series 8 và Apple Watch SE mới, sở hữu công nghệ và hiệu năng đột phá cũng như những cải tiến quan trọng về các tính năng an toàn cho hai mẫu đồng hồ thông minh bán chạy nhất. Apple Watch Series 8 sở hữu thiết kế được nhiều người yêu thích ở Apple Watch, bao gồm màn hình Retina Luôn Hiển thị lớn, và mặt đồng hồ phía trước bằng thủy tinh chống nứt bền bỉ. Với thời lượng pin 18 giờ hoạt động cả ngày, Apple Watch Series 8 tiếp tục phát triển các tính năng về sức khoẻ và an toàn ưu việt như ứng dụng ECG và phát hiện ngã, và giới thiệu tính năng cảm biến nhiệt độ, ước tính thời điểm rụng trứng hồi cứu, Phát hiện Va chạm, và chuyển vùng quốc tế. Apple Watch SE mới mang đến trải nghiệm Apple Watch cốt lõi, bao gồm ứng dụng Hoạt động, thông báo nhịp tim cao và thấp, cùng với SOS Khẩn cấp, cũng như tính năng Phát hiện Va chạm mới, và ốp lưng được thiết kế mới hoàn toàn để trùng khớp hoàn hảo với ba màu khung viền cổ điển. Cả hai mẫu đều chạy watchOS 9, ra mắt các mặt đồng hồ mới và có thể tùy chỉnh nhiều hơn như Lunar và Metropolitan, ứng dụng Bài tập nâng cao, các giai đoạn của giấc ngủ, tính năng Lịch sử AFib đầu tiên trên đồng hồ, và ứng dụng Thuốc hoàn toàn mới.\r\n“Chúng tôi lắng nghe chia sẻ của khách hàng về cách Apple Watch giúp họ duy trì kết nối với những người thân yêu, trở nên năng động hơn và có cuộc sống lành mạnh hơn,” Jeff Williams, Giám đốc vận hành của Apple cho biết. “Apple Watch Series 8 củng cố cam kết của chúng tôi trong những lĩnh vực này với những công nghệ tiên phong mới, trong khi Apple Watch SE mang đến các tính năng cốt lõi tiên tiến với giá khởi điểm mới. Được trang bị watchOS 9, những mẫu đồng hồ thông minh tốt nhất mang đến nhiều chức năng hơn bao giờ hết”.\r\n', 2, 1, '2024-04-20 19:12:10'),
+(12, 'Đồng Hồ Patek Philippe Nautilus 5711 40th Anniversary Rep 11', 'Chiếc đồng hồ Patek Philippe Nautilus 5711 phiên bản thép không gỉ được đánh giá là một trong những chiếc đồng hồ thể thao cao cấp “hot” nhất hiện nay. Thật sự rất khó để sở hữu được chiếc đồng hồ này và nếu như bạn muốn mua được nó qua những nhà phân phối bán lẻ, bạn sẽ phải dành ít nhất vài năm để có tên trong danh sách đợi. Một trong những nguyên nhân là do Patek Philippe đã khẳng định rằng chỉ có 20% tổng sản phẩm của họ được sản xuất với chất liệu thép, trong đó, 5711 Nautilus chỉ là một trong số những thiết kế mà thương hiệu này lựa chọn sản xuất.\r\n\r\nTuy nhiên, chiếc đồng hồ mà chúng ta sẽ đề cập đến dưới đây là một phiên bản sao chép chuẩn Replica 11 của mẫu Patep Philippe ra mắt năm 2016 dành cho lễ kỉ niệm 40 năm ngày ra đời của bộ sưu tập Nautilus. Trong khi chiếc Nautilus chính hãng có giá retail hàng tỷ đồng thì thiết kế Đồng Hồ Patek Philippe Nautilus 5711 40th Anniversary Rep 11 Kỉ Niệm 40 Năm 3K phiên bản Fake cao cấp nhất có giá rẻ hơn hàng trăm lần.\r\n\r\n', 2, 1, '2024-04-20 19:21:44');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `blogcategories`
+-- Cấu trúc bảng cho bảng `blogcategories`
 --
 
 CREATE TABLE `blogcategories` (
@@ -84,18 +83,16 @@ CREATE TABLE `blogcategories` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `blogcategories`
+-- Đang đổ dữ liệu cho bảng `blogcategories`
 --
 
 INSERT INTO `blogcategories` (`id`, `name`, `parent_id`, `user_id`, `created_at`) VALUES
-(58, 'Công Nghệ và Tính Năng', '', 1, '2024-03-31 15:06:35'),
-(59, 'Phong Cách và Thời Trang moi', '59', 1, '2024-03-31 15:06:43'),
-(62, 'Giới thiệu và phân tích các công nghệ mới và tính năng tiên tiến trong ngành đồng hồ.', '58', 1, '2024-03-31 15:07:35');
+(1, 'Danh mục chủ', '', 2, '2024-04-20 19:07:35');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `cart`
+-- Cấu trúc bảng cho bảng `cart`
 --
 
 CREATE TABLE `cart` (
@@ -112,7 +109,7 @@ CREATE TABLE `cart` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `categories`
+-- Cấu trúc bảng cho bảng `categories`
 --
 
 CREATE TABLE `categories` (
@@ -126,31 +123,40 @@ CREATE TABLE `categories` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `categories`
+-- Đang đổ dữ liệu cho bảng `categories`
 --
 
 INSERT INTO `categories` (`id`, `categoryName`, `status`, `created`, `updated`, `image`, `description`) VALUES
-(21, 'hieu 111', NULL, NULL, NULL, '62848236-1bf2-4c3f-8e3a-ad2e548c2c75.jpg', '121111');
+(52, 'Apple ', NULL, NULL, NULL, 'apple-logo-wallpaper-15.jpg', NULL),
+(53, 'Rolex', NULL, NULL, NULL, 'rolex-logo-editorial-illustration-free-vector.jpg', NULL),
+(54, 'Patek PhiLiPe', NULL, NULL, NULL, 'logo-cac-hang-dong-ho-2.jpg', NULL);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `comment`
+-- Cấu trúc bảng cho bảng `comment`
 --
 
 CREATE TABLE `comment` (
   `id` int NOT NULL,
-  `content` text COLLATE utf8mb4_general_ci,
+  `content` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
   `product_id` int DEFAULT NULL,
   `user_id` int DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Đang đổ dữ liệu cho bảng `comment`
+--
+
+INSERT INTO `comment` (`id`, `content`, `product_id`, `user_id`, `created_at`, `updated_at`) VALUES
+(1, 'aaaa', 47, 11, '2024-04-20 19:52:45', '2024-04-20 19:52:45');
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `coupons`
+-- Cấu trúc bảng cho bảng `coupons`
 --
 
 CREATE TABLE `coupons` (
@@ -165,7 +171,7 @@ CREATE TABLE `coupons` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `orders`
+-- Cấu trúc bảng cho bảng `orders`
 --
 
 CREATE TABLE `orders` (
@@ -184,7 +190,7 @@ CREATE TABLE `orders` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `products`
+-- Cấu trúc bảng cho bảng `products`
 --
 
 CREATE TABLE `products` (
@@ -202,16 +208,23 @@ CREATE TABLE `products` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `products`
+-- Đang đổ dữ liệu cho bảng `products`
 --
 
 INSERT INTO `products` (`id`, `name`, `price`, `description`, `image`, `category_id`, `discount`, `created`, `updated`, `status`, `oldPrice`) VALUES
-(13, 'Harry', 149000, 'czxf', '1piece.jpg;dongho1.jpg;1piece.jpg', 21, '', '2024-04-10 15:07:03', NULL, 1, 200000);
+(47, 'Apple Watch seri 7', 5200000, 'apple watch xuất xứ từ mĩ', 'Apple_Watch_Series_7_GPS_41mm_Green_Aluminum_Clover_Sport_Band_PDP_Image_Position-2__SG-scaled.jpg;Apple_watch-series7_contour-face_09142021_carousel.jpg.large_2x.jpg;th.jpg', 52, NULL, '2024-04-21 02:25:32', NULL, 1, 6000000),
+(48, 'Apple Watch seri 9', 6200000, 'apple watch seri 9 xuất xứ từ mĩ', '41-cell-alum-pink-sport-loop-light-pink-s9.jpg;0021752_apple-watch-series-9-thep-gps-cellular-41mm-milanese-loop.jpeg;apple_mqk02ll_a_watch_edition_38mm_gps_1362232.jpg', 52, NULL, '2024-04-21 02:22:39', NULL, 1, 7500000),
+(49, 'Apple Watch utral', 5320000, 'apple watch ultra xuất xứ từ mĩ', 'apple-watch-ultra-49-mm-titaanium-nutikell-ocean-band-tumehalli-rihmaga-eest.jpg;Apple-Watch-Ultra-Green-Alpine-Loop-Compass-Waypoints-220907_inline.jpg.large.jpg;utr.jpg', 52, NULL, '2024-04-21 02:22:53', NULL, 1, 7000000),
+(50, 'Rolex silver', 9000000, 'Rolex silver bạc xuất xứ nước ngoài', 'rolex-oyster-perpetual-36-mm-silver-with-10-diamonds-dial-stainless-steel-rolex-jubilee-automatic-men_s-watch-116234sdj.jpg;rolex-lady-datejust-26-silver-dial-stainless-steel-rolex-jubilee-automatic-watch-179174sdj.jpg;DSC_5295.jpg', 53, NULL, '2024-04-21 02:23:21', NULL, 1, 12000000),
+(51, 'Rolex gold', 9000000, 'Rolex gold khẳng định doanh nhân', 'g2.jpg;g1.jpg;g3.jpg', 53, NULL, '2024-04-21 02:23:45', NULL, 1, 9500000),
+(52, 'Rolex BK', 9800000, 'Rolex Bk khẳng định doanh nhân mạnh BK', 'bk1.jpg;bk.jpg;bk2.jpg', 53, NULL, '2024-04-21 02:24:08', NULL, 1, 11000000),
+(53, 'Patek PhiLiPe natulis-quart', 11000000, 'Patek PhiLiPe natulis-quart dành cho phái nữ', 'patek-philippe-nautilus-quartz-diamond-gold-dial-ladies-watch-70101r012.jpg;patek-philippe-nautilus-quartz-diamond-gold-dial-ladies-watch-70101r012.jpg;patek-philippe-nautilus-quartz-diamond-gold-dial-ladies-watch-70101r012.jpg', 54, NULL, '2024-04-21 02:47:27', NULL, 1, 12000000),
+(54, 'Patek PhiLiP Unvelis', 11200000, 'Patek PhiLiP Unvelis xuất xứ từ nước ngoài', 'patek-philippe-nautilus-silvery-white-dial-stainless-steel-mens-watch-57111a011-57111a011.jpg;Patek-Philippe-Nautilus-Chronograph-5990-1R-rose-gold-blue-1.jpg;Patek-Philippe-Nautilus-Chronograph-5990-1R-rose-gold-blue-1.jpg', 54, NULL, '2024-04-21 02:46:10', NULL, 1, 12000000);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Cấu trúc bảng cho bảng `users`
 --
 
 CREATE TABLE `users` (
@@ -229,30 +242,26 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `users`
+-- Đang đổ dữ liệu cho bảng `users`
 --
 
 INSERT INTO `users` (`id`, `userName`, `password`, `address`, `email`, `fullName`, `status`, `role`, `created`, `updated`, `phone`) VALUES
-(1, '123', '123', '13221', '123@gmail.com', '123', 1, 'user', '2023-12-03 18:24:35', '2023-12-03 18:24:35', '12312312312'),
 (2, 'admin', 'admin', '123312', '132312', '321313', 1, 'admin', '2023-12-03 22:15:39', '2023-12-03 22:15:39', '1231231232'),
-(5, 'User863', '123456', '123', '123@gmail.com', '12', 1, 'user', NULL, NULL, '123'),
-(6, 'User373', '123456', '123', '123@gmail.com', '12', 1, 'user', NULL, NULL, '123'),
-(9, 'hieu', '123456', 'nguyen van linh', 'khcute2004@gmail.com', 'hieu tran', 1, 'user', NULL, NULL, '0356764863'),
-(10, 'test', '123', '123', 'khanhvo@gmail.com', 'vominhkhanh', 1, 'user', NULL, NULL, '123');
+(11, 'hiu', 'b59daa00', 'nguyen van linh', 'khcute2004@gmail.com', 'hieu tran', 1, 'user', NULL, NULL, '0356764863');
 
 --
--- Indexes for dumped tables
+-- Chỉ mục cho các bảng đã đổ
 --
 
 --
--- Indexes for table `bill`
+-- Chỉ mục cho bảng `bill`
 --
 ALTER TABLE `bill`
   ADD PRIMARY KEY (`id`),
   ADD KEY `id_user` (`user_id`);
 
 --
--- Indexes for table `blog`
+-- Chỉ mục cho bảng `blog`
 --
 ALTER TABLE `blog`
   ADD PRIMARY KEY (`id`),
@@ -260,27 +269,27 @@ ALTER TABLE `blog`
   ADD KEY `blogcate_id` (`blogcate_id`);
 
 --
--- Indexes for table `blogcategories`
+-- Chỉ mục cho bảng `blogcategories`
 --
 ALTER TABLE `blogcategories`
   ADD PRIMARY KEY (`id`),
   ADD KEY `fk_user_id` (`user_id`);
 
 --
--- Indexes for table `cart`
+-- Chỉ mục cho bảng `cart`
 --
 ALTER TABLE `cart`
   ADD KEY `id_pro` (`product_id`),
   ADD KEY `id_bill` (`bill_id`);
 
 --
--- Indexes for table `categories`
+-- Chỉ mục cho bảng `categories`
 --
 ALTER TABLE `categories`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `comment`
+-- Chỉ mục cho bảng `comment`
 --
 ALTER TABLE `comment`
   ADD PRIMARY KEY (`id`),
@@ -288,13 +297,13 @@ ALTER TABLE `comment`
   ADD KEY `user_id` (`user_id`);
 
 --
--- Indexes for table `coupons`
+-- Chỉ mục cho bảng `coupons`
 --
 ALTER TABLE `coupons`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `orders`
+-- Chỉ mục cho bảng `orders`
 --
 ALTER TABLE `orders`
   ADD PRIMARY KEY (`id`),
@@ -302,122 +311,122 @@ ALTER TABLE `orders`
   ADD KEY `user_ID` (`user_id`);
 
 --
--- Indexes for table `products`
+-- Chỉ mục cho bảng `products`
 --
 ALTER TABLE `products`
   ADD PRIMARY KEY (`id`),
   ADD KEY `category_ID` (`category_id`);
 
 --
--- Indexes for table `users`
+-- Chỉ mục cho bảng `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT cho các bảng đã đổ
 --
 
 --
--- AUTO_INCREMENT for table `bill`
+-- AUTO_INCREMENT cho bảng `bill`
 --
 ALTER TABLE `bill`
   MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `blog`
+-- AUTO_INCREMENT cho bảng `blog`
 --
 ALTER TABLE `blog`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
--- AUTO_INCREMENT for table `blogcategories`
+-- AUTO_INCREMENT cho bảng `blogcategories`
 --
 ALTER TABLE `blogcategories`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
 
 --
--- AUTO_INCREMENT for table `categories`
+-- AUTO_INCREMENT cho bảng `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 
 --
--- AUTO_INCREMENT for table `comment`
+-- AUTO_INCREMENT cho bảng `comment`
 --
 ALTER TABLE `comment`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12124;
 
 --
--- AUTO_INCREMENT for table `coupons`
+-- AUTO_INCREMENT cho bảng `coupons`
 --
 ALTER TABLE `coupons`
   MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `orders`
+-- AUTO_INCREMENT cho bảng `orders`
 --
 ALTER TABLE `orders`
   MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `products`
+-- AUTO_INCREMENT cho bảng `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 
 --
--- AUTO_INCREMENT for table `users`
+-- AUTO_INCREMENT cho bảng `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
--- Constraints for dumped tables
+-- Các ràng buộc cho các bảng đã đổ
 --
 
 --
--- Constraints for table `bill`
+-- Các ràng buộc cho bảng `bill`
 --
 ALTER TABLE `bill`
   ADD CONSTRAINT `bill_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 --
--- Constraints for table `blog`
+-- Các ràng buộc cho bảng `blog`
 --
 ALTER TABLE `blog`
   ADD CONSTRAINT `blog_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
   ADD CONSTRAINT `blog_ibfk_2` FOREIGN KEY (`blogcate_id`) REFERENCES `blogcategories` (`id`);
 
 --
--- Constraints for table `blogcategories`
+-- Các ràng buộc cho bảng `blogcategories`
 --
 ALTER TABLE `blogcategories`
   ADD CONSTRAINT `fk_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 --
--- Constraints for table `cart`
+-- Các ràng buộc cho bảng `cart`
 --
 ALTER TABLE `cart`
   ADD CONSTRAINT `cart_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`),
   ADD CONSTRAINT `cart_ibfk_2` FOREIGN KEY (`bill_id`) REFERENCES `bill` (`id`);
 
 --
--- Constraints for table `comment`
+-- Các ràng buộc cho bảng `comment`
 --
 ALTER TABLE `comment`
   ADD CONSTRAINT `comment_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`),
   ADD CONSTRAINT `comment_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 --
--- Constraints for table `orders`
+-- Các ràng buộc cho bảng `orders`
 --
 ALTER TABLE `orders`
   ADD CONSTRAINT `product_ID` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`),
   ADD CONSTRAINT `user_ID` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 --
--- Constraints for table `products`
+-- Các ràng buộc cho bảng `products`
 --
 ALTER TABLE `products`
   ADD CONSTRAINT `products_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`);

@@ -115,7 +115,7 @@ if(!isset($_SESSION['myCart'])) {
             case "logout":
                 unset($_SESSION['login']['username']);
                 unset($_SESSION['myCart']);
-                session_destroy();
+                // session_destroy();
                 header("location:index.php");
                 break;
                 // case "profile":

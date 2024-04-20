@@ -99,7 +99,7 @@ if (isset($_POST['addBlogCate'])) {
     if (empty($errors)) {
         $cateName = $_POST['cateName'];
         $parent_id = $_POST['parent'] ?? null;
-        $user_id = 1;
+        $user_id = $_SESSION['login']['id'];
 
         $existingCategory = $db->getByName($cateName);
         if ($existingCategory) {
