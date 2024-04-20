@@ -11,6 +11,7 @@
                         <th> Tên </th>
                         <th> Hình ảnh </th>
                         <th> Giá </th>
+                        <th> Giá cũ </th>
                         <th>Mô tả </th>
                         <th> Tên danh mục </th>
                         <th> Tác vụ </th>
@@ -46,7 +47,9 @@
                             <td>
                                 <?php echo number_format($row['price']) . ' vnd'; ?>
                             </td>
-
+                            <td>
+                                <?php echo number_format($row['oldPrice']) . ' vnd'; ?>
+                            </td>
                             <td class="category-name">
                                 <?php echo $row['description']; ?>
                             </td>

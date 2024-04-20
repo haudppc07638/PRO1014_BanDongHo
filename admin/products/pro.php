@@ -44,20 +44,21 @@ class Products
 
 
 
-    public function add($name, $price, $imageStr, $description, $category_ID, $db)
+    public function add($name, $price, $imageStr, $description, $category_ID, $oldprice, $db)
     {
-        $query = "INSERT INTO products (name, price, image, description, category_id) VALUES (?, ?, ?, ?, ?)";
+        $query = "INSERT INTO products (name, price, image, description, category_id,oldPrice ) VALUES (?, ?, ?, ?, ?, ?)";
         $stmt = $db->pdo_get_connection()->prepare($query);
         $stmt->bindParam(1, $name);
         $stmt->bindParam(2, $price);
         $stmt->bindParam(3, $imageStr);
         $stmt->bindParam(4, $description);
         $stmt->bindParam(5, $category_ID);
+        $stmt->bindParam(6, $oldprice);
         $success = $stmt->execute();
         return $success;
     }
 
-    public function update($id, $name, $price, $image, $description, $category_ID)
+    public function update($id, $name, $price, $image, $description, $category_ID, $oldprice) 
     {
         $db = new connect();
         $oldProduct = $this->getById($id);
@@ -65,11 +66,14 @@ class Products
         if (!empty($image)) {
             $newImage = $image;
         }
-        $sql = "UPDATE products SET name=?, price=?, image=?, description=?, category_id=? WHERE id=?";
+        
+        // Sử dụng các tham số đúng thứ tự trong câu lệnh SQL
+        $sql = "UPDATE products SET name=?, price=?, image=?, description=?, category_id=?, oldPrice=? WHERE id=?";
         $stmt = $db->pdo_get_connection()->prepare($sql);
-        $stmt->execute([$name, $price, $newImage, $description, $category_ID, $id]);
+        $stmt->execute([$name, $price, $newImage, $description, $category_ID, $oldprice, $id]); // Chú ý thứ tự của tham số trong mảng
         return $stmt->rowCount() > 0;
     }
+    
 
     public function delete($id)
     {

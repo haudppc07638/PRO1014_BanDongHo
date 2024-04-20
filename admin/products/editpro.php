@@ -17,6 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   $price = trim($_POST['price']);
   $description = trim($_POST['description']);
   $category_ID = trim($_POST['category_ID']);
+  $oldprice = trim($_POST['oldPrice']);
 
   $errors = [];
   $imageFiles = ['image', 'image2', 'image3'];
@@ -38,7 +39,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   if (!is_numeric($price) || $price <= 0) {
     $errors[] = "Giá phải là một số dương.";
   }
-
+  if (!is_numeric($oldprice) || $oldprice <= 0) {
+    $errors[] = "Giá phải là một số dương.";
+  }
+  if ($oldprice <= $price) {
+    $errors[] = "Giá cũ sản phẩm phải lớn hơn giá mới.";
+}
   // Kiểm tra xem tên sản phẩm đã thay đổi hay chưa
   $oldProductName = $products->getProductNameById($id); // Lấy tên sản phẩm hiện tại từ cơ sở dữ liệu
   if ($oldProductName != $name) { // Nếu tên sản phẩm đã thay đổi
@@ -59,12 +65,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $imagesStr = implode(";", $uploadedImages);
 
-    $success = $products->update($id, $name, $price, $imagesStr, $description, $category_ID);
+    $success = $products->update($id, $name, $price, $imagesStr, $description, $category_ID, $oldprice );
 
     if ($success) {
       echo "Cập nhật sản phẩm thành công.";
     } else {
-      echo "";
+      echo " ";
     }
   } else {
     foreach ($errors as $error) {
@@ -113,8 +119,11 @@ function isImageValid($filename)
           <label>Giá</label>
           <input type="number" class="form-control" name="price" value="<?php echo $row['price']; ?>">
         </div>
-
-<div class="form-row">
+        <div class="form-group">
+          <label>Giá</label>
+          <input type="number" class="form-control" name="oldPrice" value="<?php echo $row['oldPrice']; ?>">
+        </div>
+        <div class="form-row">
 
           <div class="col-md-4">
             <div class="form-group">
@@ -127,58 +136,58 @@ function isImageValid($filename)
               <div class="error" id="imageError"></div>
             </div>
           </div>
-         
 
-            <div class="col-md-4">
+
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="image2">Hình ảnh 2</label>
+              <input type="file" class="form-control" name="image2" id="image2">
               <div class="form-group">
-                <label for="image2">Hình ảnh 2</label>
-                <input type="file" class="form-control" name="image2" id="image2">
-                <div class="form-group">
-                  <img id="uploadedImage2" src="/images/<?php echo $row['image2']; ?>"
-                    style="max-width: 100%; max-height: 300px;">
-                </div>
-                <div class="error" id="image2Error"></div>
+                <img id="uploadedImage2" src="/images/<?php echo $row['image2']; ?>"
+                  style="max-width: 100%; max-height: 300px;">
               </div>
+              <div class="error" id="image2Error"></div>
             </div>
+          </div>
 
-              <div class="col-md-4">
-                <div class="form-group">
-                  <label for="image3">Hình ảnh 3</label>
-                  <input type="file" class="form-control" name="image3" id="image3">
-                  <div class="form-group">
-                    <img id="uploadedImage3" src="../images/<?php echo $row['image3']; ?>"
-                      style="max-width: 100%; max-height: 300px;">
-                  </div>
-                  <div class="error" id="image3Error"></div>
-                </div>
-              </div>
-</div>
-
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="image3">Hình ảnh 3</label>
+              <input type="file" class="form-control" name="image3" id="image3">
               <div class="form-group">
-                <label>Mô tả</label>
-                <textarea class="form-control" name="description" rows="5"><?php echo $row['description']; ?></textarea>
+                <img id="uploadedImage3" src="../images/<?php echo $row['image3']; ?>"
+                  style="max-width: 100%; max-height: 300px;">
               </div>
+              <div class="error" id="image3Error"></div>
+            </div>
+          </div>
+        </div>
 
-              <div class="">
-                <label for="category_ID">Danh mục</label>
-                <br>
-                <select class="form-control" id="category_ID" name="category_ID" value="0">
-                  <?php
-                  include_once ('../categories/category.php');
-                  include_once ("../includes/pdo.php");
-                  $db = new connect();
-                  $dbCate = new category();
+        <div class="form-group">
+          <label>Mô tả</label>
+          <textarea class="form-control" name="description" rows="5"><?php echo $row['description']; ?></textarea>
+</div>
+        
+        <div class="">
+          <label for="category_ID">Danh mục</label>
+          <br>
+          <select class="form-control" id="category_ID" name="category_ID" value="0">
+            <?php
+            include_once ('../categories/category.php');
+            include_once ("../includes/pdo.php");
+            $db = new connect();
+            $dbCate = new category();
 
-                  $rows = $dbCate->getList();
-                  foreach ($rows as $row) { ?>
-                    <option value="<?php echo $row['id']; ?>">
-                      <?php echo $row['categoryName']; ?>
-                    </option>
-                  <?php } ?>
-                </select>
-              </div>
-              <div id="msg"></div>
-              <button class="btn btn-success" name="submit">Cập nhật</button>
+            $rows = $dbCate->getList();
+            foreach ($rows as $row) { ?>
+              <option value="<?php echo $row['id']; ?>">
+                <?php echo $row['categoryName']; ?>
+              </option>
+            <?php } ?>
+          </select>
+        </div>
+        <div id="msg"></div>
+        <button class="btn btn-success" name="submit">Cập nhật</button>
       </form>
     </div>
   </div>

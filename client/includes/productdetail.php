@@ -1,4 +1,6 @@
 <?php
+session_start(); // Bắt đầu phiên
+
 $id = $_GET['id'];
 
 $db = new connect();
@@ -9,13 +11,25 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_POST['submit_comment'])) {
         $content = $_POST['content'];
         $product_ID = $_POST['product_id'];
-        $user_ID = 1;
-        if (!empty($content) && !empty($product_ID) && !empty($user_ID)) {
-            $stmt = $pdo->prepare("INSERT INTO comment (content, product_id, user_id, created_at) VALUES (?, ?, ?, NOW())");
-            $stmt->execute([$content, $product_ID, $user_ID]);
-            echo "<script>alert('Bình luận đã được thêm.'); window.location.href=window.location.href;</script>";
+
+        // Kiểm tra xem người dùng đã đăng nhập chưa
+        if (isset($_SESSION['user_id'])) {
+            $user_ID = $_SESSION['user_id']; // Lấy user_id từ phiên đã lưu
+            // Xác thực dữ liệu nhập vào (Ví dụ: đảm bảo không rỗng)
+            if (!empty($content) && !empty($product_ID)) {
+                // Thêm bình luận vào cơ sở dữ liệu
+                $stmt = $pdo->prepare("INSERT INTO comment (content, product_id, user_id, created_at) VALUES (?, ?, ?, NOW())");
+                $stmt->execute([$content, $product_ID, $user_ID]);
+
+                // Hiển thị thông báo hoặc làm mới trang để hiển thị bình luận mới
+                echo "<script>alert('Bình luận đã được thêm.'); window.location.href=window.location.href;</script>";
+            } else {
+                // Hiển thị lỗi nếu dữ liệu nhập vào không hợp lệ
+                echo "<p>Vui lòng nhập đầy đủ thông tin bình luận.</p>";
+            }
         } else {
-            echo "<p>Vui lòng nhập đầy đủ thông tin bình luận.</p>";
+            // Nếu người dùng chưa đăng nhập, chuyển hướng hoặc hiển thị thông báo lỗi
+            echo "<script>alert('Vui lòng đăng nhập để bình luận.'); window.location.href='?act=login';</script>";
         }
     }
     die();
@@ -26,8 +40,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     $stmt->execute([$product_ID]);
     $comments = $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
+// Lấy bình luận từ cơ sở dữ liệu
 
 ?>
+<!-- Các phần HTML khác được giữ nguyên -->
+
+<!-- Các phần HTML khác được giữ nguyên -->
+
 <!-- Start Bradcaump area -->
 <div class="ht__bradcaump__area"
     style="background: rgba(0, 0, 0, 0) url(images/banner1.jpg) no-repeat scroll center center / cover ;">
@@ -41,7 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                             <span class="brd-separetor"><i class="zmdi zmdi-chevron-right"></i></span>
                             <a class="breadcrumb-item" href="?act=shop">Cửa hàng</a>
                             <span class="brd-separetor"><i class="zmdi zmdi-chevron-right"></i></span>
-                            <span class="breadcrumb-item active text-info"><?= $rowProd['name'] ?></span>
+                            <span class="breadcrumb-item active">Chi tiết</span>
                         </nav>
                     </div>
                 </div>
@@ -56,10 +75,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     <div class="htc__product__details__top">
         <div class="container">
             <div class="row">
-                <div class="col-md-3 col-lg-3 col-sm-12 col-xs-12">
+                <div class="col-md-5 col-lg-5 col-sm-12 col-xs-12">
                     <div class="htc__product__details__tab__content">
                         <!-- Start Product Big Images -->
-                        <div class="product__big__images">
+                        <div class="product__big__images" style="border: 2px solid #eaeaea;">
                             <div class="portfolio-full-image tab-content">
                                 <?php
                                 $imageNames = explode(';', $rowProd['image']);
@@ -69,7 +88,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                                         $activeClass = ($index === 0) ? 'in active' : '';
                                         ?>
                                         <div role="tabpanel" class="tab-pane fade <?= $activeClass ?>" id="<?= $tabId ?>">
-                                            <img src="images/<?= $imageName ?>" alt="image-product" height="367px">
+                                            <img src="images/<?= $imageName ?>" alt="image-product" width="100px">
                                         </div>
                                         <?php
                                     endif;
@@ -89,8 +108,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                                     ?>
                                     <li role="presentation" class="pot-small-img <?= $activeClass ?>">
                                         <a href="#<?= $tabId ?>" role="tab" data-toggle="tab">
-                                            <img src="images/<?= $imageName ?>" alt="image-product"
-                                                style="min-width: 45px; height: 66px">
+                                            <img src="images/<?= $imageName ?>" alt="image-product" width="100px">
                                         </a>
                                     </li>
                                     <?php
@@ -103,9 +121,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                     </div>
                 </div>
 
-                <div class="col-md-9 col-lg-9 col-sm-12 col-xs-12 smt-40 xmt-40">
+                <div class="col-md-7 col-lg-7 col-sm-12 col-xs-12 smt-40 xmt-40">
                     <div class="ht__product__dtl">
-                        <h2 class="text-capitalize">
+                        <h2>
                             <?php echo $rowProd['name'] ?>
                         </h2>
                         <!-- <h6>Model: <span>MNG001</span></h6> -->
@@ -123,25 +141,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                                     <?php echo number_format($rowProd['oldPrice']) ?> VND
                                 </del> </li>
                             <li>
-                            <li class="text-danger">
+                            <li>
                                 <?php echo number_format($rowProd['price']) ?> VND
                             </li>
                         </ul>
+                        <p class="pro__info">
+                            <?php echo $rowProd['description'] ?>
+                        </p>
                         <div class="ht__pro__desc">
-                            <div class="sin__desc mb-3">
-                                <p class="pro__info"><strong>Mô tả:</strong> <?php echo $rowProd['description'] ?></p>
-                            </div>
-                            <div class="sin__desc mb-3">
-                                <p class="pro__info"><strong>Tình trạng:</strong> Còn hàng</p>
-                            </div>
-                            <div class="sin__desc align--left mb-3">
-                                <?php
-                                $cateID = $rowProd['category_id'];
-                                $rowCate = $data->getCategoryName($cateID);
-                                ?>
-                                <p class="pro__info"><strong>Danh mục: </strong><a
-                                        href="?act=shop&id=<? echo $rowProd['category_id'] ?>"><?= $rowCate['categoryName'] ?></a>
-                                </p>
+                            <div class="sin__desc">
+                                <p><span>Tình trạng:</span> Còn hàng</p>
                             </div>
                             <!-- <div class="sin__desc product__share__link">
                                 <p><span>Share this:</span></p>
@@ -160,29 +169,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                                     <li><a href="#" target="_blank"><i class="icon-social-pinterest icons"></i></a></li>
                                 </ul>
                             </div> -->
-                            <div class="sin__desc mb-3">
-                                <form action="?act=cart" method="post">
-                                    <div class="mb-3">
-                                        <div class="row">
-                                            <div class="col-lg-2">
-                                                <label for="quantity" class="form-label">
-                                                    <p class="pro_info"><strong>Số lượng</strong></p>
-                                                </label>
-                                                <input type="number" name="quantity" id="quantity" min="1" value="1"
-                                                    max="99" class="form-control">
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                    <input type="hidden" name="productId" value="<?php echo $rowProd['id'] ?>">
-                                    <input type="hidden" name="name" value="<?php echo $rowProd['name'] ?>">
-                                    <input type="hidden" name="price" value="<?php echo $rowProd['price'] ?>">
-                                    <input type="hidden" name="image" value="<?php echo $rowProd['image'] ?>">
-                                    <button type="submit" name="addcart" class="btn btn-danger d-block mx-auto">Thêm Vào
-                                        Giỏ
-                                        Hàng</button>
-                                </form>
-                            </div>
+                            <br>
+                            <form action="?act=addcart" method="post">
+                                <input type="number" name="soluong" id="" min="1" value="1" max="10"
+                                    style="width: 200px"> <br /><br>
+                                <input type="hidden" name="id" value="<?php echo $rowProd['id'] ?>">
+                                <input type="hidden" name="name" value="<?php echo $rowProd['name'] ?>">
+                                <input type="hidden" name="img" value="<?php echo $rowProd['image'] ?>">
+                                <input type="hidden" name="price" value="<?php echo $rowProd['price'] ?>">
+                                <input type="submit" value="Thêm Vào Giỏ Hàng" name="addcart" class="btn btn-success"
+                                    style="padding: 10px;">
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -198,82 +195,74 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                 <!-- Start List And Grid View -->
                 <ul class="pro__details__tab" role="tablist">
                     <li role="presentation" class="description active"><a href="#description" role="tab"
-                            data-toggle="tab">Mô tả chi tiết</a></li>
-                    <li role="presentation" class="review"><a href="#review" role="tab" data-toggle="tab">Đánh giá</a>
+                            data-toggle="tab">description</a></li>
+                    <li role="presentation" class="review"><a href="#review" role="tab" data-toggle="tab">review</a>
                     </li>
-                    <li role="presentation" class="comment"><a href="#comment" role="tab" data-toggle="tab">Bình
-                            luận</a>
+                    <li role="presentation" class="comment"><a href="#comment" role="tab" data-toggle="tab">Comment</a>
                     </li>
                 </ul>
                 <!-- End List And Grid View -->
             </div>
         </div>
-    </div>
-</section>
-<section class="htc__product__area--2 product-details-res">
-    <div class="container">
         <div class="row">
             <div class="col-xs-12">
                 <div class="ht__pro__details__content">
                     <!-- Start Single Content -->
                     <div role="tabpanel" id="description" class="pro__single__content tab-pane fade in active">
-                        <div class="pro__tab__content__inner">
-                            <h4 class="ht__pro__title m-0">Mô tả: </h4>
-                            <p><?= $rowProd['description'] ?></p>
-                        </div>
                     </div>
                     <!-- End Single Content -->
                     <!-- Start Single Content -->
                     <!-- Bắt đầu Phần Nội dung Chi Tiết Sản Phẩm -->
+                    <!-- Start Single Content -->
                     <div role="tabpanel" id="review" class="pro__single__content tab-pane fade">
                         <!-- Hiển thị tiêu đề phần đánh giá nếu có bình luận -->
                         <?php if (!empty($comments)): ?>
-                            <div class="pro__tab__content__inner">
-                                <h4 class="ht__pro__title m-0">Đánh Giá Sản Phẩm</h4>
+                            <h4 class="ht__pro__title">Đánh Giá Sản Phẩm</h4>
+                            <?php foreach ($comments as $comment): ?>
+                                <div class="card mb-3">
+                                    <div class="card-body">
+                                        <p class="card-text">ID Người dùng: <?php echo htmlspecialchars($comment['user_id']); ?>
+                                        </p>
+                                        <p class="card-text">Nội dung : <?php echo htmlspecialchars($comment['content']); ?></p>
+                                        <p class="card-text">Ngày: <?php echo htmlspecialchars($comment['created_at']); ?></p>
+                                    </div>
+                                </div>
+                            <?php endforeach; ?>
+                        <?php else: ?>
+                            <div class="card">
+                                <div class="card-body">
+                                    <p class="card-text">Chưa có đánh giá nào cho sản phẩm này.</p>
+                                </div>
                             </div>
                         <?php endif; ?>
-
-                        <?php
-                        // Kiểm tra nếu có bình luận
-                        if (!empty($comments)) {
-                            // Duyệt qua mỗi bình luận và hiển thị nội dung và ngày tạo
-                            foreach ($comments as $comment) {
-                                echo "<div class='comment-block'>";
-                                echo "<p>" . htmlspecialchars($comment['content']) . "</p>"; // Hiển thị nội dung bình luận
-                                echo "<p>Ngày: " . htmlspecialchars(date('d/m/Y', strtotime($comment['created_at']))) . "</p>"; // Hiển thị ngày tạo bình luận
-                                echo "</div>";
-                            }
-                        } else {
-                            echo "<p>Chưa có đánh giá nào cho sản phẩm này.</p>";
-                        }
-                        ?>
                     </div>
-                    <!-- Kết thúc Phần Nội dung Chi Tiết Sản Phẩm -->
+
 
                     <!-- End Single Content -->
-                    <!-- Start Single Content -->
-                    <!-- Start Single Content -->
+
                     <!-- Start Single Content -->
                     <div role="tabpanel" id="comment" class="pro__single__content tab-pane fade">
-                        <div class="pro__tab__content__inner">
-                            <h4 class="ht__pro__title m-0">Thêm Bình Luận</h4>
-                        </div>
+                        <h4 class="ht__pro__title">Thêm Bình Luận</h4>
                         <form action="" method="post"> <!-- Gửi form đến chính trang này -->
                             <div class="form-group">
-                                <label for="comment_content">Nội dung bình luận:</label>
+                                <label for="comment_content"></label>
                                 <textarea class="form-control" id="comment_content" name="content" rows="4"
                                     placeholder="Nhập nội dung bình luận"></textarea>
                             </div>
                             <!-- Các trường ẩn -->
                             <input type="hidden" name="product_id" value="<?php echo $id ?>">
-                            <input type="hidden" name="user_ID" value="<?php echo $user_id ?>">
+                            <?php if (isset($_SESSION['user_id'])): ?>
+                                <input type="hidden" name="user_ID" value="<?php echo $_SESSION['user_id'] ?>">
+                            <?php endif; ?>
                             <!-- Thay $user_id bằng ID của người dùng đã đăng nhập -->
                             <button type="submit" name="submit_comment" class="btn btn-primary">Gửi Bình Luận</button>
                         </form>
-                        <!-- Hiển thị bình luận -->
                     </div>
+                    <!-- End Single Content -->
+
                     <div role="tabpanel" id="review" class="pro__single__content tab-pane fade">
                     </div>
+
                 </div>
             </div>
         </div>

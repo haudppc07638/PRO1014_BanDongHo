@@ -7,6 +7,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $products = new Products();
     $name = trim($_POST['name']);
     $price = trim($_POST['price']);
+    $oldprice = trim($_POST['oldPrice']);
+    
+
     $description = trim($_POST['description']);
     $category_ID = trim($_POST['category_ID']);
 
@@ -26,7 +29,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (empty($name)) {
         $errors[] = "Tên sản phẩm không được để trống.";
     }
+    if ($oldprice <= $price) {
+        $errors[] = "Giá cũ sản phẩm phải lớn hơn giá mới.";
+    }
     if (empty($price) || !is_numeric($price) || $price <= 0) {
+        $errors[] = "Giá sản phẩm không hợp lệ.";
+    }
+    if (empty($oldprice) || !is_numeric($oldprice) || $oldprice <= 0) {
         $errors[] = "Giá sản phẩm không hợp lệ.";
     }
     if ($products->checkProductNameExists($name, $db)) {
@@ -45,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $imagesStr = implode(";", $uploadedImages);
         echo $imagesStr;
 
-        $success = $products->add($name, $price, $imagesStr, $description, $category_ID, $db);
+        $success = $products->add($name, $price, $imagesStr, $description, $category_ID,$oldprice, $db);
 
         if ($success) {
             echo "Thêm thành công .";
@@ -96,6 +105,11 @@ function isImageValid($filename)
                     <label for="price">Giá </label>
                     <br>
                     <input type="test" class="form-control" id="price" name="price" placeholder="Giá ">
+                </div>
+                <div class="">
+                    <label for="price">Giá cũ </label>
+                    <br>
+                    <input type="test" class="form-control" id="oldPrice" name="oldPrice" placeholder="Giá cũ  ">
                 </div>
                 <div class="row">
                     <div class="col-md-4">

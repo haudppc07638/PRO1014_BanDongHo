@@ -93,9 +93,9 @@ if (!isset($_SESSION['login']['username'])) {
         //   $listbinhluan= $comment->loadall_binhluan(0);
         //   include 'comment/listComment.php';
         //   break;
-        // case "deleteComment":
-        //   include 'comment/deleteComment.php';
-        //   break;
+         case "deleteComment":
+           include 'comment/deleteComment.php';
+           break;
         // case "logout":
         //     unset($_SESSION['admin']);
         //     session_destroy();
